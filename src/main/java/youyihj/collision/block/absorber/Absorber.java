@@ -27,6 +27,6 @@ public abstract class Absorber extends CollisionBlock {
     }
 
     private boolean work(World world) {
-        return !AbsorberConfig.onlyWorkInDayTime || world.isDaytime();
+        return !AbsorberConfig.onlyWorkInDaytime || world.isDaytime();
     }
 }

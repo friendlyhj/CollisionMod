@@ -10,6 +10,6 @@ public class AbsorberConfig {
     public static int absorberSpeed = 2;
 
     @Config.RequiresMcRestart
-    @Config.Comment("Absorbers works only in day time?")
-    public static boolean onlyWorkInDayTime = true;
+    @Config.Comment("Absorbers works only in daytime?")
+    public static boolean onlyWorkInDaytime = true;
 }
