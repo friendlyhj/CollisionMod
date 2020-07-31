@@ -15,4 +15,18 @@ public enum EnumAbsorber {
     public Absorber getInstance() {
         return instance;
     }
+
+    public EnumAbsorber getTransformAbsorber() {
+        switch (this) {
+            case PROTON:
+                return PROTON_EMPTY;
+            case NEUTRON:
+                return NEUTRON_EMPTY;
+            case PROTON_EMPTY:
+                return PROTON;
+            case NEUTRON_EMPTY:
+                return NEUTRON;
+        }
+        return null;
+    }
 }

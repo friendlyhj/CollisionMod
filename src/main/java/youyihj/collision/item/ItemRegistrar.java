@@ -9,6 +9,8 @@ public class ItemRegistrar {
 
     public static void registerAllSpecialItem() {
         new TestItem().register();
+        new Storage("proton").register();
+        new Storage("neutron").register();
     }
 
     public static void registerAllPlainItem() {
