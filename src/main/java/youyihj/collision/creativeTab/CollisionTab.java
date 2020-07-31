@@ -1,9 +1,8 @@
 package youyihj.collision.creativeTab;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import youyihj.collision.item.TestItem;
+import youyihj.collision.block.absorber.Proton;
 
 import javax.annotation.Nonnull;
 
@@ -17,6 +16,6 @@ public class CollisionTab extends CreativeTabs {
     @Override
     @Nonnull
     public ItemStack getTabIconItem() {
-        return new ItemStack(new TestItem());
+        return new ItemStack(Proton.INSTANCE);
     }
 }
