@@ -10,8 +10,11 @@ import youyihj.collision.config.AbsorberConfig;
 import java.util.Random;
 
 public abstract class Absorber extends CollisionBlock {
+    private boolean isEmpty;
+
     public Absorber(String id, boolean isEmpty) {
         super(id, Material.ROCK);
+        this.isEmpty = isEmpty;
         this.setTickRandomly(isEmpty);
         this.setHardness(3.0f);
         this.setResistance(50.0f);
@@ -28,5 +31,9 @@ public abstract class Absorber extends CollisionBlock {
 
     private boolean work(World world) {
         return !AbsorberConfig.onlyWorkInDaytime || world.isDaytime();
+    }
+
+    public boolean isEmpty() {
+        return isEmpty;
     }
 }
