@@ -42,8 +42,14 @@ public class ItemRegistryHandler {
     @SideOnly(Side.CLIENT)
     public static void onModelRegistry(ModelRegistryEvent event) {
         for (Item item : items) {
-            ModelLoader.setCustomModelResourceLocation(item, 0,
-                    new ModelResourceLocation(item.getRegistryName(), "inventory"));
+            ModelResourceLocation modelRL = new ModelResourceLocation(item.getRegistryName(), "inventory");
+            if (item == Nucleus.NUCLEUS) {
+                for (Integer metadata : Nucleus.getAllMetaData()) {
+                    ModelLoader.setCustomModelResourceLocation(item, metadata, modelRL);
+                }
+            } else {
+                ModelLoader.setCustomModelResourceLocation(item, 0, modelRL);
+            }
         }
         for (ItemBlock itemBlock : itemBlocks) {
             ModelLoader.setCustomModelResourceLocation(itemBlock, 0,

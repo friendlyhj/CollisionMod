@@ -1,0 +1,12 @@
+tile.collision.proton.name=质子吸收载体
+tile.collision.neutron.name=中子吸收载体
+tile.collision.proton_empty.name=质子吸收载体（空）
+tile.collision.neutron_empty.name=中子吸收载体（空）
+tile.collision.collider_lv1.name=1级碰撞器
+
+item.collision.proton_storage.name=质子存储器
+item.collision.neutron_storage.name=中子存储器
+item.collision.nucleus.name=%s晶核
+
+material.nucleus.iron=铁
+material.nucleus.gold=金

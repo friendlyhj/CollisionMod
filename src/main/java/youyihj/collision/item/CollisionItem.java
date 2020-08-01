@@ -7,6 +7,7 @@ import youyihj.collision.creativeTab.CollisionTab;
 
 public class CollisionItem extends Item {
     public CollisionItem(String id) {
+        super();
         this.setUnlocalizedName(Collision.MODID + "." + id);
         this.setRegistryName(id);
         this.setCreativeTab(CollisionTab.COLLISION_TAB);
