@@ -3,6 +3,7 @@ tile.collision.neutron.name=Neutron Absorber
 tile.collision.proton_empty.name=Proton Absorber (Empty)
 tile.collision.neutron_empty.name=Neutron Absorber (Empty)
 tile.collision.collider_lv1.name=Collider (Lv1)
+tile.collision.metal_spawner.name=Metal Spawner
 
 item.collision.proton_storage.name=Proton Storage
 item.collision.neutron_storage.name=Neutron Storage

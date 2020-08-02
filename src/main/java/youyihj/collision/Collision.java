@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 import youyihj.collision.block.BlockRegistrar;
+import youyihj.collision.block.spawner.MetalSpawner;
 import youyihj.collision.item.ItemRegistrar;
 import youyihj.collision.recipe.ColliderRecipe;
 import youyihj.collision.recipe.ColliderRecipeRegistrar;
@@ -32,5 +33,6 @@ public class Collision
     public void postinit(FMLPostInitializationEvent event) {
         ColliderRecipeRegistrar.registerAll();
         logger.info(String.format("%s collider recipes have registered!", ColliderRecipe.colliderRecipes.size()));
+        logger.info(String.format("%s nuclei registered!", MetalSpawner.initMetalList()));
     }
 }

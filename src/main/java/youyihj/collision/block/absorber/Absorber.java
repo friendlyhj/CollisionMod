@@ -4,8 +4,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import youyihj.collision.Configuration;
 import youyihj.collision.block.CollisionBlock;
-import youyihj.collision.config.AbsorberConfig;
 
 import java.util.Random;
 
@@ -24,13 +24,13 @@ public abstract class Absorber extends CollisionBlock {
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-        if (!worldIn.isRemote && worldIn.canSeeSky(pos.up()) && random.nextInt() % AbsorberConfig.absorberSpeed == 0 && work(worldIn)) {
+        if (!worldIn.isRemote && worldIn.canSeeSky(pos.up()) && random.nextInt() % Configuration.absorberConfig.absorberSpeed == 0 && work(worldIn)) {
             worldIn.setBlockState(pos, this.getTransformAbsorber().getDefaultState());
         }
     }
 
     private boolean work(World world) {
-        return !AbsorberConfig.onlyWorkInDaytime || world.isDaytime();
+        return !Configuration.absorberConfig.onlyWorkInDaytime || world.isDaytime();
     }
 
     public boolean isEmpty() {

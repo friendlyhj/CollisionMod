@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import youyihj.collision.Collision;
-import youyihj.collision.config.GeneralConfig;
+import youyihj.collision.Configuration;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -24,30 +24,35 @@ public class Nucleus extends CollisionItem {
         this.setNoRepair();
     }
 
-    public static HashMap<Integer, Single> singleHashMap = new HashMap<>();
+    public static HashMap<Integer, SingleNucleus> singleHashMap = new HashMap<>();
     public static final Nucleus NUCLEUS = new Nucleus();
+
+    static {
+        for (String singleInfo : Configuration.generalConfig.nuclei) {
+            String[] singleInfos = singleInfo.split(",");
+            if (singleInfos.length == 4) {
+                int meta = Integer.valueOf(singleInfos[0]);
+                singleHashMap.put(meta, new SingleNucleus(singleInfos[1], singleInfos[2], Integer.valueOf(singleInfos[3])));
+            } else {
+                throw new IllegalArgumentException(singleInfo + " is invalid!");
+            }
+        }
+    }
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         if (this.isInCreativeTab(tab)) {
-            for (String singleInfo : GeneralConfig.nucleuses) {
-                String[] singleInfos = singleInfo.split(",");
-                if (singleInfos.length == 4) {
-                    int meta = Integer.valueOf(singleInfos[0]);
-                    singleHashMap.put(meta, new Single(singleInfos[1], singleInfos[2], Integer.valueOf(singleInfos[3])));
-                    ItemStack itemStack = new ItemStack(this, 1, meta);
-                    items.add(itemStack);
-                    OreDictionary.registerOre("nucleus" + singleInfos[1], itemStack);
-                } else {
-                    throw new IllegalArgumentException(singleInfo + " is invalid!");
-                }
-            }
+            singleHashMap.forEach((meta, single) -> {
+                ItemStack stack = new ItemStack(this, 1, meta);
+                items.add(stack);
+                OreDictionary.registerOre("nucleus" + single.name, stack);
+            });
         }
     }
 
     public static HashSet<Integer> getAllMetaData() {
         HashSet<Integer> hashSet = new HashSet<>();
-        for (String singleInfo : GeneralConfig.nucleuses) {
+        for (String singleInfo : Configuration.generalConfig.nuclei) {
             String[] singleInfos = singleInfo.split(",");
             hashSet.add(Integer.valueOf(singleInfos[0]));
         }
@@ -59,18 +64,6 @@ public class Nucleus extends CollisionItem {
     public String getItemStackDisplayName(ItemStack stack) {
         return I18n.format("item.collision.nucleus.name",
                 I18n.format("material.nucleus." + singleHashMap.get(stack.getMetadata()).name.toLowerCase()));
-    }
-
-    public class Single {
-        private Single(String name, String color, int chance) {
-            this.name = name;
-            this.color = color;
-            this.chance = chance;
-        }
-
-        public final String name;
-        private final String color;
-        public final int chance;
     }
 
     @EventBusSubscriber(modid = Collision.MODID)

@@ -8,8 +8,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import youyihj.collision.Configuration;
 import youyihj.collision.block.absorber.EnumAbsorber;
-import youyihj.collision.config.GeneralConfig;
 
 import javax.annotation.Nonnull;
 
@@ -17,7 +17,8 @@ public class Storage extends CollisionItem {
     public Storage(String type) {
         super(type + "_storage");
         this.type = type;
-        this.setMaxDamage(GeneralConfig.storageCapacity);
+        this.setMaxDamage(Configuration.generalConfig.storageCapacity);
+        this.setNoRepair();
     }
 
     private String type;
@@ -42,7 +43,7 @@ public class Storage extends CollisionItem {
             }
             return EnumActionResult.SUCCESS;
         }
-        if (state == this.getAbsorberEmpty().getInstance().getDefaultState() && stack.getItemDamage() != GeneralConfig.storageCapacity) {
+        if (state == this.getAbsorberEmpty().getInstance().getDefaultState() && stack.getItemDamage() != this.maxStackSize) {
             if (!worldIn.isRemote) {
                 stack.damageItem(1, player);
                 worldIn.setBlockState(pos, this.getAbsorber().getInstance().getDefaultState());
