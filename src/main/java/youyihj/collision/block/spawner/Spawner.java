@@ -33,7 +33,7 @@ public abstract class Spawner extends CollisionBlock {
         if (!worldIn.isRemote) {
             this.getSpawnItems(worldIn).forEach((itemStack) -> {
                 BlockPos posOffset = pos.add(getRandomOffset(worldIn.rand));
-                if (!worldIn.isAirBlock(posOffset)) {
+                if (worldIn.isAirBlock(posOffset)) {
                     worldIn.spawnEntity(new EntityItem(worldIn, posOffset.getX(), posOffset.getY(), posOffset.getZ(), itemStack));
                 }
             });
