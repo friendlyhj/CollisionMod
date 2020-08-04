@@ -75,7 +75,7 @@ public class ColliderBase extends CollisionBlock {
                 BlockPos posOffset = pos.add(i - 1,0,j - 1);
                 Block blockOffset = world.getBlockState(posOffset).getBlock();
                 if (blockOffset instanceof Absorber) {
-                    world.setBlockState(posOffset, ((Absorber) blockOffset).getTransformAbsorber().getDefaultState());
+                    ((Absorber) blockOffset).transform(world, pos);
                 }
             }
         }
