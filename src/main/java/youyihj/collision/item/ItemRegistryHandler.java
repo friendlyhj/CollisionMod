@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import youyihj.collision.block.Booster;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,8 +53,13 @@ public class ItemRegistryHandler {
             }
         }
         for (ItemBlock itemBlock : itemBlocks) {
-            ModelLoader.setCustomModelResourceLocation(itemBlock, 0,
-                    new ModelResourceLocation(itemBlock.getRegistryName(), "inventory"));
+//            if (itemBlock.getBlock() instanceof Booster) {
+//                ModelLoader.setCustomModelResourceLocation(itemBlock, 0,
+//                        new ModelResourceLocation("booster", "inventory"));
+//            } else {
+                ModelLoader.setCustomModelResourceLocation(itemBlock, 0,
+                        new ModelResourceLocation(itemBlock.getRegistryName(), "inventory"));
+//            }
         }
     }
 }

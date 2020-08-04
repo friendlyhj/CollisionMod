@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "collision:blocks/booster",
+      "particle": "collision:blocks/booster"
+    },
+    "model": "minecraft:builtin/generated",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
+  }
+}

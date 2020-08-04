@@ -8,6 +8,6 @@ public class SingleNucleus {
     }
 
     public final String name;
-    final String color;
+    public final String color;
     public final int chance;
 }

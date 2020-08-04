@@ -25,7 +25,7 @@ public abstract class Absorber extends CollisionBlock {
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
         if (!worldIn.isRemote && worldIn.canSeeSky(pos.up()) && random.nextInt() % Configuration.absorberConfig.absorberSpeed == 0 && work(worldIn)) {
-            worldIn.setBlockState(pos, this.getTransformAbsorber().getDefaultState());
+            this.transform(worldIn, pos);
         }
     }
 
@@ -35,5 +35,9 @@ public abstract class Absorber extends CollisionBlock {
 
     public boolean isEmpty() {
         return isEmpty;
+    }
+
+    public void transform(World world, BlockPos pos) {
+        world.setBlockState(pos, this.getTransformAbsorber().getDefaultState());
     }
 }

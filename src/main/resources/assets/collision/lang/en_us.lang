@@ -4,6 +4,7 @@ tile.collision.proton_empty.name=Proton Absorber (Empty)
 tile.collision.neutron_empty.name=Neutron Absorber (Empty)
 tile.collision.collider_lv1.name=Collider (Lv1)
 tile.collision.metal_spawner.name=Metal Spawner
+tile.collision.booster.name=%s Metal Booster
 
 item.collision.proton_storage.name=Proton Storage
 item.collision.neutron_storage.name=Neutron Storage
