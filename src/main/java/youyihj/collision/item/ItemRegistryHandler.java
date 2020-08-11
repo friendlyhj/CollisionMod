@@ -44,13 +44,7 @@ public class ItemRegistryHandler {
     public static void onModelRegistry(ModelRegistryEvent event) {
         for (Item item : items) {
             ModelResourceLocation modelRL = new ModelResourceLocation(item.getRegistryName(), "inventory");
-            if (item == Nucleus.NUCLEUS) {
-                for (Integer metadata : Nucleus.getAllMetaData()) {
-                    ModelLoader.setCustomModelResourceLocation(item, metadata, modelRL);
-                }
-            } else {
-                ModelLoader.setCustomModelResourceLocation(item, 0, modelRL);
-            }
+            ModelLoader.setCustomModelResourceLocation(item, 0, modelRL);
         }
         for (ItemBlock itemBlock : itemBlocks) {
 //            if (itemBlock.getBlock() instanceof Booster) {

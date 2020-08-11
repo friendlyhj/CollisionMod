@@ -1,6 +1,7 @@
-package youyihj.collision;
+package youyihj.collision.config;
 
 import net.minecraftforge.common.config.Config;
+import youyihj.collision.Collision;
 
 @Config(modid = Collision.MODID, name = Collision.NAME, category = Collision.MODID)
 public class Configuration {
@@ -20,11 +21,11 @@ public class Configuration {
 
         @Config.Comment({
                 "The list of nuclei",
-                "The format is \"meta,name,color,chanceInMetalSpawner\"",
+                "The format is \"name,color,chanceInMetalSpawner\"",
                 "chance = 1 means 0.1%"
         })
         public String[] nuclei = {
-                "0,Iron,BF8040,200", "1,Gold,FFFF00,120"
+                "Iron,BF8040,200", "Gold,FFFF00,120"
         };
     }
 

@@ -2,7 +2,7 @@ package youyihj.collision.block.spawner;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import youyihj.collision.Configuration;
+import youyihj.collision.config.Configuration;
 import youyihj.collision.item.Nucleus;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class MetalSpawner extends Spawner {
             int j = 0;
             for (int m : list) {
                 if (seed < m) {
-                    temp.add(new ItemStack(Nucleus.NUCLEUS, 1, metalList.get(j)));
+                    // temp.add(new ItemStack(Nucleus.NUCLEUS, 1, metalList.get(j)));
                     break;
                 }
                 j++;
@@ -37,11 +37,6 @@ public class MetalSpawner extends Spawner {
     }
 
     public static int initMetalList() {
-        Nucleus.singleHashMap.forEach((meta, single) -> {
-            bound += single.chance;
-            metalList.add(meta);
-            list.add(bound);
-        });
-        return metalList.size();
+        return 0;
     }
 }

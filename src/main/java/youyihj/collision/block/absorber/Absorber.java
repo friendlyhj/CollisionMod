@@ -4,7 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import youyihj.collision.Configuration;
+import youyihj.collision.config.Configuration;
 import youyihj.collision.block.CollisionBlock;
 
 import java.util.Random;

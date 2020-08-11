@@ -22,7 +22,7 @@ import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.Proton;
 import youyihj.collision.item.ItemRegistryHandler;
-import youyihj.collision.item.SingleNucleus;
+import youyihj.collision.config.NucleusDataEntry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,14 +30,14 @@ import java.util.Random;
 
 public class Booster extends CollisionBlock {
 
-    public Booster(SingleNucleus singleNucleus) {
-        super("booster_" + Utils.toLineString(singleNucleus.name) , Material.ROCK);
-        this.singleNucleus = singleNucleus;
+    public Booster(NucleusDataEntry nucleusDataEntry) {
+        super("booster_" + Utils.toLineString(nucleusDataEntry.name) , Material.ROCK);
+        this.nucleusDataEntry = nucleusDataEntry;
         this.setHardness(2.0f);
         this.setResistance(50.0f);
     }
 
-    private SingleNucleus singleNucleus;
+    private NucleusDataEntry nucleusDataEntry;
     private static final EnumFacing[] allXZFacing = {
             EnumFacing.EAST,
             EnumFacing.WEST,
@@ -68,7 +68,7 @@ public class Booster extends CollisionBlock {
     }
 
     private void convert(World world, BlockPos pos) {
-        NonNullList<ItemStack> list = OreDictionary.getOres("ore" + this.singleNucleus.name);
+        NonNullList<ItemStack> list = OreDictionary.getOres("ore" + this.nucleusDataEntry.name);
         if (!list.isEmpty()) {
             ItemStack stack = list.get(0);
             Item item = stack.getItem();
@@ -96,23 +96,23 @@ public class Booster extends CollisionBlock {
     @Nonnull
     public String getLocalizedName() {
         return I18n.format("tile.collision.booster.name" +
-        I18n.format("material.nucleus." + this.singleNucleus.name.toLowerCase()));
+        I18n.format("material.nucleus." + this.nucleusDataEntry.name.toLowerCase()));
     }
 
-    @Mod.EventBusSubscriber
+    // @Mod.EventBusSubscriber
     @SuppressWarnings("unused")
     public static final class BoosterTinter {
         @SubscribeEvent
         public static void blockColors(ColorHandlerEvent.Block event) {
             event.getBlockColors().registerBlockColorHandler((IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) -> (
-                Integer.parseInt(((Booster) state.getBlock()).singleNucleus.color, 16)
+                Integer.parseInt(((Booster) state.getBlock()).nucleusDataEntry.color, 16)
             ), allBoosters);
         }
 
         @SubscribeEvent
         public static void itemColors(ColorHandlerEvent.Item event) {
             event.getItemColors().registerItemColorHandler(((stack, tintIndex) -> (
-                  Integer.parseInt(((Booster) ((ItemBlock) stack.getItem()).getBlock()).singleNucleus.color, 16)
+                  Integer.parseInt(((Booster) ((ItemBlock) stack.getItem()).getBlock()).nucleusDataEntry.color, 16)
             )), allBoostersItemBlock);
         }
     }
