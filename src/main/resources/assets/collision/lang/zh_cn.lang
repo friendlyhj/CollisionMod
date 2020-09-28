@@ -4,7 +4,7 @@ tile.collision.proton_empty.name=质子吸收载体（空）
 tile.collision.neutron_empty.name=中子吸收载体（空）
 tile.collision.collider_lv1.name=1级碰撞器
 tile.collision.metal_spawner.name=金属生成器
-tile.collision.booster.name=%s金属生成器
+tile.collision.booster.name=金属生成器
 
 item.collision.proton_storage.name=质子存储器
 item.collision.neutron_storage.name=中子存储器

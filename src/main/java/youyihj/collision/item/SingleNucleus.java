@@ -10,4 +10,8 @@ public class SingleNucleus {
     public final String name;
     public final String color;
     public final int chance;
+
+    public int getColorToInt() {
+        return Integer.parseInt(color, 16);
+    }
 }

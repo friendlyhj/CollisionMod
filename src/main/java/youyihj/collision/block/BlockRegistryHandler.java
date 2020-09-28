@@ -1,10 +1,14 @@
 package youyihj.collision.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
+import youyihj.collision.Collision;
+import youyihj.collision.tile.TileBooster;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,5 +26,6 @@ public class BlockRegistryHandler {
         for (Block block : blocks) {
             registry.register(block);
         }
+        GameRegistry.registerTileEntity(TileBooster.class, new ResourceLocation(Collision.MODID, "booster"));
     }
 }

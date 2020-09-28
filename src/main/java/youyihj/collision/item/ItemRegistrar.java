@@ -10,6 +10,7 @@ public class ItemRegistrar {
         new Storage("proton").register();
         new Storage("neutron").register();
         Nucleus.NUCLEUS.register();
+        new Debugger().register();
     }
 
     public static void registerAllPlainItem() {

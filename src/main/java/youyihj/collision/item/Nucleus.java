@@ -72,7 +72,7 @@ public class Nucleus extends CollisionItem {
         @SubscribeEvent
         public static void colorMultiplier(ColorHandlerEvent.Item event) {
             event.getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> (
-               Integer.parseInt(singleHashMap.get(stack.getMetadata()).color, 16)
+               singleHashMap.get(stack.getMetadata()).getColorToInt()
             ), Nucleus.NUCLEUS);
         }
     }
