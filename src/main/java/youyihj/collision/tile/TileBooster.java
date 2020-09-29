@@ -1,7 +1,14 @@
 package youyihj.collision.tile;
 
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.server.management.PlayerChunkMapEntry;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.WorldServer;
+
+import javax.annotation.Nullable;
 
 public class TileBooster extends TileEntity {
     private int type;
@@ -19,6 +26,18 @@ public class TileBooster extends TileEntity {
         compound.setInteger("type", type);
         compound.setBoolean("full", full);
         return super.writeToNBT(compound);
+    }
+
+    @Nullable
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(this.getPos(), 1, writeToNBT(new NBTTagCompound()));
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager manager, SPacketUpdateTileEntity packet) {
+        NBTTagCompound data = packet.getNbtCompound();
+        readFromNBT(data);
     }
 
     public int getType() {

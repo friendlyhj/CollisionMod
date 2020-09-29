@@ -5,7 +5,7 @@
       "all": "collision:blocks/booster",
       "particle": "collision:blocks/booster"
     },
-    "model": "minecraft:cube_all",
+    "model": "collision:booster",
     "transform": "forge:default-block"
   },
   "variants": {

@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
@@ -43,17 +44,27 @@ public class Booster extends CollisionBlock {
         return true;
     }
 
+    private static final EnumFacing[] ALL_XZ_FACING = {
+            EnumFacing.NORTH,
+            EnumFacing.SOUTH,
+            EnumFacing.WEST,
+            EnumFacing.EAST
+    };
+
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
         return new TileBooster();
     }
 
+    @Override
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        if (!world.isRemote && work(world, pos)) convert(world, pos);
+    }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        if (!worldIn.isRemote && work(worldIn, pos)) convert(worldIn, pos);
+    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
+
     }
 
     @Override
@@ -64,10 +75,15 @@ public class Booster extends CollisionBlock {
             if (tileEntity instanceof TileBooster) {
                 TileBooster tileBooster = (TileBooster) tileEntity;
                 if (!tileBooster.isFull()) {
-                    if (worldIn.isRemote) return true;
+                    if (worldIn.isRemote) {
+                        worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.DEFAULT);
+                        return true;
+                    }
                     stack.shrink(1);
                     tileBooster.setType(stack.getMetadata());
                     tileBooster.setFull(true);
+                    this.updateTick(worldIn, pos, state, worldIn.rand);
+                    worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.DEFAULT);
                     return true;
                 }
             }
@@ -75,10 +91,10 @@ public class Booster extends CollisionBlock {
         return false;
     }
 
-    private boolean work(World world, BlockPos pos) {
+    private boolean work(IBlockAccess world, BlockPos pos) {
         int neutronAmount = 0;
         int protonAmount = 0;
-        for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+        for (EnumFacing facing : ALL_XZ_FACING) {
             BlockPos posOffset = pos.offset(facing);
             Block block = world.getBlockState(posOffset).getBlock();
             if (block instanceof Proton) {
@@ -110,9 +126,9 @@ public class Booster extends CollisionBlock {
                 ItemBlock itemBlock = (ItemBlock) item;
                 IBlockState state = itemBlock.getBlock().getStateFromMeta(stack.getMetadata());
                 world.setBlockState(pos, state);
-                for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+                for (EnumFacing facing : ALL_XZ_FACING) {
                     BlockPos posOffset = pos.offset(facing);
-                    ((Absorber) world.getBlockState(posOffset).getBlock()).transform(world, pos);
+                    ((Absorber) world.getBlockState(posOffset).getBlock()).transform(world, posOffset);
                 }
             }
         }
@@ -124,9 +140,9 @@ public class Booster extends CollisionBlock {
         @SubscribeEvent
         public static void blockColors(ColorHandlerEvent.Block event) {
             event.getBlockColors().registerBlockColorHandler((IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) -> {
-                if (worldIn == null || pos == null) return 0;
+                if (worldIn == null || pos == null) return 0xffffff;
                 SingleNucleus nucleus = getNucleusFromTileEntity(worldIn, pos);
-                return nucleus == null ? 0 : nucleus.getColorToInt();
+                return nucleus == null ? 0xffffff : nucleus.getColorToInt();
             }, INSTANCE);
         }
     }
