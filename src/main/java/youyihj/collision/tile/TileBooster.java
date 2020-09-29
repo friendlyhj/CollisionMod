@@ -40,6 +40,16 @@ public class TileBooster extends TileEntity {
         readFromNBT(data);
     }
 
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        return writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public void handleUpdateTag(NBTTagCompound tag) {
+        readFromNBT(tag);
+    }
+
     public int getType() {
         return type;
     }

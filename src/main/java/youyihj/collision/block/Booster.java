@@ -3,6 +3,7 @@ package youyihj.collision.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -27,6 +28,7 @@ import youyihj.collision.item.SingleNucleus;
 import youyihj.collision.tile.TileBooster;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Booster extends CollisionBlock {
@@ -58,13 +60,9 @@ public class Booster extends CollisionBlock {
     }
 
     @Override
-    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+    @SuppressWarnings("deprecation")
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!world.isRemote && work(world, pos)) convert(world, pos);
-    }
-
-    @Override
-    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-
     }
 
     @Override
@@ -75,15 +73,15 @@ public class Booster extends CollisionBlock {
             if (tileEntity instanceof TileBooster) {
                 TileBooster tileBooster = (TileBooster) tileEntity;
                 if (!tileBooster.isFull()) {
+                    worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.DEFAULT);
                     if (worldIn.isRemote) {
-                        worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.DEFAULT);
+                        Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
                         return true;
                     }
                     stack.shrink(1);
                     tileBooster.setType(stack.getMetadata());
                     tileBooster.setFull(true);
-                    this.updateTick(worldIn, pos, state, worldIn.rand);
-                    worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.DEFAULT);
+                    this.neighborChanged(state, worldIn, pos, this, pos);
                     return true;
                 }
             }
