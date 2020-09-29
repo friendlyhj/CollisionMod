@@ -28,8 +28,7 @@ import youyihj.collision.item.SingleNucleus;
 import youyihj.collision.tile.TileBooster;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Random;
+
 
 public class Booster extends CollisionBlock {
 
