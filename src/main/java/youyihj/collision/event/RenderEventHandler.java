@@ -33,9 +33,9 @@ public class RenderEventHandler {
                     } else {
                         return;
                     }
-                    Booster.doRerender = false;
                 }
             }
+            Booster.doRerender = false;
         }
     }
 }
