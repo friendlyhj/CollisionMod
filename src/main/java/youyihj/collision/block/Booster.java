@@ -3,7 +3,6 @@ package youyihj.collision.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -27,11 +26,14 @@ import youyihj.collision.item.SingleNucleus;
 import youyihj.collision.tile.TileBooster;
 
 import javax.annotation.Nullable;
+import java.util.WeakHashMap;
 
 
 public class Booster extends CollisionBlock {
 
     public static final Booster INSTANCE = new Booster();
+    public static boolean doRerender;
+    public static WeakHashMap<BlockPos, Boolean> rerenderMap = new WeakHashMap<>();
 
     private Booster() {
         super("booster", Material.ROCK);
@@ -65,8 +67,7 @@ public class Booster extends CollisionBlock {
                 TileBooster tileBooster = (TileBooster) tileEntity;
                 if (!tileBooster.isFull()) {
                     if (worldIn.isRemote) {
-                        worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.DEFAULT_AND_RERENDER);
-                        Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
+                        setRerender(worldIn ,pos);
                         return true;
                     }
                     stack.shrink(1);
@@ -79,6 +80,13 @@ public class Booster extends CollisionBlock {
             }
         }
         return false;
+    }
+
+    private void setRerender(IBlockAccess world, BlockPos pos) {
+        doRerender = true;
+        if (world.getTileEntity(pos) instanceof TileBooster) {
+            rerenderMap.put(pos, true);
+        }
     }
 
     private boolean work(IBlockAccess world, BlockPos pos) {
