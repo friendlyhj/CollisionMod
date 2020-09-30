@@ -3,6 +3,7 @@ package youyihj.collision.block.spawner;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -38,6 +39,11 @@ public abstract class Spawner extends CollisionBlock {
                 }
             });
         }
+    }
+
+    @Override
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+        return false;
     }
 
     private Vec3i getRandomOffset(Random random) {
