@@ -5,7 +5,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -45,13 +44,6 @@ public class Booster extends CollisionBlock {
         return true;
     }
 
-    private static final EnumFacing[] ALL_XZ_FACING = {
-            EnumFacing.NORTH,
-            EnumFacing.SOUTH,
-            EnumFacing.WEST,
-            EnumFacing.EAST
-    };
-
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
@@ -72,14 +64,15 @@ public class Booster extends CollisionBlock {
             if (tileEntity instanceof TileBooster) {
                 TileBooster tileBooster = (TileBooster) tileEntity;
                 if (!tileBooster.isFull()) {
-                    worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.DEFAULT);
                     if (worldIn.isRemote) {
+                        worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.DEFAULT_AND_RERENDER);
                         Minecraft.getMinecraft().renderGlobal.markBlockRangeForRenderUpdate(pos.getX(), pos.getY(), pos.getZ(), pos.getX(), pos.getY(), pos.getZ());
                         return true;
                     }
                     stack.shrink(1);
                     tileBooster.setType(stack.getMetadata());
                     tileBooster.setFull(true);
+                    worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.DEFAULT);
                     this.neighborChanged(state, worldIn, pos, this, pos);
                     return true;
                 }
@@ -91,7 +84,7 @@ public class Booster extends CollisionBlock {
     private boolean work(IBlockAccess world, BlockPos pos) {
         int neutronAmount = 0;
         int protonAmount = 0;
-        for (EnumFacing facing : ALL_XZ_FACING) {
+        for (EnumFacing facing : EnumFacing.HORIZONTALS) {
             BlockPos posOffset = pos.offset(facing);
             Block block = world.getBlockState(posOffset).getBlock();
             if (block instanceof Proton) {
@@ -116,17 +109,14 @@ public class Booster extends CollisionBlock {
         SingleNucleus nucleus = getNucleusFromTileEntity(world, pos);
         if (nucleus == null) return;
         NonNullList<ItemStack> list = OreDictionary.getOres("ore" + nucleus.name);
-        if (!list.isEmpty()) {
-            ItemStack stack = list.get(0);
-            Item item = stack.getItem();
-            if (item instanceof ItemBlock) {
-                ItemBlock itemBlock = (ItemBlock) item;
-                IBlockState state = itemBlock.getBlock().getStateFromMeta(stack.getMetadata());
-                world.setBlockState(pos, state);
-                for (EnumFacing facing : ALL_XZ_FACING) {
-                    BlockPos posOffset = pos.offset(facing);
-                    ((Absorber) world.getBlockState(posOffset).getBlock()).transform(world, posOffset);
-                }
+        ItemStack stack = list.stream().filter(itemStack -> itemStack.getItem() instanceof ItemBlock).findFirst().orElse(null);
+        if (stack != null) {
+            ItemBlock itemBlock = (ItemBlock) stack.getItem();
+            IBlockState state = itemBlock.getBlock().getStateFromMeta(stack.getMetadata());
+            world.setBlockState(pos, state);
+            for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+                BlockPos posOffset = pos.offset(facing);
+                ((Absorber) world.getBlockState(posOffset).getBlock()).transform(world, posOffset);
             }
         }
     }
