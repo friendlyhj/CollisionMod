@@ -31,7 +31,6 @@ public class Collision
 
     @EventHandler
     public void postinit(FMLPostInitializationEvent event) {
-        ColliderRecipeRegistrar.registerAll();
         logger.info(String.format("%s collider recipes have registered!", ColliderRecipe.colliderRecipes.size()));
         logger.info(String.format("%s nuclei registered!", MetalSpawner.initMetalList()));
     }

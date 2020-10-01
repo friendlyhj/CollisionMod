@@ -17,6 +17,8 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.Neutron;
@@ -32,7 +34,11 @@ import java.util.WeakHashMap;
 public class Booster extends CollisionBlock {
 
     public static final Booster INSTANCE = new Booster();
+
+    @SideOnly(Side.CLIENT)
     public static boolean doRerender;
+
+    @SideOnly(Side.CLIENT)
     public static WeakHashMap<BlockPos, Boolean> rerenderMap = new WeakHashMap<>();
 
     private Booster() {
@@ -67,7 +73,7 @@ public class Booster extends CollisionBlock {
                 TileBooster tileBooster = (TileBooster) tileEntity;
                 if (!tileBooster.isFull()) {
                     if (worldIn.isRemote) {
-                        setRerender(worldIn ,pos);
+                        setRerender(worldIn, pos);
                         return true;
                     }
                     stack.shrink(1);
@@ -82,6 +88,7 @@ public class Booster extends CollisionBlock {
         return false;
     }
 
+    @SideOnly(Side.CLIENT)
     private void setRerender(IBlockAccess world, BlockPos pos) {
         doRerender = true;
         if (world.getTileEntity(pos) instanceof TileBooster) {

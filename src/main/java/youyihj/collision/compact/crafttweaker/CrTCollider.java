@@ -1,0 +1,105 @@
+package youyihj.collision.compact.crafttweaker;
+
+import crafttweaker.CraftTweakerAPI;
+import crafttweaker.IAction;
+import crafttweaker.annotations.ZenRegister;
+import crafttweaker.api.item.IItemStack;
+import crafttweaker.api.minecraft.CraftTweakerMC;
+import net.minecraft.item.ItemStack;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
+import youyihj.collision.block.absorber.EnumAbsorber;
+import youyihj.collision.recipe.ColliderRecipe;
+
+import java.util.Arrays;
+import java.util.Optional;
+
+import static youyihj.collision.recipe.ColliderRecipe.*;
+
+@ZenClass("mods.collision.Collider")
+@ZenRegister
+@SuppressWarnings("unused")
+public class CrTCollider {
+
+    @ZenMethod
+    public static void addRecipe(int level, IItemStack out, CrTEnumAbsorber[][] absorbers) {
+        CraftTweakerAPI.apply(new ColliderAdd(level, out, absorbers));
+    }
+
+    @ZenMethod
+    public static void removeRecipe(IItemStack out) {
+        Optional<ColliderRecipe> oRecipe =  colliderRecipes.stream().filter((recipe -> {
+            ItemStack stack = recipe.getOut();
+            stack.setCount(1);
+            return stack.equals(CraftTweakerMC.getItemStack(out));
+        })).findAny();
+        if (oRecipe.isPresent()){
+            ColliderRecipe recipe = oRecipe.get();
+            CraftTweakerAPI.apply(new ColliderRemove(recipe.getLevel(), CraftTweakerMC.getIItemStack(recipe.getOut()), ColliderRecipeAction.getAbsorbers(recipe.getInput())));
+        } else {
+            CraftTweakerAPI.logWarning("cannot find a collider recipe for " + out.getDisplayName() + "! Ignore this command.");
+        }
+    }
+
+    private static abstract class ColliderRecipeAction implements IAction {
+        protected int level;
+        protected IItemStack out;
+        protected CrTEnumAbsorber[][] absorbers;
+
+        public ColliderRecipeAction(int level, IItemStack stack, CrTEnumAbsorber[][] absorbers) {
+            this.level = level;
+            this.out = stack;
+            this.absorbers = absorbers;
+        }
+
+        protected final EnumAbsorber[][] getInternalAbsorbers() {
+            return Arrays.stream(absorbers).map((absorberArray) ->
+                Arrays.stream(absorberArray).map(CrTEnumAbsorber::getInternalStatic).toArray(EnumAbsorber[]::new
+                )).toArray(EnumAbsorber[][]::new);
+        }
+
+        protected static CrTEnumAbsorber[][] getAbsorbers(EnumAbsorber[][] absorbers) {
+            return Arrays.stream(absorbers).map((absorberArray) ->
+                    Arrays.stream(absorberArray).map(CrTEnumAbsorber::new).toArray(CrTEnumAbsorber[]::new
+                    )).toArray(CrTEnumAbsorber[][]::new);
+        }
+    }
+
+    public static class ColliderAdd extends ColliderRecipeAction {
+
+        public ColliderAdd(int level, IItemStack stack, CrTEnumAbsorber[][] absorbers) {
+            super(level, stack, absorbers);
+        }
+
+        @Override
+        public void apply() {
+            new ColliderRecipe(level, CraftTweakerMC.getItemStack(out), getInternalAbsorbers()).register();
+        }
+
+        @Override
+        public String describe() {
+            return "Adding a collider recipe for " + out.getDisplayName();
+        }
+    }
+
+    public static class ColliderRemove extends ColliderRecipeAction {
+
+        public ColliderRemove(int level, IItemStack stack, CrTEnumAbsorber[][] absorbers) {
+            super(level, stack, absorbers);
+        }
+
+        @Override
+        public void apply() {
+            for (ColliderRecipe recipe : colliderRecipes) {
+                if (recipe.getOut().equals(CraftTweakerMC.getItemStack(out))) {
+                    colliderRecipes.remove(recipe);
+                }
+            }
+        }
+
+        @Override
+        public String describe() {
+            return "Removing collider recipe(s) for " + out.getDisplayName();
+        }
+    }
+}

@@ -54,7 +54,22 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.592"
+    deobfCompile "mezz.jei:jei_1.12.2:4.15.0.296"
 
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name "BASE"
+        url "http://maven.blamejared.com"
+    }
+
+    maven {
+        name 'jei'
+        url 'http://dvs1.progwml6.com/files/maven'
+    }
 }
 
 processResources {

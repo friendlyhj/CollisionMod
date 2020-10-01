@@ -69,16 +69,13 @@ public class ColliderBase extends CollisionBlock {
     }
 
     private void clean(World world, BlockPos pos) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (i == 1 && j == 1) continue;
-                BlockPos posOffset = pos.add(i - 1,0,j - 1);
-                Block blockOffset = world.getBlockState(posOffset).getBlock();
-                if (blockOffset instanceof Absorber) {
-                    ((Absorber) blockOffset).transform(world, pos);
-                }
+        Iterable<BlockPos> poses = BlockPos.getAllInBox(pos.add(-1, 0, -1), pos.add(1, 0, 1));
+        poses.forEach(pos1 -> {
+            Block block = world.getBlockState(pos1).getBlock();
+            if (block instanceof Absorber) {
+                ((Absorber) block).transform(world, pos1);
             }
-        }
+        });
     }
 
     private boolean start(World world, BlockPos pos, BlockPos fromPos) {
