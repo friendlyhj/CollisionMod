@@ -1,8 +1,11 @@
 package youyihj.collision.event;
 
+import net.minecraft.block.BlockSkull;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -36,8 +39,20 @@ public class WitherAltarWandEvent {
                 if (affectWorld.isBlockLoaded(pos) && witherAltar.match(affectWorld, pos)) {
                     affectWorld.newExplosion(null, pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f, 0.5f, true, false);
                     witherAltar.getMultiblockElements().forEach(element -> affectWorld.setBlockToAir(pos.add(element.getOffset())));
+                    transformSkull(affectWorld, pos);
                 }
             }
         }
+    }
+
+    private static void transformSkull(World world, BlockPos corePos) {
+        int n = 0;
+        for (BlockPos pos : BlockPos.getAllInBox(corePos.add(-2, -1, -2), corePos.add(2, -1, 2))) {
+            if (world.getBlockState(pos).getBlock() instanceof BlockSkull) {
+                n++;
+                world.setBlockToAir(pos);
+            }
+        }
+        world.spawnEntity(new EntityItem(world, corePos.getX(), corePos.getY(), corePos.getZ(), new ItemStack(Items.SKULL, n, 1)));
     }
 }

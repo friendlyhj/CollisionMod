@@ -21,6 +21,7 @@ public class WitherAltarWand extends CollisionItem {
     public WitherAltarWand() {
         super("wither_altar_wand");
         setMaxStackSize(1);
+        setFull3D();
     }
 
     public static SimpleMultiblock witherAltar;
