@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -33,9 +34,10 @@ public abstract class Spawner extends CollisionBlock {
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         if (!worldIn.isRemote) {
             this.getSpawnItems(worldIn).forEach((itemStack) -> {
-                BlockPos posOffset = pos.add(getRandomOffset(worldIn.rand));
+                Vec3i offset = getRandomOffset(worldIn.rand);
+                BlockPos posOffset = pos.add(offset);
                 if (worldIn.isAirBlock(posOffset)) {
-                    worldIn.spawnEntity(new EntityItem(worldIn, posOffset.getX(), posOffset.getY(), posOffset.getZ(), itemStack));
+                    spawnEntityItemWithRandomMotion(worldIn, itemStack, pos, offset);
                 }
             });
         }
@@ -56,6 +58,15 @@ public abstract class Spawner extends CollisionBlock {
             z = random.nextInt(5);
         }
         return new Vec3i(x - 2, y - 2, z - 2);
+    }
+
+    private void spawnEntityItemWithRandomMotion(World world, ItemStack itemStack, BlockPos pos, Vec3i offset) {
+        EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemStack);
+        Vec3d vec3d = new Vec3d(offset).normalize().scale(world.rand.nextDouble());
+        entityItem.motionX = vec3d.x;
+        entityItem.motionY = vec3d.y;
+        entityItem.motionZ = vec3d.z;
+        world.spawnEntity(entityItem);
     }
 
     public abstract List<ItemStack> getSpawnItems(World world);
