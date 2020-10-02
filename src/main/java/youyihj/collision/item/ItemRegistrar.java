@@ -11,6 +11,7 @@ public class ItemRegistrar {
         new Storage("neutron").register();
         Nucleus.NUCLEUS.register();
         new Debugger().register();
+        new WitherAltarWand().register();
     }
 
     public static void registerAllPlainItem() {

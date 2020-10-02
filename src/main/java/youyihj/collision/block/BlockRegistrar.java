@@ -1,5 +1,6 @@
 package youyihj.collision.block;
 
+import net.minecraft.block.material.Material;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.NeutronEmpty;
 import youyihj.collision.block.absorber.Proton;
@@ -16,5 +17,6 @@ public class BlockRegistrar {
         NeutronEmpty.INSTANCE.register();
         new MetalSpawner().register();
         Booster.INSTANCE.register();
+        new CollisionBlock("wither_altar", Material.IRON).register();
     }
 }

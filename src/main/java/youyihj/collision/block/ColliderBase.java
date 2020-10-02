@@ -79,7 +79,7 @@ public class ColliderBase extends CollisionBlock {
     }
 
     private boolean start(World world, BlockPos pos, BlockPos fromPos) {
-        Block fromBlock = world.getBlockState(fromPos).getBlock();
-        return (!world.isRemote && world.isBlockPowered(pos) && !(fromBlock instanceof Absorber) && !world.isAirBlock(fromPos));
+        IBlockState fromBlock = world.getBlockState(fromPos);
+        return (!world.isRemote && world.isBlockPowered(pos) && fromBlock.canProvidePower() && !world.isAirBlock(fromPos));
     }
 }

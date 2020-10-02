@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import youyihj.collision.block.BlockRegistrar;
 import youyihj.collision.block.spawner.MetalSpawner;
 import youyihj.collision.item.ItemRegistrar;
+import youyihj.collision.item.WitherAltarWand;
 import youyihj.collision.recipe.ColliderRecipe;
 import youyihj.collision.recipe.ColliderRecipeRegistrar;
 
@@ -31,6 +32,7 @@ public class Collision
 
     @EventHandler
     public void postinit(FMLPostInitializationEvent event) {
+        WitherAltarWand.initMultiBlock();
         logger.info(String.format("%s collider recipes have registered!", ColliderRecipe.colliderRecipes.size()));
         logger.info(String.format("%s nuclei registered!", MetalSpawner.initMetalList()));
     }

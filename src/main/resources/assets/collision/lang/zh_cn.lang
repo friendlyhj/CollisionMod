@@ -12,3 +12,5 @@ item.collision.nucleus.name=%s晶核
 
 material.nucleus.iron=铁
 material.nucleus.gold=金
+
+message.collision.bound_altar=结构正确！保存祭坛坐标！\
