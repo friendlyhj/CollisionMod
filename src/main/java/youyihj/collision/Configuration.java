@@ -39,5 +39,8 @@ public class Configuration {
     public static class SpawnerConfig {
         @Config.Comment("How many nuclei metal spawner spawn?")
         public int metalSpawnerSpawnAmount = 24;
+
+        @Config.Comment("How many nuclei gem spawner spawn?")
+        public int gemSpawnerSpawnAmount = 12;
     }
 }

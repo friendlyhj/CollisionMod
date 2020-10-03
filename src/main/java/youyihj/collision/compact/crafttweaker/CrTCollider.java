@@ -12,6 +12,7 @@ import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.recipe.ColliderRecipe;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Optional;
 
 import static youyihj.collision.recipe.ColliderRecipe.*;
@@ -31,7 +32,7 @@ public class CrTCollider {
         Optional<ColliderRecipe> oRecipe =  colliderRecipes.stream().filter((recipe -> {
             ItemStack stack = recipe.getOut();
             stack.setCount(1);
-            return stack.equals(CraftTweakerMC.getItemStack(out));
+            return CraftTweakerMC.getIItemStack(stack).matchesExact(out);
         })).findAny();
         if (oRecipe.isPresent()){
             ColliderRecipe recipe = oRecipe.get();
@@ -41,7 +42,7 @@ public class CrTCollider {
         }
     }
 
-    private static abstract class ColliderRecipeAction implements IAction {
+    public static abstract class ColliderRecipeAction implements IAction {
         protected int level;
         protected IItemStack out;
         protected CrTEnumAbsorber[][] absorbers;
@@ -90,11 +91,7 @@ public class CrTCollider {
 
         @Override
         public void apply() {
-            for (ColliderRecipe recipe : colliderRecipes) {
-                if (recipe.getOut().equals(CraftTweakerMC.getItemStack(out))) {
-                    colliderRecipes.remove(recipe);
-                }
-            }
+            colliderRecipes.removeIf(recipe -> CraftTweakerMC.getIItemStack(recipe.getOut()).matchesExact(out));
         }
 
         @Override

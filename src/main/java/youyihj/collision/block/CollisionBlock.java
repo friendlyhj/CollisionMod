@@ -4,10 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import youyihj.collision.Collision;
+import youyihj.collision.IRegistryObject;
 import youyihj.collision.creativeTab.CollisionTab;
 import youyihj.collision.item.ItemRegistryHandler;
 
-public class CollisionBlock extends Block {
+public class CollisionBlock extends Block implements IRegistryObject {
     public CollisionBlock(String id, Material material) {
         super(material);
         this.setUnlocalizedName(Collision.MODID + "." + id);

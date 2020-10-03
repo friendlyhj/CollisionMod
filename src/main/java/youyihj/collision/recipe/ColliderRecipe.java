@@ -1,11 +1,12 @@
 package youyihj.collision.recipe;
 
 import net.minecraft.item.ItemStack;
+import youyihj.collision.IRegistryObject;
 import youyihj.collision.block.absorber.EnumAbsorber;
 
 import java.util.HashSet;
 
-public class ColliderRecipe{
+public class ColliderRecipe implements IRegistryObject {
     public ColliderRecipe(int level, ItemStack out, EnumAbsorber[][] input) {
         this.level = level;
         this.out = out;

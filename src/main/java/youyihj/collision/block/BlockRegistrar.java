@@ -5,6 +5,7 @@ import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.NeutronEmpty;
 import youyihj.collision.block.absorber.Proton;
 import youyihj.collision.block.absorber.ProtonEmpty;
+import youyihj.collision.block.spawner.GemSpawner;
 import youyihj.collision.block.spawner.MetalSpawner;
 
 public class BlockRegistrar {
@@ -16,6 +17,7 @@ public class BlockRegistrar {
         Neutron.INSTANCE.register();
         NeutronEmpty.INSTANCE.register();
         new MetalSpawner().register();
+        new GemSpawner().register();
         Booster.INSTANCE.register();
         new CollisionBlock("wither_altar", Material.IRON).register();
     }

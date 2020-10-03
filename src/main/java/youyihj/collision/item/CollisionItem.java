@@ -2,10 +2,11 @@ package youyihj.collision.item;
 
 import net.minecraft.item.Item;
 import youyihj.collision.Collision;
+import youyihj.collision.IRegistryObject;
 import youyihj.collision.creativeTab.CollisionTab;
 
 
-public class CollisionItem extends Item {
+public class CollisionItem extends Item implements IRegistryObject {
     public CollisionItem(String id) {
         super();
         this.setUnlocalizedName(Collision.MODID + "." + id);

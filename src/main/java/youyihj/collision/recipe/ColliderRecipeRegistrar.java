@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import youyihj.collision.block.absorber.EnumAbsorber;
 
 public class ColliderRecipeRegistrar {
-    static {
+    {
         new ColliderRecipe(1, new ItemStack(Blocks.STONE), new EnumAbsorber[][] {
             {EnumAbsorber.NEUTRON, EnumAbsorber.NEUTRON, EnumAbsorber.NEUTRON},
             {EnumAbsorber.NEUTRON, null, EnumAbsorber.NEUTRON},

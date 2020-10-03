@@ -37,7 +37,7 @@ public abstract class Spawner extends CollisionBlock {
                 Vec3i offset = getRandomOffset(worldIn.rand);
                 BlockPos posOffset = pos.add(offset);
                 if (worldIn.isAirBlock(posOffset)) {
-                    spawnEntityItemWithRandomMotion(worldIn, itemStack, pos, offset);
+                    spawnEntityItemWithRandomMotion(worldIn, itemStack, posOffset, offset);
                 }
             });
         }
