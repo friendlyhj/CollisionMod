@@ -11,8 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import youyihj.collision.Collision;
-import youyihj.collision.block.ColliderBase;
-import youyihj.collision.item.ItemRegistryHandler;
+
+import java.util.Optional;
 
 
 public class ColliderCategory implements IRecipeCategory<ColliderWrapper> {
@@ -44,7 +44,6 @@ public class ColliderCategory implements IRecipeCategory<ColliderWrapper> {
         return background;
     }
 
-
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, ColliderWrapper recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup guiItems = recipeLayout.getItemStacks();
@@ -56,7 +55,7 @@ public class ColliderCategory implements IRecipeCategory<ColliderWrapper> {
                 int x = (i % 3) * 18;
                 int y = MathHelper.floor(i / 3) * 18;
                 guiItems.init(i, false, x, y);
-                guiItems.set(i, i != 4 ? recipeWrapper.in.get(i) : new ItemStack(ItemRegistryHandler.itemBlockHashMap.get(ColliderBase.getRegistryName(recipeWrapper.level))));
+                guiItems.set(i, Optional.ofNullable(recipeWrapper.in.get(i)).orElse(ItemStack.EMPTY));
             }
         }
     }
