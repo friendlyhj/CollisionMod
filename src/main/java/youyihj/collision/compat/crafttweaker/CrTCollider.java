@@ -1,4 +1,4 @@
-package youyihj.collision.compact.crafttweaker;
+package youyihj.collision.compat.crafttweaker;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
@@ -12,7 +12,6 @@ import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.recipe.ColliderRecipe;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Optional;
 
 import static youyihj.collision.recipe.ColliderRecipe.*;

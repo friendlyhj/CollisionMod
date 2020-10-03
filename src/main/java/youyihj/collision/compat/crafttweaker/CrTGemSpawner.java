@@ -1,4 +1,4 @@
-package youyihj.collision.compact.crafttweaker;
+package youyihj.collision.compat.crafttweaker;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
