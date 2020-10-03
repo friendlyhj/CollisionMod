@@ -14,3 +14,5 @@ material.nucleus.iron=Iron
 material.nucleus.gold=Gold
 
 message.collision.bound_altar=MultiBlock construction is correct, saving the position of altar.
+
+jei.category.collision.collider=Collider

@@ -23,7 +23,7 @@ public class ColliderBase extends CollisionBlock {
         this.setResistance(50.0f);
     }
 
-    private static String getRegistryName(int level) {
+    public static String getRegistryName(int level) {
         return "collider_lv" + String.valueOf(level);
     }
 
