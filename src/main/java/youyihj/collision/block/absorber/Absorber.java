@@ -2,20 +2,26 @@ package youyihj.collision.block.absorber;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import youyihj.collision.Configuration;
-import youyihj.collision.block.CollisionBlock;
+import youyihj.collision.block.HasSpecialItemBlock;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
-public abstract class Absorber extends CollisionBlock {
+import static youyihj.collision.item.ItemRegistryHandler.itemBlockHashMap;
+
+public abstract class Absorber extends HasSpecialItemBlock {
     private boolean isEmpty;
 
-    public Absorber(String id, boolean isEmpty) {
+    public Absorber(String id, boolean isEmpty, boolean tickRandomly) {
         super(id, Material.ROCK);
         this.isEmpty = isEmpty;
-        this.setTickRandomly(isEmpty);
+        this.setTickRandomly(tickRandomly);
         this.setHardness(3.0f);
         this.setResistance(50.0f);
         this.setHarvestLevel("pickaxe", 0);
@@ -35,6 +41,24 @@ public abstract class Absorber extends CollisionBlock {
 
     public boolean isEmpty() {
         return isEmpty;
+    }
+
+    @Override
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this) {
+            @Override
+            public boolean hasContainerItem(ItemStack stack) {
+                Absorber absorber = (Absorber) getThis();
+                return !absorber.isEmpty();
+            }
+
+            @Nullable
+            @Override
+            public Item getContainerItem() {
+                Absorber absorber = (Absorber) getThis();
+                return absorber.isEmpty() ? null : itemBlockHashMap.get(absorber.getTransformAbsorber().getRegistryName().getResourcePath());
+            }
+        };
     }
 
     public void transform(World world, BlockPos pos) {

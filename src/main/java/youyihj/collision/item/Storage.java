@@ -43,10 +43,24 @@ public class Storage extends CollisionItem {
             }
             return EnumActionResult.SUCCESS;
         }
-        if (state == this.getAbsorberEmpty().getInstance().getDefaultState() && stack.getItemDamage() != this.maxStackSize) {
+        if (state == this.getAbsorber().getRefined().getDefaultState() && stack.getItemDamage() >= 4) {
+            if (!worldIn.isRemote) {
+                stack.damageItem(-4, player);
+                worldIn.setBlockState(pos, this.getAbsorberEmpty().getRefined().getDefaultState());
+            }
+            return EnumActionResult.SUCCESS;
+        }
+        if (state == this.getAbsorberEmpty().getInstance().getDefaultState() && stack.getItemDamage() != this.getMaxDamage(stack)) {
             if (!worldIn.isRemote) {
                 stack.damageItem(1, player);
                 worldIn.setBlockState(pos, this.getAbsorber().getInstance().getDefaultState());
+            }
+            return EnumActionResult.SUCCESS;
+        }
+        if (state == this.getAbsorberEmpty().getRefined().getDefaultState() && stack.getItemDamage() <= this.getMaxDamage(stack) - 4) {
+            if (!worldIn.isRemote) {
+                stack.damageItem(4, player);
+                worldIn.setBlockState(pos, this.getAbsorber().getRefined().getDefaultState());
             }
             return EnumActionResult.SUCCESS;
         }

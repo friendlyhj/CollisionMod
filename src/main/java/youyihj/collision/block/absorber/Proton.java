@@ -2,7 +2,7 @@ package youyihj.collision.block.absorber;
 
 public class Proton extends Absorber {
     private Proton() {
-        super("proton", false);
+        super("proton", false, false);
     }
 
     public static final Proton INSTANCE = new Proton();
@@ -10,5 +10,18 @@ public class Proton extends Absorber {
     @Override
     public Absorber getTransformAbsorber() {
         return ProtonEmpty.INSTANCE;
+    }
+
+    public static class Refined extends Absorber {
+        private Refined() {
+            super("proton_refined", true, false);
+        }
+
+        public static final Refined INSTANCE = new Refined();
+
+        @Override
+        public Absorber getTransformAbsorber() {
+            return ProtonEmpty.Refined.INSTANCE;
+        }
     }
 }

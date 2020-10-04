@@ -2,7 +2,7 @@ package youyihj.collision.block.absorber;
 
 public class Neutron extends Absorber {
     private Neutron() {
-        super("neutron", false);
+        super("neutron", false, false);
     }
 
     public static final Neutron INSTANCE = new Neutron();
@@ -10,5 +10,18 @@ public class Neutron extends Absorber {
     @Override
     public Absorber getTransformAbsorber() {
         return NeutronEmpty.INSTANCE;
+    }
+
+    public static class Refined extends Absorber {
+        private Refined() {
+            super("neutron_refined", false, false);
+        }
+
+        public static final Refined INSTANCE = new Refined();
+
+        @Override
+        public Absorber getTransformAbsorber() {
+            return NeutronEmpty.Refined.INSTANCE;
+        }
     }
 }

@@ -29,7 +29,7 @@ public class ColliderWrapper implements IRecipeWrapper {
             for (int y = 0; y < 3; y++) {
                 in[x + y * 3] = (x == 1 && y == 1)
                         ? new ItemStack(ItemRegistryHandler.itemBlockHashMap.get(ColliderBase.getRegistryName(level)))
-                        : getAbsorberItem(recipe.getInput()[x][y]);
+                        : getAbsorberItem(recipe.getInput()[x][y], level);
             }
         }
         this.in = Arrays.asList(in);
@@ -41,7 +41,7 @@ public class ColliderWrapper implements IRecipeWrapper {
         ingredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(in));
     }
 
-    private static ItemStack getAbsorberItem(EnumAbsorber absorber) {
-        return absorber == null ? ItemStack.EMPTY : new ItemStack(absorber.getInstance());
+    private static ItemStack getAbsorberItem(EnumAbsorber absorber, int level) {
+        return absorber == null ? ItemStack.EMPTY : new ItemStack(absorber.getInstanceByLevel(level));
     }
 }

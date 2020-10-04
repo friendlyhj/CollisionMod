@@ -1,19 +1,29 @@
 package youyihj.collision.block.absorber;
 
 public enum EnumAbsorber {
-    NEUTRON(Neutron.INSTANCE),
-    NEUTRON_EMPTY(NeutronEmpty.INSTANCE),
-    PROTON(Proton.INSTANCE),
-    PROTON_EMPTY(ProtonEmpty.INSTANCE);
+    NEUTRON(Neutron.INSTANCE, Neutron.Refined.INSTANCE),
+    NEUTRON_EMPTY(NeutronEmpty.INSTANCE, NeutronEmpty.Refined.INSTANCE),
+    PROTON(Proton.INSTANCE, Proton.Refined.INSTANCE),
+    PROTON_EMPTY(ProtonEmpty.INSTANCE, ProtonEmpty.Refined.INSTANCE);
 
     private Absorber instance;
+    private Absorber refined;
 
-    EnumAbsorber(Absorber arg) {
+    EnumAbsorber(Absorber arg, Absorber refined) {
         this.instance = arg;
+        this.refined = refined;
     }
 
     public Absorber getInstance() {
         return instance;
+    }
+
+    public Absorber getRefined() {
+        return refined;
+    }
+
+    public Absorber getInstanceByLevel(int level) {
+        return level > 2 ? getRefined() : getInstance();
     }
 
     public EnumAbsorber getTransformAbsorber() {

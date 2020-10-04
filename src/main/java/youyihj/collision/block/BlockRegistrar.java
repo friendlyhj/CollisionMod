@@ -12,10 +12,17 @@ public class BlockRegistrar {
     public static void registerAllBlock() {
         // new CollisionBlock("test_block", Material.GRASS).register();
         new ColliderBase(1).register();
+        new ColliderBase(2).register();
+        new ColliderBase(3).register();
+        new ColliderBase(4).register();
         Proton.INSTANCE.register();
         ProtonEmpty.INSTANCE.register();
         Neutron.INSTANCE.register();
         NeutronEmpty.INSTANCE.register();
+        Proton.Refined.INSTANCE.register();
+        ProtonEmpty.Refined.INSTANCE.register();
+        Neutron.Refined.INSTANCE.register();
+        NeutronEmpty.Refined.INSTANCE.register();
         new MetalSpawner().register();
         new GemSpawner().register();
         Booster.INSTANCE.register();

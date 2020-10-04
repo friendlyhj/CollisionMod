@@ -59,7 +59,7 @@ public class ColliderBase extends CollisionBlock {
                         if ((i == 1 && j == 1) || !flag) continue;
                         EnumAbsorber absorber = colliderRecipe.getInput()[i][j];
                         IBlockState blockState = world.getBlockState(posOffset);
-                        flag = (absorber == null) ? world.isAirBlock(posOffset) : blockState == absorber.getInstance().getDefaultState();
+                        flag = (absorber == null) ? world.isAirBlock(posOffset) : blockState == absorber.getInstanceByLevel(level).getDefaultState();
                     }
                 }
                 if (flag) return colliderRecipe;
