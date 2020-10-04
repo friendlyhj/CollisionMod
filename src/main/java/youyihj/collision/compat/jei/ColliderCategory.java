@@ -54,7 +54,7 @@ public class ColliderCategory implements IRecipeCategory<ColliderWrapper> {
             } else {
                 int x = (i % 3) * 18;
                 int y = MathHelper.floor(i / 3) * 18;
-                guiItems.init(i, false, x, y);
+                guiItems.init(i, true, x, y);
                 guiItems.set(i, Optional.ofNullable(recipeWrapper.in.get(i)).orElse(ItemStack.EMPTY));
             }
         }
