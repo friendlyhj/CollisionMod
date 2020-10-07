@@ -34,6 +34,7 @@ public class ColliderRecipe implements IRegistryObject {
         return input;
     }
 
+    @Override
     public void register() {
         colliderRecipes.add(this);
     }

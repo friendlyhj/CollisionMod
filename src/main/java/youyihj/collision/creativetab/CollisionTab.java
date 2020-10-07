@@ -1,4 +1,4 @@
-package youyihj.collision.creativeTab;
+package youyihj.collision.creativetab;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;

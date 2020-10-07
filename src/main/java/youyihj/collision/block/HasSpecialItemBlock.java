@@ -2,7 +2,7 @@ package youyihj.collision.block;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
-import youyihj.collision.creativeTab.CollisionTab;
+import youyihj.collision.creativetab.CollisionTab;
 import youyihj.collision.item.ItemRegistryHandler;
 
 public abstract class HasSpecialItemBlock extends CollisionBlock implements IHasSpecialItemBlock {

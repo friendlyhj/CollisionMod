@@ -5,7 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import youyihj.collision.Collision;
 import youyihj.collision.IRegistryObject;
-import youyihj.collision.creativeTab.CollisionTab;
+import youyihj.collision.creativetab.CollisionTab;
 import youyihj.collision.item.ItemRegistryHandler;
 
 public class CollisionBlock extends Block implements IRegistryObject {
@@ -16,6 +16,7 @@ public class CollisionBlock extends Block implements IRegistryObject {
         this.setCreativeTab(CollisionTab.COLLISION_TAB);
     }
 
+    @Override
     public void register() {
         BlockRegistryHandler.blocks.add(this);
         BlockRegistryHandler.blockHashMap.put(this.getRegistryName().getResourcePath(), this);
