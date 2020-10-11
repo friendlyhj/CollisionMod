@@ -23,6 +23,11 @@ public class CrTGemSpawner {
         CraftTweakerAPI.apply(new GemSpawnerRemove(stack));
     }
 
+    @ZenMethod
+    public static void removeAll() {
+        CraftTweakerAPI.apply(new GemSpawnerRemoveAll());
+    }
+
     public static class GemSpawnerAdd implements IAction {
         private IItemStack stack;
         private int wight;
@@ -58,6 +63,19 @@ public class CrTGemSpawner {
         @Override
         public String describe() {
             return "Removing " + stack.getDisplayName() + " in gem spawner's item pool.";
+        }
+    }
+
+    public static class GemSpawnerRemoveAll implements IAction {
+
+        @Override
+        public void apply() {
+            GemSpawner.removeAll();
+        }
+
+        @Override
+        public String describe() {
+            return "Removing gem spawner item pool.";
         }
     }
 }

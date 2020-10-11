@@ -28,6 +28,10 @@ public class GemSpawner extends Spawner {
         spawnItemPool.remove(itemStack);
     }
 
+    public static void removeAll() {
+        spawnItemPool.clear();
+    }
+
     {
         addItem(new ItemStack(Items.REDSTONE, 1), 1000);
         addItem(new ItemStack(Items.GLOWSTONE_DUST, 1), 800);

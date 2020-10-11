@@ -5,6 +5,7 @@ import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
+import crafttweaker.mc1120.item.MCItemStack;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -39,6 +40,11 @@ public class CrTCollider {
         } else {
             CraftTweakerAPI.logWarning("cannot find a collider recipe for " + out.getDisplayName() + "! Ignore this command.");
         }
+    }
+
+    @ZenMethod
+    public static void removeAll() {
+        CraftTweakerAPI.apply(new ColliderRemoveAll());
     }
 
     public static abstract class ColliderRecipeAction implements IAction {
@@ -96,6 +102,23 @@ public class CrTCollider {
         @Override
         public String describe() {
             return "Removing collider recipe(s) for " + out.getDisplayName();
+        }
+    }
+
+    public static class ColliderRemoveAll extends ColliderRecipeAction {
+
+        public ColliderRemoveAll() {
+            super(0, MCItemStack.EMPTY, null);
+        }
+
+        @Override
+        public void apply() {
+            ColliderRecipe.colliderRecipes.clear();
+        }
+
+        @Override
+        public String describe() {
+            return "Removing all collider recipe.";
         }
     }
 }
