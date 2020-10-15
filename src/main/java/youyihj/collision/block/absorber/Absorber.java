@@ -8,14 +8,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import youyihj.collision.Configuration;
-import youyihj.collision.block.HasSpecialItemBlock;
+import youyihj.collision.block.CollisionBlock;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
 import static youyihj.collision.item.ItemRegistryHandler.itemBlockHashMap;
 
-public abstract class Absorber extends HasSpecialItemBlock {
+public abstract class Absorber extends CollisionBlock {
     private boolean isEmpty;
 
     public Absorber(String id, boolean isEmpty, boolean tickRandomly) {
@@ -48,14 +48,14 @@ public abstract class Absorber extends HasSpecialItemBlock {
         return new ItemBlock(this) {
             @Override
             public boolean hasContainerItem(ItemStack stack) {
-                Absorber absorber = (Absorber) getThis();
+                Absorber absorber = (Absorber) getBlockFromItem(this);
                 return !absorber.isEmpty();
             }
 
             @Nullable
             @Override
             public Item getContainerItem() {
-                Absorber absorber = (Absorber) getThis();
+                Absorber absorber = (Absorber) getBlockFromItem(this);
                 return absorber.isEmpty() ? null : itemBlockHashMap.get(absorber.getTransformAbsorber().getRegistryName().getResourcePath());
             }
         };

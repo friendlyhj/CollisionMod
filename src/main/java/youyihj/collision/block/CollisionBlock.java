@@ -16,11 +16,15 @@ public class CollisionBlock extends Block implements IRegistryObject {
         this.setCreativeTab(CollisionTab.COLLISION_TAB);
     }
 
+    public ItemBlock getItemBlock() {
+        return new ItemBlock(this);
+    }
+
     @Override
     public void register() {
         BlockRegistryHandler.blocks.add(this);
         BlockRegistryHandler.blockHashMap.put(this.getRegistryName().getResourcePath(), this);
-        ItemBlock itemBlock = new ItemBlock(this);
+        ItemBlock itemBlock = this.getItemBlock();
         itemBlock.setCreativeTab(CollisionTab.COLLISION_TAB);
         itemBlock.setRegistryName(this.getRegistryName());
         ItemRegistryHandler.itemBlocks.add(itemBlock);
