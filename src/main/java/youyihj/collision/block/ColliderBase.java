@@ -33,6 +33,7 @@ public class ColliderBase extends CollisionBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (start(worldIn, pos, fromPos)) {
             worldIn.newExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 0.1f, false, true);

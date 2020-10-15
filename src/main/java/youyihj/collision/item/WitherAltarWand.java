@@ -18,6 +18,11 @@ import youyihj.collision.multiblock.SimpleMultiblock;
 import javax.annotation.Nonnull;
 
 public class WitherAltarWand extends CollisionItem {
+    public static final String TAG_X = "AltarPosX";
+    public static final String TAG_Y = "AltarPosY";
+    public static final String TAG_Z = "AltarPosZ";
+    public static final String TAG_WORLD = "AltarPosWorld";
+
     public WitherAltarWand() {
         super("wither_altar_wand");
         setMaxStackSize(1);
@@ -50,10 +55,10 @@ public class WitherAltarWand extends CollisionItem {
                 wand.setTagCompound(new NBTTagCompound());
                 tag = wand.getTagCompound();
             }
-            tag.setInteger("AltarPosX", pos.getX());
-            tag.setInteger("AltarPosY", pos.getY());
-            tag.setInteger("AltarPosZ", pos.getZ());
-            tag.setInteger("AltarPosWorld", worldIn.provider.getDimension());
+            tag.setInteger(TAG_X, pos.getX());
+            tag.setInteger(TAG_Y, pos.getY());
+            tag.setInteger(TAG_Z, pos.getZ());
+            tag.setInteger(TAG_WORLD, worldIn.provider.getDimension());
             player.sendMessage(new TextComponentTranslation("message.collision.bound_altar"));
             return EnumActionResult.SUCCESS;
         }

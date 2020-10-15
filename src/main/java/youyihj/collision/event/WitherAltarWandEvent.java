@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import youyihj.collision.item.WitherAltarWand;
 
-import static youyihj.collision.item.WitherAltarWand.witherAltar;
+import static youyihj.collision.item.WitherAltarWand.*;
 
 @Mod.EventBusSubscriber
 @SuppressWarnings("unused")
@@ -34,8 +34,8 @@ public class WitherAltarWandEvent {
             mob.attackEntityFrom(DamageSource.causePlayerDamage(player), 4.0f);
             if (mob.getHealth() <= 0.0f && item.hasTagCompound()) {
                 NBTTagCompound tag = item.getTagCompound();
-                BlockPos pos = new BlockPos(tag.getInteger("AltarPosX"), tag.getInteger("AltarPosY"), tag.getInteger("AltarPosZ"));
-                World affectWorld = DimensionManager.getWorld(tag.getInteger("AltarWorldID"));
+                BlockPos pos = new BlockPos(tag.getInteger(TAG_X), tag.getInteger(TAG_Y), tag.getInteger(TAG_Z));
+                World affectWorld = DimensionManager.getWorld(tag.getInteger(TAG_WORLD));
                 if (affectWorld.isBlockLoaded(pos) && witherAltar.match(affectWorld, pos)) {
                     affectWorld.newExplosion(null, pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f, 0.5f, true, false);
                     witherAltar.getMultiblockElements().forEach(element -> affectWorld.setBlockToAir(pos.add(element.getOffset())));

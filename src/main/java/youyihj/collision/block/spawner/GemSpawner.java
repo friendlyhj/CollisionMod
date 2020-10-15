@@ -32,7 +32,7 @@ public class GemSpawner extends Spawner {
         spawnItemPool.clear();
     }
 
-    {
+    static {
         addItem(new ItemStack(Items.REDSTONE, 1), 1000);
         addItem(new ItemStack(Items.GLOWSTONE_DUST, 1), 800);
     }
