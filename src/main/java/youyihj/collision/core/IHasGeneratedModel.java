@@ -69,7 +69,7 @@ public interface IHasGeneratedModel extends IHasModel {
                 }
 
                 if (!all.has("forge_marker"))
-                    throw new UnsupportedGeneratedTypeException(modelRL + "is linked to an unsupported generated type:" + getRegistryEntryType().getName());
+                    throw new UnsupportedGeneratedTypeException(modelRL + " is linked to an unsupported generated type: " + getRegistryEntryType().getName());
 
                 try {
                     FileUtils.writeStringToFile(file, gson.toJson(all), StandardCharsets.UTF_8, false);
