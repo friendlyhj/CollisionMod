@@ -1,7 +1,7 @@
 package youyihj.collision.recipe;
 
 import net.minecraft.item.ItemStack;
-import youyihj.collision.IRegistryObject;
+import youyihj.collision.core.IRegistryObject;
 import youyihj.collision.block.absorber.EnumAbsorber;
 
 import java.util.HashSet;

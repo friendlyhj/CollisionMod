@@ -1,5 +1,6 @@
 package youyihj.collision.item;
 
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -64,6 +65,15 @@ public class Nucleus extends CollisionItem {
     public String getItemStackDisplayName(ItemStack stack) {
         return I18n.format("item.collision.nucleus.name",
                 I18n.format("material.nucleus." + singleHashMap.get(stack.getMetadata()).name.toLowerCase()));
+    }
+
+    @Override
+    public HashMap<Integer, ModelResourceLocation> getModelRLs() {
+        HashMap<Integer, ModelResourceLocation> temp = new HashMap<>();
+        for (int i : getAllMetaData()) {
+            temp.put(i, new ModelResourceLocation(this.getRegistryName(), "inventory"));
+        }
+        return temp;
     }
 
     @EventBusSubscriber(modid = Collision.MODID)

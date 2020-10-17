@@ -2,13 +2,17 @@ package youyihj.collision.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemBlock;
 import youyihj.collision.Collision;
-import youyihj.collision.IRegistryObject;
+import youyihj.collision.core.IHasGeneratedModel;
+import youyihj.collision.core.IRegistryObject;
 import youyihj.collision.creativetab.CollisionTab;
 import youyihj.collision.item.ItemRegistryHandler;
 
-public class CollisionBlock extends Block implements IRegistryObject {
+import java.util.HashMap;
+
+public class CollisionBlock extends Block implements IRegistryObject, IHasGeneratedModel {
     public CollisionBlock(String id, Material material) {
         super(material);
         this.setUnlocalizedName(Collision.MODID + "." + id);
@@ -29,5 +33,18 @@ public class CollisionBlock extends Block implements IRegistryObject {
         itemBlock.setRegistryName(this.getRegistryName());
         ItemRegistryHandler.itemBlocks.add(itemBlock);
         ItemRegistryHandler.itemBlockHashMap.put(this.getRegistryName().getResourcePath(), itemBlock);
+        Collision.needGenerateModels.add(this);
+    }
+
+    @Override
+    public HashMap<Integer, ModelResourceLocation> getModelRLs() {
+        HashMap<Integer, ModelResourceLocation> temp = new HashMap<>();
+        temp.put(0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
+        return temp;
+    }
+
+    @Override
+    public Class<?> getRegistryEntryType() {
+        return this.getClass();
     }
 }

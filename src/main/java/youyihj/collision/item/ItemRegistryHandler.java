@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import youyihj.collision.block.Booster;
+import youyihj.collision.block.CollisionBlock;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,24 +43,13 @@ public class ItemRegistryHandler {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onModelRegistry(ModelRegistryEvent event) {
-        for (Item item : items) {
-            ModelResourceLocation modelRL = new ModelResourceLocation(item.getRegistryName(), "inventory");
-            if (item == Nucleus.NUCLEUS) {
-                for (Integer metadata : Nucleus.getAllMetaData()) {
-                    ModelLoader.setCustomModelResourceLocation(item, metadata, modelRL);
-                }
-            } else {
-                ModelLoader.setCustomModelResourceLocation(item, 0, modelRL);
-            }
+        for (CollisionItem item : items) {
+            item.getModelRLs().forEach((meta, modelResourceLocation) ->
+            ModelLoader.setCustomModelResourceLocation(item, meta, modelResourceLocation));
         }
         for (ItemBlock itemBlock : itemBlocks) {
-//            if (itemBlock.getBlock() instanceof Booster) {
-//                ModelLoader.setCustomModelResourceLocation(itemBlock, 0,
-//                        new ModelResourceLocation("booster", "inventory"));
-//            } else {
-                ModelLoader.setCustomModelResourceLocation(itemBlock, 0,
-                        new ModelResourceLocation(itemBlock.getRegistryName(), "inventory"));
-//            }
+            ((CollisionBlock) itemBlock.getBlock()).getModelRLs().forEach((meta, modelRL) ->
+            ModelLoader.setCustomModelResourceLocation(itemBlock, meta, modelRL));
         }
     }
 }

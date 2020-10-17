@@ -2,6 +2,7 @@ package youyihj.collision.item;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -23,7 +24,9 @@ public class Debugger extends CollisionItem{
         player.sendMessage(new TextComponentString(blockState.getBlock().getRegistryName().toString()));
         player.sendMessage(new TextComponentString(String.valueOf(blockState.getBlock().getMetaFromState(blockState))));
         if (tileEntity != null) {
-            player.sendMessage(new TextComponentString(tileEntity.getTileData().toString()));
+            NBTTagCompound tag = new NBTTagCompound();
+            tileEntity.readFromNBT(tag);
+            player.sendMessage(new TextComponentString(tag.toString()));
         }
         return EnumActionResult.SUCCESS;
     }
