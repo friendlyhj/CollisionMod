@@ -25,8 +25,7 @@ public class Debugger extends CollisionItem{
         player.sendMessage(new TextComponentString(String.valueOf(blockState.getBlock().getMetaFromState(blockState))));
         if (tileEntity != null) {
             NBTTagCompound tag = new NBTTagCompound();
-            tileEntity.readFromNBT(tag);
-            player.sendMessage(new TextComponentString(tag.toString()));
+            player.sendMessage(new TextComponentString(tileEntity.writeToNBT(tag).toString()));
         }
         return EnumActionResult.SUCCESS;
     }

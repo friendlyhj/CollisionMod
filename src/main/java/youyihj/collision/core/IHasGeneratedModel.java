@@ -28,7 +28,7 @@ public interface IHasGeneratedModel extends IHasModel {
     }
 
     Class<?> getRegistryEntryType();
-    
+
     default void generate() {
         if (!isGenerating()) return;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
