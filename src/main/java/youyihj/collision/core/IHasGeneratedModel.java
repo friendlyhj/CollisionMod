@@ -8,29 +8,36 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import org.apache.commons.io.FileUtils;
 import youyihj.collision.Collision;
+import youyihj.collision.Utils;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 public interface IHasGeneratedModel extends IHasModel {
-    String DIR = "resources/" + Collision.MODID + "/blockstates/";
+    default String getDir() {
+        return "../src/main/resources/assets/" + this.getResourceDomain() + "/blockstates/";
+    }
 
     default boolean isAlwaysOverrideModelFile() {
         return false;
     }
 
     default boolean isGenerating() {
-        return true;
+        return Utils.isDevEnvironment();
     }
 
     Class<?> getRegistryEntryType();
+
+    default String getResourceDomain() {
+        return this.getModelRLs().values().stream().findAny().get().getResourceDomain();
+    }
 
     default void generate() {
         if (!isGenerating()) return;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         this.getModelRLs().forEach((meta, modelRL) -> {
-            File file = new File(DIR + modelRL.getResourcePath() + ".json");
+            File file = new File(getDir() + modelRL.getResourcePath() + ".json");
             if (isAlwaysOverrideModelFile() || !file.exists()) {
                 JsonObject all = new JsonObject();
                 if (Item.class.isAssignableFrom(getRegistryEntryType())) {

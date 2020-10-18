@@ -1,5 +1,7 @@
 package youyihj.collision;
 
+import net.minecraft.launchwrapper.Launch;
+
 public class Utils {
 
     public Utils() {
@@ -31,5 +33,9 @@ public class Utils {
             }
         }
         return stringBuilder.toString().toLowerCase();
+    }
+
+    public static boolean isDevEnvironment() {
+        return (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
     }
 }
