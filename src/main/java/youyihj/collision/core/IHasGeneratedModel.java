@@ -5,9 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import org.apache.commons.io.FileUtils;
-import youyihj.collision.Collision;
 import youyihj.collision.Utils;
 
 import java.io.File;
@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 public interface IHasGeneratedModel extends IHasModel {
-    default String getDir() {
-        return "../src/main/resources/assets/" + this.getResourceDomain() + "/blockstates/";
+    default String getDir(ModelResourceLocation location) {
+        return "../src/main/resources/assets/" + location.getResourceDomain() + "/blockstates/";
     }
 
     default boolean isAlwaysOverrideModelFile() {
@@ -28,16 +28,12 @@ public interface IHasGeneratedModel extends IHasModel {
     }
 
     Class<?> getRegistryEntryType();
-
-    default String getResourceDomain() {
-        return this.getModelRLs().values().stream().findAny().get().getResourceDomain();
-    }
-
+    
     default void generate() {
         if (!isGenerating()) return;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         this.getModelRLs().forEach((meta, modelRL) -> {
-            File file = new File(getDir() + modelRL.getResourcePath() + ".json");
+            File file = new File(getDir(modelRL) + modelRL.getResourcePath() + ".json");
             if (isAlwaysOverrideModelFile() || !file.exists()) {
                 JsonObject all = new JsonObject();
                 if (Item.class.isAssignableFrom(getRegistryEntryType())) {
@@ -45,7 +41,7 @@ public interface IHasGeneratedModel extends IHasModel {
                     JsonObject defaults = new JsonObject();
                     defaults.addProperty("model", "minecraft:builtin/generated");
                     JsonObject textures = new JsonObject();
-                    textures.addProperty("layer0", Collision.MODID + ":items/" + modelRL.getResourcePath());
+                    textures.addProperty("layer0", modelRL.getResourceDomain() + ":items/" + modelRL.getResourcePath());
                     defaults.add("textures", textures);
                     all.add("defaults", defaults);
                     JsonObject variants = new JsonObject();
@@ -61,8 +57,8 @@ public interface IHasGeneratedModel extends IHasModel {
                     all.addProperty("forge_marker", 1);
                     JsonObject defaults = new JsonObject();
                     JsonObject textures = new JsonObject();
-                    textures.addProperty("all", Collision.MODID + ":blocks/" + modelRL.getResourcePath());
-                    textures.addProperty("particle", Collision.MODID + ":blocks/" + modelRL.getResourcePath());
+                    textures.addProperty("all", modelRL.getResourceDomain() + ":blocks/" + modelRL.getResourcePath());
+                    textures.addProperty("particle", modelRL.getResourceDomain() + ":blocks/" + modelRL.getResourcePath());
                     defaults.add("textures", textures);
                     defaults.addProperty("model", "minecraft:cube_all");
                     defaults.addProperty("uvlock", true);
