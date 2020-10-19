@@ -9,6 +9,7 @@ import youyihj.collision.block.BlockRegistrar;
 import youyihj.collision.block.spawner.GemSpawner;
 import youyihj.collision.block.spawner.MetalSpawner;
 import youyihj.collision.core.IHasGeneratedModel;
+import youyihj.collision.core.ModelGenerater;
 import youyihj.collision.item.ItemRegistrar;
 import youyihj.collision.item.WitherAltarWand;
 import youyihj.collision.recipe.ColliderRecipe;
@@ -27,15 +28,13 @@ public class Collision
 
     private static Logger logger;
 
-    public static List<IHasGeneratedModel> needGenerateModels = new ArrayList<>();
-
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         ItemRegistrar.registerAllPlainItem();
         ItemRegistrar.registerAllSpecialItem();
         BlockRegistrar.registerAllBlock();
-        needGenerateModels.forEach(IHasGeneratedModel::generate);
+        ModelGenerater.generate();
         new ColliderRecipeRegistrar();
     }
 

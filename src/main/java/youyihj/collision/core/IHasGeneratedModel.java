@@ -30,7 +30,6 @@ public interface IHasGeneratedModel extends IHasModel {
     Class<?> getRegistryEntryType();
 
     default void generate() {
-        if (!isGenerating()) return;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         this.getModelRLs().forEach((meta, modelRL) -> {
             File file = new File(getDir(modelRL) + modelRL.getResourcePath() + ".json");
