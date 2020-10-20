@@ -8,15 +8,11 @@ import org.apache.logging.log4j.Logger;
 import youyihj.collision.block.BlockRegistrar;
 import youyihj.collision.block.spawner.GemSpawner;
 import youyihj.collision.block.spawner.MetalSpawner;
-import youyihj.collision.core.IHasGeneratedModel;
-import youyihj.collision.core.ModelGenerater;
+import youyihj.collision.core.ModelGenerator;
 import youyihj.collision.item.ItemRegistrar;
 import youyihj.collision.item.WitherAltarWand;
 import youyihj.collision.recipe.ColliderRecipe;
 import youyihj.collision.recipe.ColliderRecipeRegistrar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Mod(modid = Collision.MODID, name = Collision.NAME, version = Collision.VERSION, dependencies = Collision.DEPENDENCIES)
 public class Collision
@@ -34,7 +30,7 @@ public class Collision
         ItemRegistrar.registerAllPlainItem();
         ItemRegistrar.registerAllSpecialItem();
         BlockRegistrar.registerAllBlock();
-        ModelGenerater.generate();
+        ModelGenerator.generate();
         new ColliderRecipeRegistrar();
     }
 

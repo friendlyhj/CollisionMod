@@ -5,7 +5,7 @@ import net.minecraft.item.Item;
 import youyihj.collision.Collision;
 import youyihj.collision.core.IHasGeneratedModel;
 import youyihj.collision.core.IRegistryObject;
-import youyihj.collision.core.ModelGenerater;
+import youyihj.collision.core.ModelGenerator;
 import youyihj.collision.creativetab.CollisionTab;
 
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public class CollisionItem extends Item implements IRegistryObject, IHasGenerate
     public void register() {
         ItemRegistryHandler.items.add(this);
         ItemRegistryHandler.itemHashMap.put(this.getRegistryName().getResourcePath(), this);
-        ModelGenerater.needGenerateModels.add(this);
+        ModelGenerator.needGenerateModels.add(this);
     }
 
     @Override

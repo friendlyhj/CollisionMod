@@ -7,7 +7,7 @@ import net.minecraft.item.ItemBlock;
 import youyihj.collision.Collision;
 import youyihj.collision.core.IHasGeneratedModel;
 import youyihj.collision.core.IRegistryObject;
-import youyihj.collision.core.ModelGenerater;
+import youyihj.collision.core.ModelGenerator;
 import youyihj.collision.creativetab.CollisionTab;
 import youyihj.collision.item.ItemRegistryHandler;
 
@@ -34,7 +34,7 @@ public class CollisionBlock extends Block implements IRegistryObject, IHasGenera
         itemBlock.setRegistryName(this.getRegistryName());
         ItemRegistryHandler.itemBlocks.add(itemBlock);
         ItemRegistryHandler.itemBlockHashMap.put(this.getRegistryName().getResourcePath(), itemBlock);
-        ModelGenerater.needGenerateModels.add(this);
+        ModelGenerator.needGenerateModels.add(this);
     }
 
     @Override

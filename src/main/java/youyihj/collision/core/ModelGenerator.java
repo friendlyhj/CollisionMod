@@ -3,7 +3,7 @@ package youyihj.collision.core;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelGenerater {
+public class ModelGenerator {
     public static List<IHasGeneratedModel> needGenerateModels = new ArrayList<>();
 
     public static void generate() {
