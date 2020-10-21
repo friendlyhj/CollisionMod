@@ -2,7 +2,12 @@ package youyihj.collision.fluid;
 
 import net.minecraft.util.ResourceLocation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FluidRegistrar {
+    public static List<CollisionFluid> fluids = new ArrayList<>();
+
     public static void registerAll() {
         new CollisionFluid("collision_proton",
                 new ResourceLocation("collision:fluids/molten"),

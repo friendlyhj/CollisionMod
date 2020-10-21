@@ -1,4 +1,4 @@
-package youyihj.collision;
+package youyihj.collision.core;
 
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -10,10 +10,10 @@ import org.apache.logging.log4j.Logger;
 import youyihj.collision.block.BlockRegistrar;
 import youyihj.collision.block.spawner.GemSpawner;
 import youyihj.collision.block.spawner.MetalSpawner;
-import youyihj.collision.core.ModelGenerator;
 import youyihj.collision.fluid.FluidRegistrar;
 import youyihj.collision.item.ItemRegistrar;
 import youyihj.collision.item.WitherAltarWand;
+import youyihj.collision.model.ModelGenerator;
 import youyihj.collision.recipe.ColliderRecipe;
 import youyihj.collision.recipe.ColliderRecipeRegistrar;
 

@@ -1,4 +1,4 @@
-package youyihj.collision.core;
+package youyihj.collision.model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

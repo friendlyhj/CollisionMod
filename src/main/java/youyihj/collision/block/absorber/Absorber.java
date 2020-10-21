@@ -7,7 +7,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import youyihj.collision.Configuration;
+import youyihj.collision.core.Configuration;
 import youyihj.collision.block.CollisionBlock;
 
 import javax.annotation.Nullable;

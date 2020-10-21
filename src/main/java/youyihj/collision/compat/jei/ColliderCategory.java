@@ -10,7 +10,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import youyihj.collision.Collision;
+import youyihj.collision.core.Collision;
 
 import java.util.Optional;
 

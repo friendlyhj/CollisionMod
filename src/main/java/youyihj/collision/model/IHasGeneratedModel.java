@@ -1,7 +1,7 @@
-package youyihj.collision.core;
+package youyihj.collision.model;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import youyihj.collision.Utils;
+import youyihj.collision.core.Utils;
 
 public interface IHasGeneratedModel extends IHasModel {
     default String getDir(ModelResourceLocation location) {

@@ -9,8 +9,8 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
-import youyihj.collision.Collision;
-import youyihj.collision.Configuration;
+import youyihj.collision.core.Collision;
+import youyihj.collision.core.Configuration;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;

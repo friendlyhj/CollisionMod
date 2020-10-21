@@ -2,7 +2,7 @@ package youyihj.collision.block.spawner;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import youyihj.collision.Configuration;
+import youyihj.collision.core.Configuration;
 import youyihj.collision.item.Nucleus;
 
 import java.util.ArrayList;

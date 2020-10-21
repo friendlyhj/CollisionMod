@@ -1,4 +1,4 @@
-package youyihj.collision.core;
+package youyihj.collision.model;
 
 public enum ModelType {
     ITEM,

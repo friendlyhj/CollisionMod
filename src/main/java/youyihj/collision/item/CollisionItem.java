@@ -2,11 +2,11 @@ package youyihj.collision.item;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import youyihj.collision.Collision;
-import youyihj.collision.core.IHasGeneratedModel;
+import youyihj.collision.core.Collision;
+import youyihj.collision.model.IHasGeneratedModel;
 import youyihj.collision.core.IRegistryObject;
-import youyihj.collision.core.ModelGenerator;
-import youyihj.collision.core.ModelType;
+import youyihj.collision.model.ModelGenerator;
+import youyihj.collision.model.ModelType;
 import youyihj.collision.creativetab.CollisionTab;
 
 import java.util.HashMap;

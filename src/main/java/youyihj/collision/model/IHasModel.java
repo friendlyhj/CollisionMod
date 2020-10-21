@@ -1,4 +1,4 @@
-package youyihj.collision.core;
+package youyihj.collision.model;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 
