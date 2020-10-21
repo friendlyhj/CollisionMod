@@ -2,7 +2,7 @@ package youyihj.collision;
 
 import net.minecraft.launchwrapper.Launch;
 
-public class Utils {
+public final class Utils {
 
     public Utils() {
         throw new UnsupportedOperationException("no instance");

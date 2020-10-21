@@ -6,4 +6,6 @@ import java.util.HashMap;
 
 public interface IHasModel {
     HashMap<Integer, ModelResourceLocation> getModelRLs();
+
+    ModelType getModelType();
 }

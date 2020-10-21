@@ -6,6 +6,7 @@ import youyihj.collision.Collision;
 import youyihj.collision.core.IHasGeneratedModel;
 import youyihj.collision.core.IRegistryObject;
 import youyihj.collision.core.ModelGenerator;
+import youyihj.collision.core.ModelType;
 import youyihj.collision.creativetab.CollisionTab;
 
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class CollisionItem extends Item implements IRegistryObject, IHasGenerate
     }
 
     @Override
-    public Class<?> getRegistryEntryType() {
-        return this.getClass();
+    public ModelType getModelType() {
+        return ModelType.ITEM;
     }
 }

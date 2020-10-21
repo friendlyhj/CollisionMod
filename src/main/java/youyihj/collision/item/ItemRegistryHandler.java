@@ -1,6 +1,8 @@
 package youyihj.collision.item;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -13,6 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import youyihj.collision.block.Booster;
 import youyihj.collision.block.CollisionBlock;
+import youyihj.collision.fluid.CollisionFluid;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +31,8 @@ public class ItemRegistryHandler {
 
     public static List<ItemBlock> itemBlocks = new ArrayList<>();
     public static HashMap<String, ItemBlock> itemBlockHashMap = new HashMap<>();
+
+    public static List<CollisionFluid> fluids = new ArrayList<>();
 
     @SubscribeEvent
     public static void onRegistry(RegistryEvent.Register<Item> event) {
@@ -50,6 +55,15 @@ public class ItemRegistryHandler {
         for (ItemBlock itemBlock : itemBlocks) {
             ((CollisionBlock) itemBlock.getBlock()).getModelRLs().forEach((meta, modelRL) ->
             ModelLoader.setCustomModelResourceLocation(itemBlock, meta, modelRL));
+        }
+        for (CollisionFluid fluid : fluids) {
+            fluid.getModelRLs().forEach((meta, model) ->
+            ModelLoader.setCustomStateMapper(fluid.getBlock(), new StateMapperBase() {
+                @Override
+                protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                    return model;
+                }
+            }));
         }
     }
 }
