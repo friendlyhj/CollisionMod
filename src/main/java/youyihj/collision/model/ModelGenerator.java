@@ -16,10 +16,10 @@ public class ModelGenerator {
     public static List<IHasGeneratedModel> needGenerateModels = new ArrayList<>();
 
     public static void generate() {
-        needGenerateModels.stream().filter(IHasGeneratedModel::isGenerating).forEach(model -> {
+        needGenerateModels.stream().filter(IHasGeneratedModel::isGeneratingModel).forEach(model -> {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             model.getModelRLs().forEach((meta, modelRL) -> {
-                File file = new File(model.getDir(modelRL) + modelRL.getResourcePath() + ".json");
+                File file = new File(model.getModelDir(modelRL) + modelRL.getResourcePath() + ".json");
                 if (model.isAlwaysOverrideModelFile() || !file.exists()) {
                     JsonObject all = new JsonObject();
                     all.addProperty("forge_marker", 1);

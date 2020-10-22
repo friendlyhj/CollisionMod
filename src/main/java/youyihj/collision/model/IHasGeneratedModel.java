@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import youyihj.collision.core.Utils;
 
 public interface IHasGeneratedModel extends IHasModel {
-    default String getDir(ModelResourceLocation location) {
+    default String getModelDir(ModelResourceLocation location) {
         return "../src/main/resources/assets/" + location.getResourceDomain() + "/blockstates/";
     }
 
@@ -12,7 +12,7 @@ public interface IHasGeneratedModel extends IHasModel {
         return false;
     }
 
-    default boolean isGenerating() {
+    default boolean isGeneratingModel() {
         return Utils.isDevEnvironment();
     }
 }

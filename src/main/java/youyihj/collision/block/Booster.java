@@ -65,7 +65,7 @@ public class Booster extends CollisionBlock {
     }
 
     @Override
-    public boolean isGenerating() {
+    public boolean isGeneratingModel() {
         return false;
     }
 
