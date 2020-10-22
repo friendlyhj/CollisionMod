@@ -65,6 +65,11 @@ public class Booster extends CollisionBlock {
     }
 
     @Override
+    public boolean isGenerating() {
+        return false;
+    }
+
+    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItem(hand);
         if (stack.getItem() instanceof Nucleus) {
@@ -141,7 +146,7 @@ public class Booster extends CollisionBlock {
     public static final class BoosterTinter {
         @SubscribeEvent
         public static void blockColors(ColorHandlerEvent.Block event) {
-            event.getBlockColors().registerBlockColorHandler((IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) -> {
+            event.getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) -> {
                 if (worldIn == null || pos == null) return 0xffffff;
                 SingleNucleus nucleus = getNucleusFromTileEntity(worldIn, pos);
                 return nucleus == null ? 0xffffff : nucleus.getColorToInt();
