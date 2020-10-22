@@ -13,9 +13,14 @@ tile.collision.booster.name=Metal Booster
 item.collision.proton_storage.name=Proton Storage
 item.collision.neutron_storage.name=Neutron Storage
 item.collision.nucleus.name=%s Nucleus
+item.collision.metal_chunk.name=Metal Chunk
+item.collision.mystical_gem.name=Mystical Gem
+item.collision.little_ghast_drop.name=Little Ghast Drop
 
 material.nucleus.iron=Iron
 material.nucleus.gold=Gold
+
+itemGroup.collision=Collision
 
 message.collision.bound_altar=MultiBlock construction is correct, saving the position of altar.
 

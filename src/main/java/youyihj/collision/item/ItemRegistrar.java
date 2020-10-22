@@ -3,7 +3,9 @@ package youyihj.collision.item;
 
 public class ItemRegistrar {
     private static String[] plainItemsID = {
-
+            "metal_chunk",
+            "mystical_gem",
+            "little_ghast_drop"
     };
 
     public static void registerAllSpecialItem() {
@@ -15,8 +17,6 @@ public class ItemRegistrar {
     }
 
     public static void registerAllPlainItem() {
-        for (String plainItemID : plainItemsID) {
-            new CollisionItem(plainItemID).register();
-        }
+        new ItemMaterial(plainItemsID).register();
     }
 }
