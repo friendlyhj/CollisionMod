@@ -72,11 +72,11 @@ public class BlockStructureBuilder extends CollisionBlock {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        super.breakBlock(worldIn, pos, state);
         TileEntity tileEntity = worldIn.getTileEntity(pos);
         Capability<IItemHandler> itemHandlerCapability = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
         IItemHandler in = tileEntity.getCapability(itemHandlerCapability, EnumFacing.NORTH);
         Block.spawnAsEntity(worldIn, pos, in.getStackInSlot(0));
+        super.breakBlock(worldIn, pos, state);
     }
 
     @Override
