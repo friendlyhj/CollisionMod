@@ -9,6 +9,7 @@ tile.collision.neutron_empty_refined.name=Refined Neutron Absorber (Empty)
 tile.collision.collider_lv1.name=Collider (Lv1)
 tile.collision.metal_spawner.name=Metal Spawner
 tile.collision.booster.name=Metal Booster
+tile.collision.structure_builder.name=Collider Structure Builder
 
 item.collision.proton_storage.name=Proton Storage
 item.collision.neutron_storage.name=Neutron Storage
@@ -25,3 +26,5 @@ itemGroup.collision=Collision
 message.collision.bound_altar=MultiBlock construction is correct, saving the position of altar.
 
 jei.category.collision.collider=Collider
+
+gui.collision.no_collider=No collider above!

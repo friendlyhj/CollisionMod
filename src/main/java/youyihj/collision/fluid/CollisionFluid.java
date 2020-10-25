@@ -15,7 +15,7 @@ import youyihj.collision.model.ModelGenerator;
 import youyihj.collision.model.ModelType;
 
 import javax.annotation.Nullable;
-import java.awt.*;
+import java.awt.Color;
 import java.util.HashMap;
 
 public class CollisionFluid extends Fluid implements IHasGeneratedModel, IRegistryObject {

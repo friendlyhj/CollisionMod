@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
 import youyihj.collision.block.BlockRegistrar;
 import youyihj.collision.block.spawner.GemSpawner;
@@ -14,6 +15,7 @@ import youyihj.collision.fluid.FluidRegistrar;
 import youyihj.collision.item.ItemRegistrar;
 import youyihj.collision.item.WitherAltarWand;
 import youyihj.collision.model.ModelGenerator;
+import youyihj.collision.network.NetworkRegistryHandler;
 import youyihj.collision.recipe.ColliderRecipe;
 import youyihj.collision.recipe.ColliderRecipeRegistrar;
 
@@ -38,6 +40,7 @@ public class Collision {
         ItemRegistrar.registerAllSpecialItem();
         BlockRegistrar.registerAllBlock();
         FluidRegistrar.registerAll();
+        NetworkRegistryHandler.register();
         ModelGenerator.generate();
         new ColliderRecipeRegistrar();
     }

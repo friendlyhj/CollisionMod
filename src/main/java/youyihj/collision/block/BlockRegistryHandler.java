@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import youyihj.collision.core.Collision;
 import youyihj.collision.tile.TileBooster;
+import youyihj.collision.tile.TileStructureBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,5 +28,6 @@ public class BlockRegistryHandler {
             registry.register(block);
         }
         GameRegistry.registerTileEntity(TileBooster.class, new ResourceLocation(Collision.MODID, "booster"));
+        GameRegistry.registerTileEntity(TileStructureBuilder.class, new ResourceLocation(Collision.MODID, "structure_builder"));
     }
 }
