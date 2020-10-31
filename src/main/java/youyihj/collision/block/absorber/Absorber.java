@@ -26,7 +26,10 @@ public abstract class Absorber extends CollisionBlock {
         this.setResistance(50.0f);
         this.setHarvestLevel("pickaxe", 0);
     }
+
     public abstract Absorber getTransformAbsorber();
+
+    public abstract EnumAbsorber getType();
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random random) {

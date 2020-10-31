@@ -14,7 +14,6 @@ import youyihj.collision.core.Collision;
 
 import java.util.Optional;
 
-
 public class ColliderCategory implements IRecipeCategory<ColliderWrapper> {
     private IDrawable background;
     public static final String UID = "collision.collider";

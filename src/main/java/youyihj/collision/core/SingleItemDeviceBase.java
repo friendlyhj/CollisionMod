@@ -1,13 +1,15 @@
 package youyihj.collision.core;
 
+import com.google.common.collect.Lists;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -213,7 +216,7 @@ public final class SingleItemDeviceBase {
         public void drawScreen(int mouseX, int mouseY, float partialTicks) {
             super.drawDefaultBackground();
             super.drawScreen(mouseX, mouseY, partialTicks);
-            super.renderHoveredToolTip(mouseX, mouseY);
+            this.renderHoveredToolTip(mouseX, mouseY);
         }
 
         @Override
@@ -231,6 +234,21 @@ public final class SingleItemDeviceBase {
         @Override
         protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
             this.drawCenteredString(this.fontRenderer, getTitle(), xSize / 2, 6, -1);
+        }
+
+        @Override
+        protected void renderHoveredToolTip(int mouseX, int mouseY) {
+            super.renderHoveredToolTip(mouseX, mouseY);
+            int left = (this.width - this.xSize) / 2;
+            int top = (this.height - this.ySize) / 2;
+            int x = mouseX - left;
+            int y = mouseY - top;
+            if (x >= 14 && x <= 32 && y >= 18 && y <= 72) {
+                GuiUtils.drawHoveringText(Lists.newArrayList(
+                        I18n.format("collision.tooltip.energy_cap",
+                                ((ContainerModule) this.inventorySlots).energyStored, ENERGY_CAPACITY)
+                ), mouseX, mouseY, this.width, this.height, 300, this.fontRenderer);
+            }
         }
 
         public abstract String getTitle();
@@ -257,9 +275,7 @@ public final class SingleItemDeviceBase {
             TileEntity tileEntity = worldIn.getTileEntity(pos);
             Capability<IItemHandler> itemHandlerCapability = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
             IItemHandler in = tileEntity.getCapability(itemHandlerCapability, EnumFacing.NORTH);
-            net.minecraft.block.Block.spawnAsEntity(worldIn, pos, in.getStackInSlot(0));
-            IItemHandler set = tileEntity.getCapability(itemHandlerCapability, EnumFacing.DOWN);
-            net.minecraft.block.Block.spawnAsEntity(worldIn, pos, set.getStackInSlot(0));
+            Block.spawnAsEntity(worldIn, pos, in.getStackInSlot(0));
             super.breakBlock(worldIn, pos, state);
         }
     }

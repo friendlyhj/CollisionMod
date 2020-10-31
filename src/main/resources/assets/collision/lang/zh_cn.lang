@@ -28,3 +28,5 @@ message.collision.bound_altar=结构正确！保存祭坛坐标！
 jei.category.collision.collider=碰撞器
 
 gui.collision.no_collider=上方没有碰撞器！
+
+collision.tooltip.energy_cap=能量： %s / %s FE

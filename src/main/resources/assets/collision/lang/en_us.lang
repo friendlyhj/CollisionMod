@@ -28,3 +28,5 @@ message.collision.bound_altar=MultiBlock construction is correct, saving the pos
 jei.category.collision.collider=Collider
 
 gui.collision.no_collider=No collider above!
+
+collision.tooltip.energy_cap=Energy: %s / %s FE

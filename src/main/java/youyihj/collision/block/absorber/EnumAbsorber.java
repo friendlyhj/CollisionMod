@@ -1,5 +1,7 @@
 package youyihj.collision.block.absorber;
 
+import javax.annotation.Nonnull;
+
 public enum EnumAbsorber {
     NEUTRON(Neutron.INSTANCE, Neutron.Refined.INSTANCE),
     NEUTRON_EMPTY(NeutronEmpty.INSTANCE, NeutronEmpty.Refined.INSTANCE),
@@ -26,6 +28,7 @@ public enum EnumAbsorber {
         return level > 2 ? getRefined() : getInstance();
     }
 
+    @Nonnull
     public EnumAbsorber getTransformAbsorber() {
         switch (this) {
             case PROTON:

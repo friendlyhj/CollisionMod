@@ -14,21 +14,29 @@ import youyihj.collision.block.absorber.EnumAbsorber;
 import javax.annotation.Nonnull;
 
 public class Storage extends CollisionItem {
-    public Storage(String type) {
-        super(type + "_storage");
-        this.type = type;
+    public Storage(EnumAbsorber absorber) {
+        super(absorber.name().toLowerCase() + "_storage");
+        this.type = absorber;
         this.setMaxDamage(Configuration.generalConfig.storageCapacity);
         this.setNoRepair();
     }
 
-    private String type;
+    private EnumAbsorber type;
 
-    private EnumAbsorber getAbsorber() {
-        return EnumAbsorber.valueOf(type.toUpperCase());
+    private IBlockState getAbsorber() {
+        return this.type.getInstance().getDefaultState();
     }
 
-    private EnumAbsorber getAbsorberEmpty() {
-        return this.getAbsorber().getTransformAbsorber();
+    private IBlockState getAbsorberEmpty() {
+        return this.type.getTransformAbsorber().getInstance().getDefaultState();
+    }
+
+    private IBlockState getAbsorberRefined() {
+        return this.type.getRefined().getDefaultState();
+    }
+
+    private IBlockState getAbsorberEmptyRefined() {
+        return this.type.getTransformAbsorber().getRefined().getDefaultState();
     }
 
     @Override
@@ -36,31 +44,31 @@ public class Storage extends CollisionItem {
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
         IBlockState state = worldIn.getBlockState(pos);
-        if (state == this.getAbsorber().getInstance().getDefaultState() && stack.getItemDamage() != 0) {
+        if (state == this.getAbsorber() && stack.getItemDamage() != 0) {
             if (!worldIn.isRemote) {
                 stack.damageItem(-1, player);
-                worldIn.setBlockState(pos, this.getAbsorberEmpty().getInstance().getDefaultState());
+                worldIn.setBlockState(pos, this.getAbsorberEmpty());
             }
             return EnumActionResult.SUCCESS;
         }
-        if (state == this.getAbsorber().getRefined().getDefaultState() && stack.getItemDamage() >= 4) {
+        if (state == this.getAbsorberRefined() && stack.getItemDamage() >= 4) {
             if (!worldIn.isRemote) {
                 stack.damageItem(-4, player);
-                worldIn.setBlockState(pos, this.getAbsorberEmpty().getRefined().getDefaultState());
+                worldIn.setBlockState(pos, this.getAbsorberEmptyRefined());
             }
             return EnumActionResult.SUCCESS;
         }
-        if (state == this.getAbsorberEmpty().getInstance().getDefaultState() && stack.getItemDamage() != this.getMaxDamage(stack)) {
+        if (state == this.getAbsorberEmpty() && stack.getItemDamage() != this.getMaxDamage(stack)) {
             if (!worldIn.isRemote) {
                 stack.damageItem(1, player);
-                worldIn.setBlockState(pos, this.getAbsorber().getInstance().getDefaultState());
+                worldIn.setBlockState(pos, this.getAbsorber());
             }
             return EnumActionResult.SUCCESS;
         }
-        if (state == this.getAbsorberEmpty().getRefined().getDefaultState() && stack.getItemDamage() <= this.getMaxDamage(stack) - 4) {
+        if (state == this.getAbsorberEmptyRefined() && stack.getItemDamage() <= this.getMaxDamage(stack) - 4) {
             if (!worldIn.isRemote) {
                 stack.damageItem(4, player);
-                worldIn.setBlockState(pos, this.getAbsorber().getRefined().getDefaultState());
+                worldIn.setBlockState(pos, this.getAbsorberRefined());
             }
             return EnumActionResult.SUCCESS;
         }

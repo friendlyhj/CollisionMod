@@ -12,6 +12,11 @@ public class ProtonEmpty extends Absorber {
         return Proton.INSTANCE;
     }
 
+    @Override
+    public EnumAbsorber getType() {
+        return EnumAbsorber.PROTON_EMPTY;
+    }
+
     public static class Refined extends Absorber {
         private Refined() {
             super("proton_empty_refined", true, false);
@@ -22,6 +27,11 @@ public class ProtonEmpty extends Absorber {
         @Override
         public Absorber getTransformAbsorber() {
             return Proton.Refined.INSTANCE;
+        }
+
+        @Override
+        public EnumAbsorber getType() {
+            return EnumAbsorber.PROTON_EMPTY;
         }
     }
 }

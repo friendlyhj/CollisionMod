@@ -12,6 +12,11 @@ public class NeutronEmpty extends Absorber {
         return Neutron.INSTANCE;
     }
 
+    @Override
+    public EnumAbsorber getType() {
+        return EnumAbsorber.NEUTRON_EMPTY;
+    }
+
     public static class Refined extends Absorber {
         private Refined() {
             super("neutron_empty_refined", true, false);
@@ -22,6 +27,11 @@ public class NeutronEmpty extends Absorber {
         @Override
         public Absorber getTransformAbsorber() {
             return Neutron.Refined.INSTANCE;
+        }
+
+        @Override
+        public EnumAbsorber getType() {
+            return EnumAbsorber.NEUTRON_EMPTY;
         }
     }
 }
