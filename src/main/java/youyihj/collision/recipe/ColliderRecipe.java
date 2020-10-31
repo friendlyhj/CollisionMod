@@ -1,5 +1,6 @@
 package youyihj.collision.recipe;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import youyihj.collision.core.IRegistryObject;
 import youyihj.collision.block.absorber.EnumAbsorber;
@@ -37,5 +38,17 @@ public class ColliderRecipe implements IRegistryObject {
     @Override
     public void register() {
         colliderRecipes.add(this);
+    }
+
+    public static boolean isSuchOutputExist(Item item) {
+        return colliderRecipes.stream().anyMatch(recipe -> recipe.getOut().getItem() == item);
+    }
+
+    public static boolean isSuchOutputExist(ItemStack itemStack) {
+        return isSuchOutputExist(itemStack.getItem());
+    }
+
+    public boolean isAdvanced() {
+        return level > 2;
     }
 }

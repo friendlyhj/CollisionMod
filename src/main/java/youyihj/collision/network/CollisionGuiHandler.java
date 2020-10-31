@@ -22,7 +22,7 @@ public class CollisionGuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == STRUCTURE_BUILDER) {
-            return new GuiStructureBuilder(player, world, new BlockPos(x, y, z));
+            return new GuiStructureBuilder(new ContainerStructureBuilder(player, world, new BlockPos(x, y, z)));
         }
         return null;
     }
