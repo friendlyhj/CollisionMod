@@ -25,12 +25,10 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
+import net.minecraftforge.items.*;
 import youyihj.collision.block.CollisionBlock;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -61,7 +59,7 @@ public final class SingleItemDeviceBase {
         }
 
         @Override
-        public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        public NBTTagCompound writeToNBT( NBTTagCompound compound) {
             compound.setTag("item", this.item.serializeNBT());
             return super.writeToNBT(this.energy.writeToNBT(compound));
         }
@@ -78,8 +76,41 @@ public final class SingleItemDeviceBase {
         public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
             Capability<IItemHandler> iItemHandlerCapability = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
             Capability<IEnergyStorage> iEnergyStorageCapability = CapabilityEnergy.ENERGY;
-            if (iItemHandlerCapability.equals(capability) && facing != null) {
-                return iItemHandlerCapability.cast(this.item);
+            if (iItemHandlerCapability.equals(capability)) {
+                return iItemHandlerCapability.cast(facing == null ? this.item : new IItemHandlerModifiable() {
+                    @Override
+                    public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
+                        item.setStackInSlot(slot, stack);
+                    }
+
+                    @Override
+                    public int getSlots() {
+                        return item.getSlots();
+                    }
+
+                    @Nonnull
+                    @Override
+                    public ItemStack getStackInSlot(int slot) {
+                        return item.getStackInSlot(slot);
+                    }
+
+                    @Nonnull
+                    @Override
+                    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+                        return item.insertItem(slot, stack, simulate);
+                    }
+
+                    @Nonnull
+                    @Override
+                    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+                        return ItemStack.EMPTY;
+                    }
+
+                    @Override
+                    public int getSlotLimit(int slot) {
+                        return item.getSlotLimit(slot);
+                    }
+                });
             }
             if (iEnergyStorageCapability.equals(capability) && facing != null) {
                 return iEnergyStorageCapability.cast(this.energy);
@@ -103,7 +134,7 @@ public final class SingleItemDeviceBase {
             this.pos = pos;
             TileEntity tileEntity = world.getTileEntity(pos);
             Capability<IItemHandler> itemHandlerCapability = CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
-            this.item = tileEntity.getCapability(itemHandlerCapability, EnumFacing.NORTH);
+            this.item = tileEntity.getCapability(itemHandlerCapability, null);
             InventoryPlayer inventoryPlayer = player.inventory;
             this.addSlotToContainer(new SlotItemHandler(this.item, 0, 80, 32));
             for (int i = 0; i < 9; i++) {

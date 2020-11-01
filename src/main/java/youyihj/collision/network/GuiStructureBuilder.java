@@ -1,13 +1,11 @@
 package youyihj.collision.network;
 
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import youyihj.collision.block.ColliderBase;
-import youyihj.collision.core.Collision;
 import youyihj.collision.core.SingleItemDeviceBase;
 
 @SideOnly(Side.CLIENT)

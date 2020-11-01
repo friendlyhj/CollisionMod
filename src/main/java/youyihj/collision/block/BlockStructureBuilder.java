@@ -16,8 +16,6 @@ import youyihj.collision.core.SingleItemDeviceBase;
 import youyihj.collision.network.CollisionGuiHandler;
 import youyihj.collision.tile.TileStructureBuilder;
 
-import javax.annotation.Nullable;
-
 public class BlockStructureBuilder extends SingleItemDeviceBase.BlockModule {
     private static final IProperty<EnumFacing> FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
