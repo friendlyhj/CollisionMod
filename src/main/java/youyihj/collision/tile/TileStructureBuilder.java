@@ -12,6 +12,7 @@ import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.Proton;
+import youyihj.collision.core.IOType;
 import youyihj.collision.core.SingleItemDeviceBase;
 import youyihj.collision.recipe.ColliderRecipe;
 
@@ -119,5 +120,10 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
             }
         }
         return null;
+    }
+
+    @Override
+    public IOType getIOType() {
+        return IOType.INPUT;
     }
 }

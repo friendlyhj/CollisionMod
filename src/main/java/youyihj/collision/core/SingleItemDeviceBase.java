@@ -51,6 +51,8 @@ public final class SingleItemDeviceBase {
 
         public final EnergyStorageSerializable energy = new EnergyStorageSerializable(ENERGY_CAPACITY, ENERGY_MAX_RECEIVE, 0);
 
+        public abstract IOType getIOType();
+
         @Override
         public void readFromNBT(NBTTagCompound compound) {
             this.item.deserializeNBT(compound.getCompoundTag("item"));
@@ -59,7 +61,7 @@ public final class SingleItemDeviceBase {
         }
 
         @Override
-        public NBTTagCompound writeToNBT( NBTTagCompound compound) {
+        public NBTTagCompound writeToNBT(NBTTagCompound compound) {
             compound.setTag("item", this.item.serializeNBT());
             return super.writeToNBT(this.energy.writeToNBT(compound));
         }
@@ -97,13 +99,13 @@ public final class SingleItemDeviceBase {
                     @Nonnull
                     @Override
                     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-                        return item.insertItem(slot, stack, simulate);
+                        return TileEntityModule.this.getIOType() == IOType.OUTPUT ? ItemStack.EMPTY : item.insertItem(slot, stack, simulate);
                     }
 
                     @Nonnull
                     @Override
                     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-                        return ItemStack.EMPTY;
+                        return TileEntityModule.this.getIOType() == IOType.INPUT ? ItemStack.EMPTY : item.extractItem(slot, amount, simulate);
                     }
 
                     @Override
