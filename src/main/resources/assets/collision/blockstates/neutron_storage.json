@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "top": "collision:blocks/neutron_storage_y",
+      "bottom": "minecraft:blocks/neutron_storage_y",
+      "side": "collision:blocks/neutron_storage"
+    },
+    "model": "minecraft:cube_bottom_top",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

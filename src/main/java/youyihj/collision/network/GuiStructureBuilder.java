@@ -2,6 +2,8 @@ package youyihj.collision.network;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import youyihj.collision.block.ColliderBase;
@@ -19,8 +21,14 @@ public class GuiStructureBuilder extends SingleItemDeviceBase.GuiContainerModule
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         super.drawGuiContainerForegroundLayer(mouseX, mouseY);
         String error = I18n.format("gui.collision.no_collider");
-        if (!(this.mc.world.getBlockState(this.pos.up()).getBlock() instanceof ColliderBase)) {
-            this.drawCenteredString(this.fontRenderer, error, xSize / 2, 64, 0xffff0000);
+        BlockPos posOffset = pos.up();
+        World world = this.mc.world;
+        while (!(world.getBlockState(posOffset).getBlock() instanceof ColliderBase)) {
+            if (!world.isAirBlock(posOffset) || world.isOutsideBuildHeight(posOffset)) {
+                this.drawCenteredString(this.fontRenderer, error, xSize / 2, 64, 0xffff0000);
+                return;
+            }
+            posOffset = posOffset.up();
         }
     }
 

@@ -39,4 +39,9 @@ public class EnergyStorageSerializable extends EnergyStorage {
         return nbt;
     }
 
+    public boolean consumeEnergy(int energy, boolean simulate) {
+        if (this.energy < energy) return false;
+        if (!simulate) this.energy -= energy;
+        return true;
+    }
 }

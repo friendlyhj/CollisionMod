@@ -18,5 +18,11 @@ public class ColliderRecipeRegistrar {
                 {null, null, null},
                 {EnumAbsorber.PROTON, null, EnumAbsorber.PROTON}
         }).register();
+
+        new ColliderRecipe(1, new ItemStack(Blocks.SAND, 4), new EnumAbsorber[][] {
+                {null, null, null},
+                {null, null, EnumAbsorber.NEUTRON},
+                {null, null, EnumAbsorber.PROTON}
+        }).register();
     }
 }

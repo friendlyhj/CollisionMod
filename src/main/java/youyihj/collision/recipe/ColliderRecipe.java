@@ -44,6 +44,10 @@ public class ColliderRecipe implements IRegistryObject {
         return colliderRecipes.stream().anyMatch(recipe -> recipe.getOut().getItem() == item);
     }
 
+    public static ColliderRecipe getRecipe(ItemStack itemStack) {
+        return colliderRecipes.stream().filter(recipe -> recipe.getOut().getItem() == itemStack.getItem()).findFirst().orElse(null);
+    }
+
     public static boolean isSuchOutputExist(ItemStack itemStack) {
         return isSuchOutputExist(itemStack.getItem());
     }

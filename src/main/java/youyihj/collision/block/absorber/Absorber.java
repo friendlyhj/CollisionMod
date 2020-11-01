@@ -11,6 +11,7 @@ import youyihj.collision.core.Configuration;
 import youyihj.collision.block.CollisionBlock;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Random;
 
 import static youyihj.collision.item.ItemRegistryHandler.itemBlockHashMap;
@@ -66,5 +67,14 @@ public abstract class Absorber extends CollisionBlock {
 
     public void transform(World world, BlockPos pos) {
         world.setBlockState(pos, this.getTransformAbsorber().getDefaultState());
+    }
+
+    public boolean match(ItemStack itemStack, boolean allowAir) {
+        if (allowAir && itemStack.isEmpty()) return true;
+        if (itemStack.getItem() instanceof ItemBlock) {
+            ItemBlock itemBlock = ((ItemBlock) itemStack.getItem());
+            return Objects.deepEquals(itemBlock.getBlock(), this);
+        }
+        return false;
     }
 }

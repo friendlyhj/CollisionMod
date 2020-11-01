@@ -31,7 +31,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import youyihj.collision.block.CollisionBlock;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
