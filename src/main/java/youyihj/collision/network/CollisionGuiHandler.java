@@ -9,21 +9,36 @@ import javax.annotation.Nullable;
 
 public class CollisionGuiHandler implements IGuiHandler {
     public static final int STRUCTURE_BUILDER = 1;
+    public static final int PROTON_STORAGE = 2;
+    public static final int NEUTRON_STORAGE = 3;
+
     @Nullable
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        if (ID == STRUCTURE_BUILDER) {
-            return new ContainerStructureBuilder(player, world, new BlockPos(x, y, z));
+        switch (ID) {
+            case STRUCTURE_BUILDER:
+                return new ContainerStructureBuilder(player, world, new BlockPos(x, y, z));
+            case PROTON_STORAGE:
+                return new ContainerProtonStorage(player, world, new BlockPos(x, y, z));
+            case NEUTRON_STORAGE:
+                return new ContainerNeutronStorage(player, world, new BlockPos(x, y, z));
+            default:
+                return null;
         }
-        return null;
     }
 
     @Nullable
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        if (ID == STRUCTURE_BUILDER) {
-            return new GuiStructureBuilder(new ContainerStructureBuilder(player, world, new BlockPos(x, y, z)));
+        switch (ID) {
+            case STRUCTURE_BUILDER:
+                return new GuiStructureBuilder(new ContainerStructureBuilder(player, world, new BlockPos(x, y, z)));
+            case PROTON_STORAGE:
+                return new GuiProtonStorage(new ContainerProtonStorage(player, world, new BlockPos(x, y, z)));
+            case NEUTRON_STORAGE:
+                return new GuiNeutronStorage(new ContainerProtonStorage(player, world, new BlockPos(x, y, z)));
+            default:
+                return null;
         }
-        return null;
     }
 }

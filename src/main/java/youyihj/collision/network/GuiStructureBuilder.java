@@ -10,8 +10,6 @@ import youyihj.collision.core.SingleItemDeviceBase;
 
 @SideOnly(Side.CLIENT)
 public class GuiStructureBuilder extends SingleItemDeviceBase.GuiContainerModule {
-    private static final ResourceLocation TEXTURE =
-            new ResourceLocation(Collision.MODID + ":textures/gui/structure_builder.png");
 
     public GuiStructureBuilder(SingleItemDeviceBase.ContainerModule inventorySlotsIn) {
         super(inventorySlotsIn);
@@ -29,10 +27,5 @@ public class GuiStructureBuilder extends SingleItemDeviceBase.GuiContainerModule
     @Override
     public String getTitle() {
         return I18n.format("tile.collision.structure_builder.name");
-    }
-
-    @Override
-    public ResourceLocation getTexture() {
-        return TEXTURE;
     }
 }

@@ -11,8 +11,8 @@ public class ItemRegistrar {
     };
 
     public static void registerAllSpecialItem() {
-        new Storage(EnumAbsorber.PROTON).register();
-        new Storage(EnumAbsorber.NEUTRON).register();
+        new Holder(EnumAbsorber.PROTON).register();
+        new Holder(EnumAbsorber.NEUTRON).register();
         Nucleus.NUCLEUS.register();
         new Debugger().register();
         new WitherAltarWand().register();

@@ -10,9 +10,11 @@ tile.collision.collider_lv1.name=1级碰撞器
 tile.collision.metal_spawner.name=金属生成器
 tile.collision.booster.name=金属增幅器
 tile.collision.structure_builder.name=碰撞器结构生成器
+tile.collision.proton_storage.name=质子存储仓
+tile.collision.neutron_storage.name=中子存储仓
 
-item.collision.proton_storage.name=质子存储器
-item.collision.neutron_storage.name=中子存储器
+item.collision.proton_holder.name=质子存储器
+item.collision.neutron_holder.name=中子存储器
 item.collision.nucleus.name=%s晶核
 item.collision.metal_chunk.name=金属碎片
 item.collision.mystical_gem.name=神秘宝石
@@ -29,4 +31,4 @@ jei.category.collision.collider=碰撞器
 
 gui.collision.no_collider=上方没有碰撞器！
 
-collision.tooltip.energy_cap=能量： %s / %s FE
+collision.tooltip.energy_cap=能量： %s/%s FE

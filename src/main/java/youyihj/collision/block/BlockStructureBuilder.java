@@ -55,7 +55,6 @@ public class BlockStructureBuilder extends SingleItemDeviceBase.BlockModule {
         return true;
     }
 
-    @Nullable
     @Override
     public SingleItemDeviceBase.TileEntityModule createTileEntity(World world, IBlockState state) {
         return new TileStructureBuilder();

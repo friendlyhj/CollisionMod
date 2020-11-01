@@ -29,4 +29,4 @@ jei.category.collision.collider=Collider
 
 gui.collision.no_collider=No collider above!
 
-collision.tooltip.energy_cap=Energy: %s / %s FE
+collision.tooltip.energy_cap=Energy: %s/%s FE

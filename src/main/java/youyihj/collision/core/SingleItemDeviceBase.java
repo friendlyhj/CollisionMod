@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,6 +31,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import youyihj.collision.block.CollisionBlock;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -43,14 +45,14 @@ public final class SingleItemDeviceBase {
 
     public static abstract class TileEntityModule extends TileEntity {
 
-        protected final ItemStackHandler item = new ItemStackHandler(1) {
+        public final ItemStackHandler item = new ItemStackHandler(1) {
             @Override
             protected void onContentsChanged(int slot) {
                 TileEntityModule.this.markDirty();
             }
         };
 
-        protected final EnergyStorageSerializable energy = new EnergyStorageSerializable(ENERGY_CAPACITY, ENERGY_MAX_RECEIVE, 0);
+        public final EnergyStorageSerializable energy = new EnergyStorageSerializable(ENERGY_CAPACITY, ENERGY_MAX_RECEIVE, 0);
 
         @Override
         public void readFromNBT(NBTTagCompound compound) {
@@ -203,6 +205,8 @@ public final class SingleItemDeviceBase {
     @SideOnly(Side.CLIENT)
     public static abstract class GuiContainerModule extends GuiContainer {
 
+        private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(Collision.MODID, "textures/gui/single_item_device.png");
+
         protected final BlockPos pos;
 
         public GuiContainerModule(ContainerModule inventorySlotsIn) {
@@ -253,7 +257,9 @@ public final class SingleItemDeviceBase {
 
         public abstract String getTitle();
 
-        public abstract ResourceLocation getTexture();
+        public ResourceLocation getTexture() {
+            return DEFAULT_TEXTURE;
+        }
     }
 
     public static abstract class BlockModule extends CollisionBlock {
@@ -266,9 +272,11 @@ public final class SingleItemDeviceBase {
             return true;
         }
 
-        @Nullable
         @Override
         public abstract TileEntityModule createTileEntity(World world, IBlockState state);
+
+        @Override
+        public abstract boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ);
 
         @Override
         public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {

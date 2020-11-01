@@ -13,9 +13,9 @@ import youyihj.collision.block.absorber.EnumAbsorber;
 
 import javax.annotation.Nonnull;
 
-public class Storage extends CollisionItem {
-    public Storage(EnumAbsorber absorber) {
-        super(absorber.name().toLowerCase() + "_storage");
+public class Holder extends CollisionItem {
+    public Holder(EnumAbsorber absorber) {
+        super(absorber.name().toLowerCase() + "_holder");
         this.type = absorber;
         this.setMaxDamage(Configuration.generalConfig.storageCapacity);
         this.setNoRepair();

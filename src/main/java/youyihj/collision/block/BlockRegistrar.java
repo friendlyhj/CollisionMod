@@ -28,5 +28,7 @@ public class BlockRegistrar {
         Booster.INSTANCE.register();
         new CollisionBlock("wither_altar", Material.IRON).register();
         new BlockStructureBuilder().register();
+        new NeutronStorage().register();
+        new ProtonStorage().register();
     }
 }
