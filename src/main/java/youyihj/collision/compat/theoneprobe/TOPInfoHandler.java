@@ -1,9 +1,7 @@
 package youyihj.collision.compat.theoneprobe;
 
 import mcjty.theoneprobe.api.*;
-import mcjty.theoneprobe.apiimpl.styles.ItemStyle;
 import mcjty.theoneprobe.apiimpl.styles.ProgressStyle;
-import mcjty.theoneprobe.apiimpl.styles.TextStyle;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

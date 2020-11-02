@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class ItemMaterial extends CollisionItem {
     private String[] subItemIDs;
 
-    public ItemMaterial(String... subItemIDs) {
+    ItemMaterial(String... subItemIDs) {
         super("material");
         this.subItemIDs = subItemIDs;
         this.setHasSubtypes(true);
@@ -30,8 +30,17 @@ public class ItemMaterial extends CollisionItem {
     }
 
     @Override
+    public int getItemStackLimit(ItemStack stack) {
+        int meta = stack.getMetadata();
+        return (meta == 3 || meta == 4) ? 4 : super.getItemStackLimit(stack);
+    }
+
+    @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return "item." + Collision.MODID + "." + subItemIDs[stack.getMetadata()];
+        int meta = stack.getMetadata();
+        return meta < subItemIDs.length
+                ? "item." + Collision.MODID + "." + subItemIDs[meta]
+                : this.getUnlocalizedName(new ItemStack(this, 1, 0));
     }
 
     @Override

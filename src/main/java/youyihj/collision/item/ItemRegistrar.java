@@ -7,7 +7,9 @@ public class ItemRegistrar {
     private static String[] plainItemsID = {
             "metal_chunk",
             "mystical_gem",
-            "little_ghast_drop"
+            "little_ghast_drop",
+            "up_shifter",
+            "down_shifter"
     };
 
     public static void registerAllSpecialItem() {

@@ -17,9 +17,11 @@ item.collision.nucleus.name=%s Nucleus
 item.collision.metal_chunk.name=Metal Chunk
 item.collision.mystical_gem.name=Mystical Gem
 item.collision.little_ghast_drop.name=Little Ghast Drop
+item.collision.up_shifter.name=Down Shift Upgrade
+item.collision.down_shifter.name=Down Shift Upgrade
 
-fluid.proton=Liquid Proton
-fluid.neutron=Liquid Neutron
+fluid.collision_proton=Liquid Proton
+fluid.collision_neutron=Liquid Neutron
 
 material.nucleus.iron=Iron
 material.nucleus.gold=Gold
