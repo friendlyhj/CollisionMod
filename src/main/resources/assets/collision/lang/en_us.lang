@@ -18,12 +18,19 @@ item.collision.metal_chunk.name=Metal Chunk
 item.collision.mystical_gem.name=Mystical Gem
 item.collision.little_ghast_drop.name=Little Ghast Drop
 
+fluid.proton=Liquid Proton
+fluid.neutron=Liquid Neutron
+
 material.nucleus.iron=Iron
 material.nucleus.gold=Gold
 
 itemGroup.collision=Collision
 
 message.collision.bound_altar=MultiBlock construction is correct, saving the position of altar.
+message.collision.show_io_type=IO Type: %s
+message.collision.io.input=Input
+message.collision.io.output=Output
+message.collision.io.both=Both
 
 jei.category.collision.collider=Collider
 

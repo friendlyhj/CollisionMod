@@ -3,6 +3,7 @@ package youyihj.collision.block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -28,7 +29,16 @@ public class NeutronStorage extends SingleItemDeviceBase.BlockModule {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            playerIn.openGui(Collision.MODID, CollisionGuiHandler.NEUTRON_STORAGE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            if (playerIn.isSneaking()) {
+                TileEntity te = worldIn.getTileEntity(pos);
+                if (te != null && te instanceof TileNeutronStorage) {
+                    TileNeutronStorage tep = (TileNeutronStorage) te;
+                    tep.transformIO();
+                    tep.getIOType().sendMessageToPlayer(playerIn);
+                }
+            } else {
+                playerIn.openGui(Collision.MODID, CollisionGuiHandler.NEUTRON_STORAGE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            }
         }
         return true;
     }

@@ -1,19 +1,17 @@
 package youyihj.collision.tile;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.SoundType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import youyihj.collision.block.ColliderBase;
-import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.Proton;
 import youyihj.collision.core.IOType;
 import youyihj.collision.core.SingleItemDeviceBase;
+import youyihj.collision.core.Utils;
 import youyihj.collision.recipe.ColliderRecipe;
 
 public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule implements ITickable {
@@ -47,8 +45,8 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
                 }
             }
             if (!this.energy.consumeEnergy(500, true)) return;
-            TileProtonStorage protonStorage = this.getProtonStorage();
-            TileNeutronStorage neutronStorage = this.getNeutronStorage();
+            TileProtonStorage protonStorage = Utils.getProtonStorage(world, pos, false, 1);
+            TileNeutronStorage neutronStorage = Utils.getNeutronStorage(world, pos, false, 1);
 
             if (protonStorage != null && neutronStorage != null) {
                 if (!protonStorage.energy.consumeEnergy(100, true)) return;
@@ -84,42 +82,10 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
                         world.setBlockState(posOffset, absorber.getInstanceByLevel(recipe.getLevel()).getDefaultState());
                     }
                 }
+                SoundType stonePlaceType = SoundType.STONE;
+                world.playSound(null, pos, stonePlaceType.getPlaceSound(), SoundCategory.BLOCKS, (stonePlaceType.getVolume() + 1.0F) / 2.0F, stonePlaceType.getPitch() * 0.8F);
             }
         }
-    }
-
-    private TileNeutronStorage getNeutronStorage() {
-        for (BlockPos pos : BlockPos.getAllInBox(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
-            TileEntity tileEntity = world.getTileEntity(pos);
-            if (tileEntity != null && tileEntity instanceof TileNeutronStorage) {
-                TileNeutronStorage neutronStorage = ((TileNeutronStorage) tileEntity);
-                Item item = neutronStorage.item.getStackInSlot(0).getItem();
-                if (item instanceof ItemBlock) {
-                    Block block = ((ItemBlock) item).getBlock();
-                    if (block instanceof Absorber && ((Absorber) block).getType() == EnumAbsorber.NEUTRON) {
-                        return neutronStorage;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    private TileProtonStorage getProtonStorage() {
-        for (BlockPos pos : BlockPos.getAllInBox(pos.add(-1, -1, -1), pos.add(1, 1, 1))) {
-            TileEntity tileEntity = world.getTileEntity(pos);
-            if (tileEntity != null && tileEntity instanceof TileProtonStorage) {
-                TileProtonStorage protonStorage = ((TileProtonStorage) tileEntity);
-                Item item = protonStorage.item.getStackInSlot(0).getItem();
-                if (item instanceof ItemBlock) {
-                    Block block = ((ItemBlock) item).getBlock();
-                    if (block instanceof Absorber && ((Absorber) block).getType() == EnumAbsorber.PROTON) {
-                        return protonStorage;
-                    }
-                }
-            }
-        }
-        return null;
     }
 
     @Override

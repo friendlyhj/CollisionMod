@@ -20,12 +20,19 @@ item.collision.metal_chunk.name=金属碎片
 item.collision.mystical_gem.name=神秘宝石
 item.collision.little_ghast_drop.name=小滴恶魂之泪
 
+fluid.proton=流体质子
+fluid.neutron=流体中子
+
 material.nucleus.iron=铁
 material.nucleus.gold=金
 
 itemGroup.collision=粒子碰撞
 
 message.collision.bound_altar=结构正确！保存祭坛坐标！
+message.collision.show_io_type=IO 模式：%s
+message.collision.io.input=输入
+message.collision.io.output=输出
+message.collision.io.both=输入/输出
 
 jei.category.collision.collider=碰撞器
 

@@ -99,7 +99,7 @@ public final class SingleItemDeviceBase {
                     @Nonnull
                     @Override
                     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-                        return TileEntityModule.this.getIOType() == IOType.OUTPUT ? ItemStack.EMPTY : item.insertItem(slot, stack, simulate);
+                        return TileEntityModule.this.getIOType() == IOType.OUTPUT ? stack : item.insertItem(slot, stack, simulate);
                     }
 
                     @Nonnull
