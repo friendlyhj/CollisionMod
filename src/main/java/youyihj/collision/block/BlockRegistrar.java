@@ -30,5 +30,6 @@ public class BlockRegistrar {
         new BlockStructureBuilder().register();
         new NeutronStorage().register();
         new ProtonStorage().register();
+        new BlockHarvester().register();
     }
 }

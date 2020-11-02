@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import youyihj.collision.core.Collision;
 import youyihj.collision.core.EnergyStorageSerializable;
 import youyihj.collision.core.SingleItemDeviceBase.TileEntityModule;
+import youyihj.collision.tile.TileHarvester;
 
 import java.awt.Color;
 
@@ -41,6 +42,8 @@ public class TOPInfoHandler implements IProbeInfoProvider {
             ItemStack itemStack = tem.item.getStackInSlot(0);
             probeInfo.progress(energy.getEnergyStored(), energy.getMaxEnergyStored(), ENERGY_CAP);
             if (tem.canEditIOType()) probeInfo.text(TextStyleClass.LABEL + tem.getIOType().getString());
+            if (tem instanceof TileHarvester)
+                probeInfo.text(TextStyleClass.LABEL + ((TileHarvester) tem).getShowWorkTypeText().getUnformattedText());
             if (!itemStack.isEmpty()) probeInfo.item(itemStack);
         }
     }

@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import youyihj.collision.core.Configuration;
 import youyihj.collision.block.CollisionBlock;
+import youyihj.collision.item.ItemRegistryHandler;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -76,5 +77,9 @@ public abstract class Absorber extends CollisionBlock {
             return Objects.deepEquals(itemBlock.getBlock(), this);
         }
         return false;
+    }
+
+    public ItemStack getItemStack() {
+        return new ItemStack(ItemRegistryHandler.itemBlockHashMap.get(this.getRegistryName().getResourcePath()), 1, 0);
     }
 }

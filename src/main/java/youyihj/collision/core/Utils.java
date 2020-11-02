@@ -1,17 +1,15 @@
 package youyihj.collision.core;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import youyihj.collision.block.absorber.Absorber;
-import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.block.absorber.Neutron;
+import youyihj.collision.block.absorber.NeutronEmpty;
 import youyihj.collision.block.absorber.Proton;
+import youyihj.collision.block.absorber.ProtonEmpty;
 import youyihj.collision.tile.TileNeutronStorage;
 import youyihj.collision.tile.TileProtonStorage;
 
@@ -58,7 +56,10 @@ public final class Utils {
             if (tileEntity != null && tileEntity instanceof TileNeutronStorage) {
                 TileNeutronStorage neutronStorage = ((TileNeutronStorage) tileEntity);
                 ItemStack item = neutronStorage.item.getStackInSlot(0);
-                if (Neutron.INSTANCE.match(item, allowAir) || Neutron.Refined.INSTANCE.match(item, allowAir))
+                if (Neutron.INSTANCE.match(item, allowAir) ||
+                        Neutron.Refined.INSTANCE.match(item, allowAir) ||
+                        NeutronEmpty.INSTANCE.match(item, allowAir) ||
+                        NeutronEmpty.Refined.INSTANCE.match(item, allowAir))
                     return neutronStorage;
             }
         }
@@ -71,10 +72,17 @@ public final class Utils {
             if (tileEntity != null && tileEntity instanceof TileProtonStorage) {
                 TileProtonStorage protonStorage = ((TileProtonStorage) tileEntity);
                 ItemStack item = protonStorage.item.getStackInSlot(0);
-                if (Proton.INSTANCE.match(item, allowAir) || Proton.Refined.INSTANCE.match(item, allowAir))
+                if (Proton.INSTANCE.match(item, allowAir) ||
+                        Proton.Refined.INSTANCE.match(item, allowAir) ||
+                        ProtonEmpty.INSTANCE.match(item, allowAir) ||
+                        ProtonEmpty.Refined.INSTANCE.match(item, allowAir))
                     return protonStorage;
             }
         }
         return null;
+    }
+
+    public String i18nFormat(String key, Object... objects) {
+        return new TextComponentTranslation(key, objects).getUnformattedText();
     }
 }

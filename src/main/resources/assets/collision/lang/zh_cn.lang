@@ -10,6 +10,7 @@ tile.collision.collider_lv1.name=1级碰撞器
 tile.collision.metal_spawner.name=金属生成器
 tile.collision.booster.name=金属增幅器
 tile.collision.structure_builder.name=碰撞器结构生成器
+tile.collision.harvester.name=载体收集机
 tile.collision.proton_storage.name=质子存储仓
 tile.collision.neutron_storage.name=中子存储仓
 
@@ -35,6 +36,9 @@ message.collision.show_io_type=IO 模式：%s
 message.collision.io.input=输入
 message.collision.io.output=输出
 message.collision.io.both=输入/输出
+message.collision.work_type=工作模式：%s
+message.collision.full=收集满载体
+message.collision.empty=收集空载体
 
 jei.category.collision.collider=碰撞器
 

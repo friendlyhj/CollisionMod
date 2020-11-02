@@ -6,7 +6,7 @@
       "top": "collision:blocks/machine_base",
       "side": "collision:blocks/machine_base",
       "bottom": "collision:blocks/machine_base",
-      "front": "collision:blocks/structure_builder"
+      "front": "collision:blocks/harvester"
     },
     "model": "minecraft:orientable"
   },

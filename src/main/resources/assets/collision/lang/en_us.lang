@@ -8,6 +8,7 @@ tile.collision.proton_empty_refined.name=Refined Proton Absorber (Empty)
 tile.collision.neutron_empty_refined.name=Refined Neutron Absorber (Empty)
 tile.collision.collider_lv1.name=Collider (Lv1)
 tile.collision.metal_spawner.name=Metal Spawner
+tile.collision.harvester.name=Absorber Harvester
 tile.collision.booster.name=Metal Booster
 tile.collision.structure_builder.name=Collider Structure Builder
 
@@ -33,6 +34,9 @@ message.collision.show_io_type=IO Type: %s
 message.collision.io.input=Input
 message.collision.io.output=Output
 message.collision.io.both=Both
+message.collision.work_type=Work Mode: %s
+message.collision.full=Harvest Full Absorbers
+message.collision.empty=Harvest Empty Absorbers
 
 jei.category.collision.collider=Collider
 

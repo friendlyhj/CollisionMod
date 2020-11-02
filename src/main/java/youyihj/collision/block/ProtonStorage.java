@@ -37,7 +37,7 @@ public class ProtonStorage extends SingleItemDeviceBase.BlockModule {
                     tep.getIOType().sendMessageToPlayer(playerIn);
                 }
             } else {
-                playerIn.openGui(Collision.MODID, CollisionGuiHandler.NEUTRON_STORAGE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                playerIn.openGui(Collision.MODID, CollisionGuiHandler.PROTON_STORAGE, worldIn, pos.getX(), pos.getY(), pos.getZ());
             }
         }
         return true;

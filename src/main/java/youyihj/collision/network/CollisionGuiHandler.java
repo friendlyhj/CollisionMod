@@ -11,6 +11,7 @@ public class CollisionGuiHandler implements IGuiHandler {
     public static final int STRUCTURE_BUILDER = 1;
     public static final int PROTON_STORAGE = 2;
     public static final int NEUTRON_STORAGE = 3;
+    public static final int HARVESTER = 4;
 
     @Nullable
     @Override
@@ -22,6 +23,8 @@ public class CollisionGuiHandler implements IGuiHandler {
                 return new ContainerProtonStorage(player, world, new BlockPos(x, y, z));
             case NEUTRON_STORAGE:
                 return new ContainerNeutronStorage(player, world, new BlockPos(x, y, z));
+            case HARVESTER:
+                return new ContainerHarvester(player, world, new BlockPos(x, y, z));
             default:
                 return null;
         }
@@ -36,7 +39,9 @@ public class CollisionGuiHandler implements IGuiHandler {
             case PROTON_STORAGE:
                 return new GuiProtonStorage(new ContainerProtonStorage(player, world, new BlockPos(x, y, z)));
             case NEUTRON_STORAGE:
-                return new GuiNeutronStorage(new ContainerProtonStorage(player, world, new BlockPos(x, y, z)));
+                return new GuiNeutronStorage(new ContainerNeutronStorage(player, world, new BlockPos(x, y, z)));
+            case HARVESTER:
+                return new GuiHarvester(new ContainerHarvester(player, world, new BlockPos(x, y, z)));
             default:
                 return null;
         }
