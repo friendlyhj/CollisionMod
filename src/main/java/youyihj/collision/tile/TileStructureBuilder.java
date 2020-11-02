@@ -83,7 +83,7 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
                     }
                 }
                 SoundType stonePlaceType = SoundType.STONE;
-                world.playSound(null, pos, stonePlaceType.getPlaceSound(), SoundCategory.BLOCKS, (stonePlaceType.getVolume() + 1.0F) / 2.0F, stonePlaceType.getPitch() * 0.8F);
+                world.playSound(null, pos.up(posOffsetY), stonePlaceType.getPlaceSound(), SoundCategory.BLOCKS, (stonePlaceType.getVolume() + 1.0F) / 2.0F, stonePlaceType.getPitch() * 0.8F);
             }
         }
     }
