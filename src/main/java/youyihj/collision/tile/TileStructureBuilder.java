@@ -92,4 +92,9 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
     public IOType getIOType() {
         return IOType.INPUT;
     }
+
+    @Override
+    public boolean canEditIOType() {
+        return false;
+    }
 }

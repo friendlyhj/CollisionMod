@@ -30,4 +30,9 @@ public class TileProtonStorage extends SingleItemDeviceBase.TileEntityModule {
     public void transformIO() {
         output = !output;
     }
+
+    @Override
+    public boolean canEditIOType() {
+        return true;
+    }
 }

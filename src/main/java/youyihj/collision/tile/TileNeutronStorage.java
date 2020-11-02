@@ -39,4 +39,8 @@ public class TileNeutronStorage extends SingleItemDeviceBase.TileEntityModule {
         output = !output;
     }
 
+    @Override
+    public boolean canEditIOType() {
+        return true;
+    }
 }

@@ -53,6 +53,8 @@ public final class SingleItemDeviceBase {
 
         public abstract IOType getIOType();
 
+        public abstract boolean canEditIOType();
+
         @Override
         public void readFromNBT(NBTTagCompound compound) {
             this.item.deserializeNBT(compound.getCompoundTag("item"));
@@ -297,6 +299,7 @@ public final class SingleItemDeviceBase {
     public static abstract class BlockModule extends CollisionBlock {
         public BlockModule(String id, Material material) {
             super(id, material);
+            setHarvestLevel("pickaxe", 1);
         }
 
         @Override
