@@ -7,6 +7,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import youyihj.collision.core.Collision;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class ItemMaterial extends CollisionItem {
@@ -50,5 +51,17 @@ public class ItemMaterial extends CollisionItem {
             temp.put(i, new ModelResourceLocation(new ResourceLocation(Collision.MODID, subItemIDs[i]), "inventory"));
         }
         return temp;
+    }
+
+    public ItemStack getSubItemStack(int count, String name) {
+        return new ItemStack(this, count, Arrays.binarySearch(subItemIDs, name));
+    }
+
+    public ItemStack getSubItemStack(String name) {
+        return this.getSubItemStack(1, name);
+    }
+
+    public static ItemMaterial instance() {
+        return (ItemMaterial) ItemRegistryHandler.itemHashMap.get("material");
     }
 }

@@ -4,6 +4,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import youyihj.collision.block.absorber.EnumAbsorber;
+import youyihj.collision.item.ItemMaterial;
 
 public class ColliderRecipeRegistrar {
     static {
@@ -23,6 +24,12 @@ public class ColliderRecipeRegistrar {
                 {null, null, null},
                 {null, null, EnumAbsorber.NEUTRON},
                 {null, null, EnumAbsorber.PROTON}
+        }).register();
+
+        new ColliderRecipe(3, ItemMaterial.instance().getSubItemStack("mystical_gem"), new EnumAbsorber[][]{
+                {EnumAbsorber.NEUTRON, EnumAbsorber.NEUTRON, null},
+                {null, null, null},
+                {null, EnumAbsorber.PROTON, EnumAbsorber.PROTON}
         }).register();
     }
 }
