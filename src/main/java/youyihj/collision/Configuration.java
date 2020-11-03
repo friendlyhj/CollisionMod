@@ -1,7 +1,6 @@
-package youyihj.collision.core;
+package youyihj.collision;
 
 import net.minecraftforge.common.config.Config;
-import youyihj.collision.core.Collision;
 
 @Config(modid = Collision.MODID, name = Collision.NAME, category = Collision.MODID)
 public class Configuration {

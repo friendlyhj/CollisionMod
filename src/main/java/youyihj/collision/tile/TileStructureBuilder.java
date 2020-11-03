@@ -9,9 +9,9 @@ import youyihj.collision.block.ColliderBase;
 import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.Proton;
-import youyihj.collision.core.IOType;
-import youyihj.collision.core.SingleItemDeviceBase;
-import youyihj.collision.core.Utils;
+import youyihj.collision.util.IOType;
+import youyihj.collision.util.SingleItemDeviceBase;
+import youyihj.collision.util.Utils;
 import youyihj.collision.recipe.ColliderRecipe;
 
 public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule implements ITickable {

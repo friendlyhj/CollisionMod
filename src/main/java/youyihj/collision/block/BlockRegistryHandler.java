@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
-import youyihj.collision.core.Collision;
+import youyihj.collision.Collision;
 import youyihj.collision.tile.*;
 
 import java.util.ArrayList;

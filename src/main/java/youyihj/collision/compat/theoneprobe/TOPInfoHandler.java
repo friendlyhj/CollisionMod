@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import youyihj.collision.core.Collision;
-import youyihj.collision.core.EnergyStorageSerializable;
-import youyihj.collision.core.SingleItemDeviceBase.TileEntityModule;
+import youyihj.collision.Collision;
+import youyihj.collision.util.EnergyStorageSerializable;
+import youyihj.collision.util.SingleItemDeviceBase.TileEntityModule;
 import youyihj.collision.tile.TileHarvester;
 
 import java.awt.Color;

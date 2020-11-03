@@ -2,9 +2,9 @@ package youyihj.collision.item;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import youyihj.collision.core.Collision;
+import youyihj.collision.Collision;
 import youyihj.collision.model.IHasGeneratedModel;
-import youyihj.collision.core.IRegistryObject;
+import youyihj.collision.IRegistryObject;
 import youyihj.collision.model.ModelGenerator;
 import youyihj.collision.model.ModelType;
 import youyihj.collision.creativetab.CollisionTab;

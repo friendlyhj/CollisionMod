@@ -9,9 +9,9 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.items.IItemHandler;
 import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.EnumAbsorber;
-import youyihj.collision.core.IOType;
-import youyihj.collision.core.SingleItemDeviceBase;
-import youyihj.collision.core.Utils;
+import youyihj.collision.util.IOType;
+import youyihj.collision.util.SingleItemDeviceBase;
+import youyihj.collision.util.Utils;
 import youyihj.collision.item.ItemRegistryHandler;
 
 /**

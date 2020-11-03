@@ -3,7 +3,7 @@ package youyihj.collision.block.spawner;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import youyihj.collision.core.Configuration;
+import youyihj.collision.Configuration;
 
 import java.util.ArrayList;
 import java.util.HashMap;

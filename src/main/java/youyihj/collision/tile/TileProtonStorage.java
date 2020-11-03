@@ -1,8 +1,8 @@
 package youyihj.collision.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
-import youyihj.collision.core.IOType;
-import youyihj.collision.core.SingleItemDeviceBase;
+import youyihj.collision.util.IOType;
+import youyihj.collision.util.SingleItemDeviceBase;
 
 /**
  * @author youyihj

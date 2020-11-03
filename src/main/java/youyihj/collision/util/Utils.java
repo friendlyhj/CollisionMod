@@ -1,4 +1,4 @@
-package youyihj.collision.core;
+package youyihj.collision.util;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;

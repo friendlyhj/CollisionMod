@@ -1,4 +1,4 @@
-package youyihj.collision.core;
+package youyihj.collision.util;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;

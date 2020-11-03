@@ -1,4 +1,4 @@
-package youyihj.collision.core;
+package youyihj.collision;
 
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;

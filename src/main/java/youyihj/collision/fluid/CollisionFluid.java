@@ -7,10 +7,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import youyihj.collision.core.Collision;
+import youyihj.collision.Collision;
 import youyihj.collision.block.BlockRegistryHandler;
 import youyihj.collision.model.IHasGeneratedModel;
-import youyihj.collision.core.IRegistryObject;
+import youyihj.collision.IRegistryObject;
 import youyihj.collision.model.ModelGenerator;
 import youyihj.collision.model.ModelType;
 

@@ -12,8 +12,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import youyihj.collision.core.Collision;
-import youyihj.collision.core.SingleItemDeviceBase;
+import youyihj.collision.Collision;
+import youyihj.collision.util.SingleItemDeviceBase;
 import youyihj.collision.network.CollisionGuiHandler;
 import youyihj.collision.tile.TileHarvester;
 

@@ -5,7 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import youyihj.collision.core.Collision;
+import youyihj.collision.Collision;
 
 import java.util.Arrays;
 import java.util.HashMap;

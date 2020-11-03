@@ -1,7 +1,7 @@
 package youyihj.collision.network;
 
 import net.minecraft.client.resources.I18n;
-import youyihj.collision.core.SingleItemDeviceBase;
+import youyihj.collision.util.SingleItemDeviceBase;
 
 /**
  * @author youyihj

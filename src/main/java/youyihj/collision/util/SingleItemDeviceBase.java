@@ -1,4 +1,4 @@
-package youyihj.collision.core;
+package youyihj.collision.util;
 
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
@@ -26,6 +26,7 @@ import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.*;
+import youyihj.collision.Collision;
 import youyihj.collision.block.CollisionBlock;
 
 import javax.annotation.Nonnull;
