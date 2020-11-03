@@ -85,4 +85,8 @@ public final class Utils {
     public static String i18nFormat(String key, Object... objects) {
         return new TextComponentTranslation(key, objects).getUnformattedText();
     }
+
+    public static boolean hasPassbleBlock(World world, BlockPos pos) {
+        return world.getBlockState(pos).getBlock().isPassable(world, pos);
+    }
 }

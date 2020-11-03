@@ -7,6 +7,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import youyihj.collision.block.ColliderBase;
 import youyihj.collision.core.SingleItemDeviceBase;
+import youyihj.collision.core.Utils;
 
 @SideOnly(Side.CLIENT)
 public class GuiStructureBuilder extends SingleItemDeviceBase.GuiContainerModule {
@@ -22,7 +23,7 @@ public class GuiStructureBuilder extends SingleItemDeviceBase.GuiContainerModule
         BlockPos posOffset = pos.up();
         World world = this.mc.world;
         while (!(world.getBlockState(posOffset).getBlock() instanceof ColliderBase)) {
-            if (!world.isAirBlock(posOffset) || world.isOutsideBuildHeight(posOffset)) {
+            if (!Utils.hasPassbleBlock(world, pos) || world.isOutsideBuildHeight(posOffset)) {
                 this.drawCenteredString(this.fontRenderer, error, xSize / 2, 64, 0xffff0000);
                 return;
             }
