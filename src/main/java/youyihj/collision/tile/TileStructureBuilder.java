@@ -55,6 +55,7 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
 
                 ItemStack itemP = protonStorage.item.extractItem(0, p, true);
                 ItemStack itemN = neutronStorage.item.extractItem(0, n, true);
+                if (itemP.getCount() < p || itemN.getCount() < n) return;
                 if (itemP.isEmpty() && itemN.isEmpty()) return;
                 if (recipe.isAdvanced()) {
                     if (Proton.Refined.INSTANCE.match(itemP, true) && Neutron.Refined.INSTANCE.match(itemN, true)) {

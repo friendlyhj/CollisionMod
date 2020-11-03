@@ -1,16 +1,17 @@
 package youyihj.collision.item;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import youyihj.collision.core.Collision;
 import youyihj.collision.core.Configuration;
+import youyihj.collision.core.Utils;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -63,8 +64,8 @@ public class Nucleus extends CollisionItem {
     @Override
     @Nonnull
     public String getItemStackDisplayName(ItemStack stack) {
-        return I18n.format("item.collision.nucleus.name",
-                I18n.format("material.nucleus." + singleHashMap.get(stack.getMetadata()).name.toLowerCase()));
+        return Utils.i18nFormat("item.collision.nucleus.name",
+                new TextComponentTranslation("material.nucleus." + singleHashMap.get(stack.getMetadata()).name.toLowerCase()));
     }
 
     @Override

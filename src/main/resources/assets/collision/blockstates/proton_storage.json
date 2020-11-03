@@ -3,7 +3,7 @@
   "defaults": {
     "textures": {
       "top": "collision:blocks/proton_storage_y",
-      "bottom": "minecraft:blocks/proton_storage_y",
+      "bottom": "collision:blocks/proton_storage_y",
       "side": "collision:blocks/proton_storage"
     },
     "model": "minecraft:cube_bottom_top",

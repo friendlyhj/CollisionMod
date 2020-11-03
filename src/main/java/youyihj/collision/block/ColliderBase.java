@@ -41,7 +41,7 @@ public class ColliderBase extends CollisionBlock {
             if (recipe != null) {
                 BlockPos posOffset = pos;
                 while (!worldIn.canSeeSky(posOffset)) {
-                    posOffset = pos.up();
+                    posOffset = posOffset.up();
                 }
                 worldIn.spawnEntity(new EntityItem(worldIn, posOffset.getX(), posOffset.getY(), posOffset.getZ(), recipe.getOut()));
                 clean(worldIn, pos);

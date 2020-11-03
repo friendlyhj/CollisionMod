@@ -82,7 +82,7 @@ public final class Utils {
         return null;
     }
 
-    public String i18nFormat(String key, Object... objects) {
+    public static String i18nFormat(String key, Object... objects) {
         return new TextComponentTranslation(key, objects).getUnformattedText();
     }
 }
