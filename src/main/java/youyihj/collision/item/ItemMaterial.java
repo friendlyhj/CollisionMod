@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import youyihj.collision.Collision;
+import youyihj.collision.util.Utils;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class ItemMaterial extends CollisionItem {
@@ -54,7 +54,7 @@ public class ItemMaterial extends CollisionItem {
     }
 
     public ItemStack getSubItemStack(int count, String name) {
-        return new ItemStack(this, count, Arrays.binarySearch(subItemIDs, name));
+        return new ItemStack(this, count, Utils.search(subItemIDs, name, false));
     }
 
     public ItemStack getSubItemStack(String name) {

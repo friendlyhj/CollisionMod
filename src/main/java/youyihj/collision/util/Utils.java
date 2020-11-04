@@ -13,6 +13,8 @@ import youyihj.collision.block.absorber.ProtonEmpty;
 import youyihj.collision.tile.TileNeutronStorage;
 import youyihj.collision.tile.TileProtonStorage;
 
+import java.util.Arrays;
+
 public final class Utils {
 
     public Utils() {
@@ -86,7 +88,15 @@ public final class Utils {
         return new TextComponentTranslation(key, objects).getUnformattedText();
     }
 
-    public static boolean hasPassbleBlock(World world, BlockPos pos) {
+    public static boolean hasPassableBlock(World world, BlockPos pos) {
         return world.getBlockState(pos).getBlock().isPassable(world, pos);
+    }
+
+    public static <T> int search(T[] array, T obj, boolean isSorted) {
+        if (isSorted) return Arrays.binarySearch(array, obj);
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(obj)) return i;
+        }
+        return -1;
     }
 }

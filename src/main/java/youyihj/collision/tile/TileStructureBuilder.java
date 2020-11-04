@@ -22,7 +22,7 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
             BlockPos posOffset = pos.up();
             int posOffsetY = 1;
             while (!(world.getBlockState(posOffset).getBlock() instanceof ColliderBase)) {
-                if (!Utils.hasPassbleBlock(world, posOffset) || world.isOutsideBuildHeight(posOffset)) return;
+                if (!Utils.hasPassableBlock(world, posOffset) || world.isOutsideBuildHeight(posOffset)) return;
                 posOffsetY++;
                 posOffset = posOffset.up();
             }
