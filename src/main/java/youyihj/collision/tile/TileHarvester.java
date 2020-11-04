@@ -9,32 +9,28 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.items.IItemHandler;
 import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.EnumAbsorber;
-import youyihj.collision.util.IOType;
-import youyihj.collision.util.SingleItemDeviceBase;
-import youyihj.collision.util.Utils;
+import youyihj.collision.util.*;
 import youyihj.collision.item.ItemRegistryHandler;
+
+import java.util.Iterator;
 
 /**
  * @author youyihj
  */
 public class TileHarvester extends SingleItemDeviceBase.TileEntityModule implements ITickable {
     private boolean doFull;
-    private int posOffsetX = -3;
-    private int posOffsetZ = -3;
+    private Iterator<BlockPos> offsets;
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
+        offsets = new CircleIterable<>(BlockPos.getAllInBox(this.pos.add(-3, 0, -3), this.pos.add(3, 0, 3))).iterator();
         doFull = compound.getBoolean("doFull");
-        posOffsetX = compound.getInteger("posOffsetX");
-        posOffsetZ = compound.getInteger("posOffsetZ");
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setBoolean("doFull", doFull);
-        compound.setInteger("posOffsetX", posOffsetX);
-        compound.setInteger("posOffsetZ", posOffsetZ);
         return super.writeToNBT(compound);
     }
 
@@ -68,17 +64,7 @@ public class TileHarvester extends SingleItemDeviceBase.TileEntityModule impleme
     }
 
     private BlockPos getNextPos() {
-        if (posOffsetX > 3) {
-            posOffsetX = -3;
-            posOffsetZ++;
-        } else {
-            posOffsetX++;
-        }
-        if (posOffsetZ > 3) {
-            posOffsetZ = -3;
-            posOffsetX = -3;
-        }
-        return this.pos.add(posOffsetX, getPosOffsetY(), posOffsetZ);
+        return offsets.next().up(getPosOffsetY());
     }
 
     @Override
