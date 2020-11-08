@@ -11,7 +11,7 @@ import youyihj.collision.util.Utils;
 import java.util.HashMap;
 
 public class ItemMaterial extends CollisionItem {
-    private String[] subItemIDs;
+    private final String[] subItemIDs;
 
     ItemMaterial(String... subItemIDs) {
         super("material");

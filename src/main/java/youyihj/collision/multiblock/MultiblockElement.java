@@ -6,8 +6,8 @@ import net.minecraft.util.math.Vec3i;
 import java.util.function.Predicate;
 
 public class MultiblockElement {
-    private Vec3i offset;
-    private IBlockMatcher checker;
+    private final Vec3i offset;
+    private final IBlockMatcher checker;
 
     public MultiblockElement(Vec3i offset, IBlockMatcher checker) {
         this.offset = offset;

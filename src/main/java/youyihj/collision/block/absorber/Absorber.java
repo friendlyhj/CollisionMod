@@ -18,7 +18,7 @@ import java.util.Random;
 import static youyihj.collision.item.ItemRegistryHandler.itemBlockHashMap;
 
 public abstract class Absorber extends CollisionBlock {
-    private boolean isEmpty;
+    private final boolean isEmpty;
 
     public Absorber(String id, boolean isEmpty, boolean tickRandomly) {
         super(id, Material.ROCK);

@@ -8,7 +8,7 @@ import youyihj.collision.block.absorber.EnumAbsorber;
 @ZenClass("mods.collision.Absorber")
 @ZenRegister
 public class CrTEnumAbsorber {
-    private EnumAbsorber absorber;
+    private final EnumAbsorber absorber;
 
     public CrTEnumAbsorber(EnumAbsorber absorber) {
         this.absorber = absorber;

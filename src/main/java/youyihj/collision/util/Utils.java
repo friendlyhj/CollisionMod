@@ -35,7 +35,6 @@ public final class Utils {
         return stringBuilder.toString();
     }
 
-
     public static String toLineString(String string) {
         StringBuilder stringBuilder = new StringBuilder(string);
         int temp = 0;

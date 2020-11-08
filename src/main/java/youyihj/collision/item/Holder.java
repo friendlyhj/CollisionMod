@@ -21,7 +21,7 @@ public class Holder extends CollisionItem {
         this.setNoRepair();
     }
 
-    private EnumAbsorber type;
+    private final EnumAbsorber type;
 
     private IBlockState getAbsorber() {
         return this.type.getInstance().getDefaultState();

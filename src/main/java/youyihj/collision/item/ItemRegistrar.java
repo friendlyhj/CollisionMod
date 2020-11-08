@@ -4,7 +4,7 @@ package youyihj.collision.item;
 import youyihj.collision.block.absorber.EnumAbsorber;
 
 public class ItemRegistrar {
-    private static String[] plainItemsID = {
+    private static final String[] plainItemsID = {
             "metal_chunk",
             "mystical_gem",
             "little_ghast_drop",

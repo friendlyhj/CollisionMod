@@ -15,9 +15,9 @@ public class GemSpawner extends Spawner {
         super("gem_spawner");
     }
 
-    private static Map<ItemStack, Integer> spawnItemPool = new HashMap<>();
-    private static List<ItemStack> itemStacks = new ArrayList<>();
-    private static List<Integer> list = new ArrayList<>();
+    private static final Map<ItemStack, Integer> spawnItemPool = new HashMap<>();
+    private static final List<ItemStack> itemStacks = new ArrayList<>();
+    private static final List<Integer> list = new ArrayList<>();
     private static int bound = 0;
 
     public static void addItem(ItemStack itemStack, int wight) {

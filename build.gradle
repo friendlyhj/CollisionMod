@@ -54,7 +54,7 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.592"
+    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.601"
     deobfCompile "mezz.jei:jei_1.12.2:4.15.0.296"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.28-17"
 

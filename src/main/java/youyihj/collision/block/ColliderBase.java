@@ -15,7 +15,7 @@ import youyihj.collision.recipe.ColliderRecipe;
 import javax.annotation.Nullable;
 
 public class ColliderBase extends CollisionBlock {
-    private int level;
+    private final int level;
     public ColliderBase(int level) {
         super(getRegistryName(level), Material.IRON);
         this.level = level;
@@ -24,7 +24,7 @@ public class ColliderBase extends CollisionBlock {
     }
 
     public static String getRegistryName(int level) {
-        return "collider_lv" + String.valueOf(level);
+        return "collider_lv" + level;
     }
 
     @Override

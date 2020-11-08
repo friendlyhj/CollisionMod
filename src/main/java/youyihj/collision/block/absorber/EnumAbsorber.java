@@ -8,8 +8,8 @@ public enum EnumAbsorber {
     PROTON(Proton.INSTANCE, Proton.Refined.INSTANCE),
     PROTON_EMPTY(ProtonEmpty.INSTANCE, ProtonEmpty.Refined.INSTANCE);
 
-    private Absorber instance;
-    private Absorber refined;
+    private final Absorber instance;
+    private final Absorber refined;
 
     EnumAbsorber(Absorber arg, Absorber refined) {
         this.instance = arg;

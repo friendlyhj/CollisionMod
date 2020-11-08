@@ -16,7 +16,9 @@ public class CollisionPlugin implements IModPlugin {
     @Override
     public void register(IModRegistry registry) {
         registry.addRecipes(ColliderRecipe.colliderRecipes.stream().map(ColliderWrapper::new).collect(Collectors.toSet()), ColliderCategory.UID);
-        registry.addRecipeCatalyst(new ItemStack(ItemRegistryHandler.itemBlockHashMap.get(ColliderBase.getRegistryName(1))), ColliderCategory.UID);
+        for (int i = 1; i < 5; i++) {
+            registry.addRecipeCatalyst(new ItemStack(ItemRegistryHandler.itemBlockHashMap.get(ColliderBase.getRegistryName(i))), ColliderCategory.UID);
+        }
     }
 
     @Override

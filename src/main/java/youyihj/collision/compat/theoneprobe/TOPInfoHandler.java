@@ -41,10 +41,15 @@ public class TOPInfoHandler implements IProbeInfoProvider {
             EnergyStorageSerializable energy = tem.energy;
             ItemStack itemStack = tem.item.getStackInSlot(0);
             probeInfo.progress(energy.getEnergyStored(), energy.getMaxEnergyStored(), ENERGY_CAP);
-            if (tem.canEditIOType()) probeInfo.text(TextStyleClass.LABEL + tem.getIOType().getString());
-            if (tem instanceof TileHarvester)
+            if (tem.canEditIOType()) {
+                probeInfo.text(TextStyleClass.LABEL + tem.getIOType().getString());
+            }
+            if (tem instanceof TileHarvester) {
                 probeInfo.text(TextStyleClass.LABEL + ((TileHarvester) tem).getShowWorkTypeText().getUnformattedText());
-            if (!itemStack.isEmpty()) probeInfo.item(itemStack);
+            }
+            if (!itemStack.isEmpty()) {
+                probeInfo.item(itemStack);
+            }
         }
     }
 }

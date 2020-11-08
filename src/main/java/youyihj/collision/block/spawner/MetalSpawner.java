@@ -14,8 +14,8 @@ public class MetalSpawner extends Spawner {
         super("metal_spawner");
     }
 
-    private static ArrayList<Integer> metalList = new ArrayList<>();
-    private static ArrayList<Integer> list = new ArrayList<>();
+    private static final ArrayList<Integer> metalList = new ArrayList<>();
+    private static final ArrayList<Integer> list = new ArrayList<>();
     private static int bound = 0;
 
 

@@ -29,8 +29,8 @@ public class CrTGemSpawner {
     }
 
     public static class GemSpawnerAdd implements IAction {
-        private IItemStack stack;
-        private int wight;
+        private final IItemStack stack;
+        private final int wight;
 
         public GemSpawnerAdd(IItemStack stack, int wight) {
             this.stack = stack;
@@ -49,7 +49,7 @@ public class CrTGemSpawner {
     }
 
     public static class GemSpawnerRemove implements IAction {
-        private IItemStack stack;
+        private final IItemStack stack;
 
         public GemSpawnerRemove(IItemStack stack) {
             this.stack = stack;
