@@ -9,6 +9,7 @@ import youyihj.collision.Collision;
 import youyihj.collision.util.Utils;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class ItemMaterial extends CollisionItem {
     private final String[] subItemIDs;
@@ -45,12 +46,10 @@ public class ItemMaterial extends CollisionItem {
     }
 
     @Override
-    public HashMap<Integer, ModelResourceLocation> getModelRLs() {
-        HashMap<Integer, ModelResourceLocation> temp = new HashMap<>();
+    public void getModelRLs(List<ModelResourceLocation> list) {
         for (int i = 0; i < subItemIDs.length; i++) {
-            temp.put(i, new ModelResourceLocation(new ResourceLocation(Collision.MODID, subItemIDs[i]), "inventory"));
+            list.add(new ModelResourceLocation(new ResourceLocation(Collision.MODID, subItemIDs[i]), "inventory"));
         }
-        return temp;
     }
 
     public ItemStack getSubItemStack(int count, String name) {

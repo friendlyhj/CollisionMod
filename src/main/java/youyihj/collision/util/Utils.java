@@ -14,6 +14,9 @@ import youyihj.collision.tile.TileNeutronStorage;
 import youyihj.collision.tile.TileProtonStorage;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.BiConsumer;
 
 public final class Utils {
 
@@ -54,14 +57,15 @@ public final class Utils {
     public static TileNeutronStorage getNeutronStorage(World world, BlockPos posIn, boolean allowAir, int range) {
         for (BlockPos pos : BlockPos.getAllInBox(posIn.add(-range, 0, -range), posIn.add(range, 0, range))) {
             TileEntity tileEntity = world.getTileEntity(pos);
-            if (tileEntity != null && tileEntity instanceof TileNeutronStorage) {
+            if (tileEntity instanceof TileNeutronStorage) {
                 TileNeutronStorage neutronStorage = ((TileNeutronStorage) tileEntity);
                 ItemStack item = neutronStorage.item.getStackInSlot(0);
                 if (Neutron.INSTANCE.match(item, allowAir) ||
                         Neutron.Refined.INSTANCE.match(item, allowAir) ||
                         NeutronEmpty.INSTANCE.match(item, allowAir) ||
-                        NeutronEmpty.Refined.INSTANCE.match(item, allowAir))
+                        NeutronEmpty.Refined.INSTANCE.match(item, allowAir)) {
                     return neutronStorage;
+                }
             }
         }
         return null;
@@ -70,14 +74,15 @@ public final class Utils {
     public static TileProtonStorage getProtonStorage(World world, BlockPos posIn, boolean allowAir, int range) {
         for (BlockPos pos : BlockPos.getAllInBox(posIn.add(-range, 0, -range), posIn.add(range, 0, range))) {
             TileEntity tileEntity = world.getTileEntity(pos);
-            if (tileEntity != null && tileEntity instanceof TileProtonStorage) {
+            if (tileEntity instanceof TileProtonStorage) {
                 TileProtonStorage protonStorage = ((TileProtonStorage) tileEntity);
                 ItemStack item = protonStorage.item.getStackInSlot(0);
                 if (Proton.INSTANCE.match(item, allowAir) ||
                         Proton.Refined.INSTANCE.match(item, allowAir) ||
                         ProtonEmpty.INSTANCE.match(item, allowAir) ||
-                        ProtonEmpty.Refined.INSTANCE.match(item, allowAir))
+                        ProtonEmpty.Refined.INSTANCE.match(item, allowAir)) {
                     return protonStorage;
+                }
             }
         }
         return null;
@@ -92,10 +97,21 @@ public final class Utils {
     }
 
     public static <T> int search(T[] array, T obj, boolean isSorted) {
-        if (isSorted) return Arrays.binarySearch(array, obj);
+        if (isSorted) {
+            return Arrays.binarySearch(array, obj);
+        }
         for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(obj)) return i;
+            if (array[i].equals(obj)) {
+                return i;
+            }
         }
         return -1;
+    }
+
+    public static <T> void enumerateForeach(List<T> list, BiConsumer<Integer, ? super T> action) {
+        Objects.requireNonNull(action);
+        for (int i = 0; i < list.size(); i++) {
+            action.accept(i, list.get(i));
+        }
     }
 }

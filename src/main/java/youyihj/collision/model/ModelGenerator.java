@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import org.apache.commons.io.FileUtils;
+import youyihj.collision.util.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +20,9 @@ public class ModelGenerator {
     public static void generate() {
         needGenerateModels.stream().filter(IHasGeneratedModel::isGeneratingModel).forEach(model -> {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            model.getModelRLs().forEach((meta, modelRL) -> {
+            ArrayList<ModelResourceLocation> modelResourceLocations = new ArrayList<>();
+            model.getModelRLs(modelResourceLocations);
+            Utils.enumerateForeach(modelResourceLocations, (meta, modelRL) -> {
                 File file = new File(model.getModelDir(modelRL) + modelRL.getResourcePath() + ".json");
                 if (model.isAlwaysOverrideModelFile() || !file.exists()) {
                     JsonObject all = new JsonObject();

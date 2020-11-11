@@ -23,8 +23,9 @@ public class CircleIterator<E> implements Iterator<E> {
 
     @Override
     public E next() {
-        if (!internal.hasNext())
+        if (!internal.hasNext()) {
             internal = parent.iterator();
+        }
         return internal.next();
     }
 

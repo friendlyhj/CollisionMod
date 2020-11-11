@@ -15,22 +15,30 @@ import youyihj.collision.fluid.CollisionFluid;
 import youyihj.collision.fluid.FluidRegistrar;
 import youyihj.collision.item.CollisionItem;
 import youyihj.collision.item.ItemRegistryHandler;
+import youyihj.collision.util.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber
 public class ModelRegistryHandler {
     @SubscribeEvent
     public static void onModelRegistry(ModelRegistryEvent event) {
+        List<ModelResourceLocation> modelResourceLocations = new ArrayList<>();
         for (CollisionItem item : ItemRegistryHandler.items) {
-            item.getModelRLs().forEach((meta, modelResourceLocation) ->
+            item.getModelRLs(modelResourceLocations);
+            Utils.enumerateForeach(modelResourceLocations, (meta, modelResourceLocation) ->
                     ModelLoader.setCustomModelResourceLocation(item, meta, modelResourceLocation));
         }
         for (ItemBlock itemBlock : ItemRegistryHandler.itemBlocks) {
-            ((CollisionBlock) itemBlock.getBlock()).getModelRLs().forEach((meta, modelRL) ->
+            ((CollisionBlock) itemBlock.getBlock()).getModelRLs(modelResourceLocations);
+            Utils.enumerateForeach(modelResourceLocations, (meta, modelRL) ->
                     ModelLoader.setCustomModelResourceLocation(itemBlock, meta, modelRL));
         }
         for (CollisionFluid fluid : FluidRegistrar.fluids) {
-            fluid.getModelRLs().forEach((meta, model) ->
+            fluid.getModelRLs(modelResourceLocations);
+            Utils.enumerateForeach(modelResourceLocations, (meta, model) ->
                     ModelLoader.setCustomStateMapper(fluid.getBlock(), new StateMapperBase() {
                         @Override
                         protected ModelResourceLocation getModelResourceLocation(IBlockState state) {

@@ -71,7 +71,9 @@ public abstract class Absorber extends CollisionBlock {
     }
 
     public boolean match(ItemStack itemStack, boolean allowAir) {
-        if (allowAir && itemStack.isEmpty()) return true;
+        if (allowAir && itemStack.isEmpty()) {
+            return true;
+        }
         if (itemStack.getItem() instanceof ItemBlock) {
             ItemBlock itemBlock = ((ItemBlock) itemStack.getItem());
             return Objects.deepEquals(itemBlock.getBlock(), this);

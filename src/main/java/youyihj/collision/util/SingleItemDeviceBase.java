@@ -161,7 +161,9 @@ public final class SingleItemDeviceBase {
             TileEntity tileEntity = this.world.getTileEntity(pos);
             if (tileEntity != null && TileEntityModule.class.isAssignableFrom(tileEntity.getClass())) {
                 int energy = ((TileEntityModule) tileEntity).energy.getEnergyStored();
-                if (energy == this.getEnergyStored()) return;
+                if (energy == this.getEnergyStored()) {
+                    return;
+                }
                 this.energyStored = energy;
                 this.listeners.forEach(listener -> listener.sendWindowProperty(this, 0, energy));
             }
@@ -170,13 +172,17 @@ public final class SingleItemDeviceBase {
         @Override
         @SideOnly(Side.CLIENT)
         public void updateProgressBar(int id, int data) {
-            if (id == 0) this.energyStored = data;
+            if (id == 0) {
+                this.energyStored = data;
+            }
         }
 
         @Override
         public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
             ItemStack itemstack = ItemStack.EMPTY;
-            if (index < 0) return itemstack;
+            if (index < 0) {
+                return itemstack;
+            }
             Slot slot = this.inventorySlots.get(index);
 
             if (slot != null && slot.getHasStack())

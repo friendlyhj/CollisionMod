@@ -10,6 +10,7 @@ import youyihj.collision.model.ModelType;
 import youyihj.collision.creativetab.CollisionTab;
 
 import java.util.HashMap;
+import java.util.List;
 
 
 public class CollisionItem extends Item implements IRegistryObject, IHasGeneratedModel {
@@ -28,10 +29,8 @@ public class CollisionItem extends Item implements IRegistryObject, IHasGenerate
     }
 
     @Override
-    public HashMap<Integer, ModelResourceLocation> getModelRLs() {
-        HashMap<Integer, ModelResourceLocation> temp = new HashMap<>();
-        temp.put(0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
-        return temp;
+    public void getModelRLs(List<ModelResourceLocation> list) {
+        list.add(new ModelResourceLocation(this.getRegistryName(), "inventory"));
     }
 
     @Override

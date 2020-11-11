@@ -16,6 +16,7 @@ import youyihj.collision.util.Utils;
 import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 
 public class Nucleus extends CollisionItem {
@@ -69,12 +70,10 @@ public class Nucleus extends CollisionItem {
     }
 
     @Override
-    public HashMap<Integer, ModelResourceLocation> getModelRLs() {
-        HashMap<Integer, ModelResourceLocation> temp = new HashMap<>();
+    public void getModelRLs(List<ModelResourceLocation> list) {
         for (int i : getAllMetaData()) {
-            temp.put(i, new ModelResourceLocation(this.getRegistryName(), "inventory"));
+            list.add(i, new ModelResourceLocation(this.getRegistryName(), "inventory"));
         }
-        return temp;
     }
 
     @EventBusSubscriber(modid = Collision.MODID)

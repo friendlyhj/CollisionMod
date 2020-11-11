@@ -57,8 +57,12 @@ public class TileHarvester extends SingleItemDeviceBase.TileEntityModule impleme
     private int getPosOffsetY() {
         ItemStack stack = this.item.getStackInSlot(0);
         if (stack.getItem() == ItemRegistryHandler.itemHashMap.get("material")) {
-            if (stack.getMetadata() == 3) return stack.getCount();
-            if (stack.getMetadata() == 4) return -stack.getCount();
+            if (stack.getMetadata() == 3) {
+                return stack.getCount();
+            }
+            if (stack.getMetadata() == 4) {
+                return -stack.getCount();
+            }
         }
         return 0;
     }
@@ -75,7 +79,9 @@ public class TileHarvester extends SingleItemDeviceBase.TileEntityModule impleme
             if (tileNeutronStorage != null && tileProtonStorage != null) {
                 if (!this.energy.consumeEnergy(100, true) ||
                         !tileNeutronStorage.energy.consumeEnergy(20, true) ||
-                        !tileProtonStorage.energy.consumeEnergy(20, true)) return;
+                        !tileProtonStorage.energy.consumeEnergy(20, true)) {
+                    return;
+                }
                 IItemHandler itemN = tileNeutronStorage.item;
                 IItemHandler itemP = tileProtonStorage.item;
                 boolean success = false;

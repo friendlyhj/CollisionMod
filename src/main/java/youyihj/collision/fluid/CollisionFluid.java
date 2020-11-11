@@ -17,6 +17,7 @@ import youyihj.collision.model.ModelType;
 import javax.annotation.Nullable;
 import java.awt.Color;
 import java.util.HashMap;
+import java.util.List;
 
 public class CollisionFluid extends Fluid implements IHasGeneratedModel, IRegistryObject {
 
@@ -47,10 +48,8 @@ public class CollisionFluid extends Fluid implements IHasGeneratedModel, IRegist
     }
 
     @Override
-    public HashMap<Integer, ModelResourceLocation> getModelRLs() {
-        HashMap<Integer, ModelResourceLocation> temp = new HashMap<>();
-        temp.put(0, new ModelResourceLocation(new ResourceLocation(Collision.MODID, this.fluidName), "defaults"));
-        return temp;
+    public void getModelRLs(List<ModelResourceLocation> list) {
+        list.add(new ModelResourceLocation(new ResourceLocation(Collision.MODID, this.fluidName), "defaults"));
     }
 
     @Override

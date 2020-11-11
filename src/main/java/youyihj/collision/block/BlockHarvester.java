@@ -28,7 +28,6 @@ public class BlockHarvester extends SingleItemDeviceBase.BlockModule {
 
     private static final IProperty<EnumFacing> FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
-
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING);

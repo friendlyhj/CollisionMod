@@ -5,7 +5,8 @@ import net.minecraft.item.ItemStack;
 import youyihj.collision.IRegistryObject;
 import youyihj.collision.block.absorber.EnumAbsorber;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ColliderRecipe implements IRegistryObject {
     public ColliderRecipe(int level, ItemStack out, EnumAbsorber[][] input) {
@@ -21,7 +22,7 @@ public class ColliderRecipe implements IRegistryObject {
     private final ItemStack out;
     private final EnumAbsorber[][] input;
 
-    public static HashSet<ColliderRecipe> colliderRecipes = new HashSet<>();
+    public static List<ColliderRecipe> colliderRecipes = new ArrayList<>();
 
     public int getLevel() {
         return level;

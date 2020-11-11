@@ -13,6 +13,7 @@ import youyihj.collision.creativetab.CollisionTab;
 import youyihj.collision.item.ItemRegistryHandler;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class CollisionBlock extends Block implements IRegistryObject, IHasGeneratedModel {
     public CollisionBlock(String id, Material material) {
@@ -39,10 +40,8 @@ public class CollisionBlock extends Block implements IRegistryObject, IHasGenera
     }
 
     @Override
-    public HashMap<Integer, ModelResourceLocation> getModelRLs() {
-        HashMap<Integer, ModelResourceLocation> temp = new HashMap<>();
-        temp.put(0, new ModelResourceLocation(this.getRegistryName(), "inventory"));
-        return temp;
+    public void getModelRLs(List<ModelResourceLocation> list) {
+        list.add(new ModelResourceLocation(this.getRegistryName(), "inventory"));
     }
 
     @Override
