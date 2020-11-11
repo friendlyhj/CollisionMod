@@ -14,7 +14,7 @@ import youyihj.collision.tile.TileNeutronStorage;
 import youyihj.collision.tile.TileProtonStorage;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
@@ -108,10 +108,15 @@ public final class Utils {
         return -1;
     }
 
-    public static <T> void enumerateForeach(List<T> list, BiConsumer<Integer, ? super T> action) {
+    public static <T> void enumerateForeach(Iterator<T> iterator, BiConsumer<Integer, ? super T> action) {
         Objects.requireNonNull(action);
-        for (int i = 0; i < list.size(); i++) {
-            action.accept(i, list.get(i));
+        int i = 0;
+        while (iterator.hasNext()) {
+            action.accept(i++, iterator.next());
         }
+    }
+
+    public static <T> void enumerateForeach(Iterable<T> iterable, BiConsumer<Integer, ? super T> action) {
+        enumerateForeach(iterable.iterator(), action);
     }
 }
