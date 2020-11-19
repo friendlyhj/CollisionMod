@@ -9,8 +9,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.items.IItemHandler;
 import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.EnumAbsorber;
+import youyihj.collision.item.ItemMaterial;
 import youyihj.collision.util.*;
-import youyihj.collision.item.ItemRegistryHandler;
 
 import java.util.Iterator;
 
@@ -56,7 +56,7 @@ public class TileHarvester extends SingleItemDeviceBase.TileEntityModule impleme
 
     private int getPosOffsetY() {
         ItemStack stack = this.item.getStackInSlot(0);
-        if (stack.getItem() == ItemRegistryHandler.itemHashMap.get("material")) {
+        if (stack.getItem() == ItemMaterial.instance()) {
             if (stack.getMetadata() == 3) {
                 return stack.getCount();
             }

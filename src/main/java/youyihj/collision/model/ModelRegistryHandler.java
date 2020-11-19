@@ -25,20 +25,22 @@ import java.util.List;
 public class ModelRegistryHandler {
     @SubscribeEvent
     public static void onModelRegistry(ModelRegistryEvent event) {
-        List<ModelResourceLocation> modelResourceLocations = new ArrayList<>();
         for (CollisionItem item : ItemRegistryHandler.items) {
+            List<ModelResourceLocation> modelResourceLocations = new ArrayList<>();
             item.getModelRLs(modelResourceLocations);
-            Utils.enumerateForeach(modelResourceLocations, (meta, modelResourceLocation) ->
+            Utils.enumerateForEach(modelResourceLocations, (meta, modelResourceLocation) ->
                     ModelLoader.setCustomModelResourceLocation(item, meta, modelResourceLocation));
         }
         for (ItemBlock itemBlock : ItemRegistryHandler.itemBlocks) {
+            List<ModelResourceLocation> modelResourceLocations = new ArrayList<>();
             ((CollisionBlock) itemBlock.getBlock()).getModelRLs(modelResourceLocations);
-            Utils.enumerateForeach(modelResourceLocations, (meta, modelRL) ->
+            Utils.enumerateForEach(modelResourceLocations, (meta, modelRL) ->
                     ModelLoader.setCustomModelResourceLocation(itemBlock, meta, modelRL));
         }
         for (CollisionFluid fluid : FluidRegistrar.fluids) {
+            List<ModelResourceLocation> modelResourceLocations = new ArrayList<>();
             fluid.getModelRLs(modelResourceLocations);
-            Utils.enumerateForeach(modelResourceLocations, (meta, model) ->
+            Utils.enumerateForEach(modelResourceLocations, (meta, model) ->
                     ModelLoader.setCustomStateMapper(fluid.getBlock(), new StateMapperBase() {
                         @Override
                         protected ModelResourceLocation getModelResourceLocation(IBlockState state) {

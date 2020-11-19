@@ -47,7 +47,7 @@ public class Collision {
     }
 
     @EventHandler
-    public void postinit(FMLPostInitializationEvent event) {
+    public void postInit(FMLPostInitializationEvent event) {
         WitherAltarWand.initMultiBlock();
         logger.info(String.format("%s collider recipes have registered!", ColliderRecipe.colliderRecipes.size()));
         logger.info(String.format("%s nuclei registered!", MetalSpawner.initMetalList()));

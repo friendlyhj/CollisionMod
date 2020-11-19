@@ -89,7 +89,7 @@ public class CollisionFluid extends Fluid implements IHasGeneratedModel, IRegist
         FluidRegistrar.fluids.add(this);
         Block blockFluid = new BlockFluidClassic(this, (isLava ? Material.LAVA : Material.WATER)).setRegistryName(this.fluidName);
         BlockRegistryHandler.blocks.add(blockFluid);
-        ModelGenerator.needGenerateModels.add(this);
+        ModelGenerator.registerModel(this);
     }
 
     @Override

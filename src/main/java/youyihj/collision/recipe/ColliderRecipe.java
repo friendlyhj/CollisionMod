@@ -46,7 +46,7 @@ public class ColliderRecipe implements IRegistryObject {
     }
 
     public static ColliderRecipe getRecipe(ItemStack itemStack) {
-        return colliderRecipes.stream().filter(recipe -> recipe.getOut().getItem() == itemStack.getItem()).findFirst().orElse(null);
+        return colliderRecipes.stream().filter(recipe -> recipe.getOut().isItemEqual(itemStack)).findFirst().orElse(null);
     }
 
     public static boolean isSuchOutputExist(ItemStack itemStack) {

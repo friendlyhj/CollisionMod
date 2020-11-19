@@ -12,7 +12,6 @@ import youyihj.collision.model.ModelType;
 import youyihj.collision.creativetab.CollisionTab;
 import youyihj.collision.item.ItemRegistryHandler;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class CollisionBlock extends Block implements IRegistryObject, IHasGeneratedModel {
@@ -36,7 +35,7 @@ public class CollisionBlock extends Block implements IRegistryObject, IHasGenera
         itemBlock.setRegistryName(this.getRegistryName());
         ItemRegistryHandler.itemBlocks.add(itemBlock);
         ItemRegistryHandler.itemBlockHashMap.put(this.getRegistryName().getResourcePath(), itemBlock);
-        ModelGenerator.needGenerateModels.add(this);
+        ModelGenerator.registerModel(this);
     }
 
     @Override

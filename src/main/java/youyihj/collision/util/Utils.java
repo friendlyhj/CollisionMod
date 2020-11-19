@@ -108,7 +108,7 @@ public final class Utils {
         return -1;
     }
 
-    public static <T> void enumerateForeach(Iterator<T> iterator, BiConsumer<Integer, ? super T> action) {
+    public static <T> void enumerateForEach(Iterator<T> iterator, BiConsumer<Integer, ? super T> action) {
         Objects.requireNonNull(action);
         int i = 0;
         while (iterator.hasNext()) {
@@ -116,7 +116,7 @@ public final class Utils {
         }
     }
 
-    public static <T> void enumerateForeach(Iterable<T> iterable, BiConsumer<Integer, ? super T> action) {
-        enumerateForeach(iterable.iterator(), action);
+    public static <T> void enumerateForEach(Iterable<T> iterable, BiConsumer<Integer, ? super T> action) {
+        enumerateForEach(iterable.iterator(), action);
     }
 }

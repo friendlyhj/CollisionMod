@@ -15,14 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModelGenerator {
-    public static List<IHasGeneratedModel> needGenerateModels = new ArrayList<>();
+    private static final List<IHasGeneratedModel> NEED_GENERATE_MODELS = new ArrayList<>();
+
+    public static void registerModel(IHasGeneratedModel model) {
+        NEED_GENERATE_MODELS.add(model);
+    }
 
     public static void generate() {
-        needGenerateModels.stream().filter(IHasGeneratedModel::isGeneratingModel).forEach(model -> {
+        NEED_GENERATE_MODELS.stream().filter(IHasGeneratedModel::isGeneratingModel).forEach(model -> {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             ArrayList<ModelResourceLocation> modelResourceLocations = new ArrayList<>();
             model.getModelRLs(modelResourceLocations);
-            Utils.enumerateForeach(modelResourceLocations, (meta, modelRL) -> {
+            Utils.enumerateForEach(modelResourceLocations, (meta, modelRL) -> {
                 File file = new File(model.getModelDir(modelRL) + modelRL.getResourcePath() + ".json");
                 if (model.isAlwaysOverrideModelFile() || !file.exists()) {
                     JsonObject all = new JsonObject();

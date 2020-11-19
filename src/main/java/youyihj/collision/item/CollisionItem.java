@@ -25,7 +25,7 @@ public class CollisionItem extends Item implements IRegistryObject, IHasGenerate
     public void register() {
         ItemRegistryHandler.items.add(this);
         ItemRegistryHandler.itemHashMap.put(this.getRegistryName().getResourcePath(), this);
-        ModelGenerator.needGenerateModels.add(this);
+        ModelGenerator.registerModel(this);
     }
 
     @Override

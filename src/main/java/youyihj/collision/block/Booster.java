@@ -129,8 +129,8 @@ public class Booster extends CollisionBlock {
         SingleNucleus nucleus = getNucleusFromTileEntity(world, pos);
         if (nucleus == null) return;
         NonNullList<ItemStack> list = OreDictionary.getOres("ore" + nucleus.name);
-        ItemStack stack = list.stream().filter(itemStack -> itemStack.getItem() instanceof ItemBlock).findFirst().orElse(null);
-        if (stack != null) {
+        ItemStack stack = list.stream().filter(itemStack -> itemStack.getItem() instanceof ItemBlock).findFirst().orElse(ItemStack.EMPTY);
+        if (!stack.isEmpty()) {
             ItemBlock itemBlock = (ItemBlock) stack.getItem();
             IBlockState state = itemBlock.getBlock().getStateFromMeta(stack.getMetadata());
             world.setBlockState(pos, state);
