@@ -34,8 +34,8 @@ public class Nucleus extends CollisionItem {
         for (String singleInfo : Configuration.generalConfig.nuclei) {
             String[] singleInfos = singleInfo.split(",");
             if (singleInfos.length == 4) {
-                int meta = Integer.valueOf(singleInfos[0]);
-                singleHashMap.put(meta, new SingleNucleus(singleInfos[1], singleInfos[2], Integer.valueOf(singleInfos[3])));
+                int meta = Integer.parseInt(singleInfos[0]);
+                singleHashMap.put(meta, new SingleNucleus(singleInfos[1], singleInfos[2], Integer.parseInt(singleInfos[3])));
             } else {
                 throw new IllegalArgumentException(singleInfo + " is invalid!");
             }

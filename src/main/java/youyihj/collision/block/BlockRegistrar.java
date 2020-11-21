@@ -27,6 +27,7 @@ public class BlockRegistrar {
         new GemSpawner().register();
         Booster.INSTANCE.register();
         new CollisionBlock("wither_altar", Material.IRON).register();
+        new CollisionBlock("bone_plank", Material.WOOD).register();
         new BlockStructureBuilder().register();
         new NeutronStorage().register();
         new ProtonStorage().register();

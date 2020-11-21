@@ -10,19 +10,24 @@ tile.collision.collider_lv1.name=Collider (Lv1)
 tile.collision.collider_lv2.name=Collider (Lv2)
 tile.collision.collider_lv3.name=Collider (Lv3)
 tile.collision.collider_lv4.name=Collider (Lv4)
+tile.collision.bone_plank.name=Bone Plank
 tile.collision.metal_spawner.name=Metal Spawner
+tile.collision.gem_spawner.name=Gem Spawner
 tile.collision.harvester.name=Absorber Harvester
 tile.collision.booster.name=Metal Booster
 tile.collision.structure_builder.name=Collider Structure Builder
+tile.collision.proton_storage.name=Proton Storage
+tile.collision.neutron_storage.name=Neutron Storage
 
-item.collision.proton_storage.name=Proton Storage
-item.collision.neutron_storage.name=Neutron Storage
+item.collision.proton_holder.name=Proton Holder
+item.collision.neutron_holder.name=Neutron Holder
 item.collision.nucleus.name=%s Nucleus
 item.collision.metal_chunk.name=Metal Chunk
 item.collision.mystical_gem.name=Mystical Gem
 item.collision.little_ghast_drop.name=Little Ghast Drop
 item.collision.up_shifter.name=Up Shift Upgrade
 item.collision.down_shifter.name=Down Shift Upgrade
+item.collision.debugger.name=Debugger
 
 fluid.collision_proton=Liquid Proton
 fluid.collision_neutron=Liquid Neutron

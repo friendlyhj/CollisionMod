@@ -13,7 +13,6 @@ import java.util.List;
 
 
 @EventBusSubscriber
-@SuppressWarnings("unused")
 public class ItemRegistryHandler {
 
     public static List<CollisionItem> items = new ArrayList<>();

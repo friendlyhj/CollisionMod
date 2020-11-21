@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 
 @EventBusSubscriber
-@SuppressWarnings("unused")
 public class BlockRegistryHandler {
     public static List<Block> blocks = new ArrayList<>();
     public static HashMap<String, CollisionBlock> blockHashMap = new HashMap<>();

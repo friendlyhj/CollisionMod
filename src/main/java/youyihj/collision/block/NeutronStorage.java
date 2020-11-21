@@ -31,7 +31,7 @@ public class NeutronStorage extends SingleItemDeviceBase.BlockModule {
         if (!worldIn.isRemote) {
             if (playerIn.isSneaking() && playerIn.getActiveItemStack().isEmpty()) {
                 TileEntity te = worldIn.getTileEntity(pos);
-                if (te != null && te instanceof TileNeutronStorage) {
+                if (te instanceof TileNeutronStorage) {
                     TileNeutronStorage tep = (TileNeutronStorage) te;
                     tep.transformIO();
                     tep.getIOType().sendMessageToPlayer(playerIn);

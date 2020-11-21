@@ -10,7 +10,9 @@ tile.collision.collider_lv1.name=1级碰撞器
 tile.collision.collider_lv2.name=2级碰撞器
 tile.collision.collider_lv3.name=3级碰撞器
 tile.collision.collider_lv4.name=4级碰撞器
+tile.collision.bone_plank.name=骨化木板
 tile.collision.metal_spawner.name=金属生成器
+tile.collision.gem_spawner.name=宝石生成器
 tile.collision.booster.name=金属增幅器
 tile.collision.structure_builder.name=碰撞器结构生成器
 tile.collision.harvester.name=载体收集机
@@ -25,6 +27,7 @@ item.collision.mystical_gem.name=神秘宝石
 item.collision.little_ghast_drop.name=小滴恶魂之泪
 item.collision.up_shifter.name=向上偏移升级
 item.collision.down_shifter.name=向下偏移升级
+item.collision.debugger.name=调试器
 
 fluid.collision_proton=流体质子
 fluid.collision_neutron=流体中子
@@ -47,4 +50,4 @@ jei.category.collision.collider=碰撞器
 
 gui.collision.no_collider=上方没有碰撞器！
 
-collision.tooltip.energy_cap=能量： %s/%s FE
+collision.tooltip.energy_cap=能量: %s/%s FE

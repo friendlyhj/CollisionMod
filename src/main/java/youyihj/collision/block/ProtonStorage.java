@@ -31,7 +31,7 @@ public class ProtonStorage extends SingleItemDeviceBase.BlockModule {
         if (!worldIn.isRemote) {
             if (playerIn.isSneaking() && playerIn.getActiveItemStack().isEmpty()) {
                 TileEntity te = worldIn.getTileEntity(pos);
-                if (te != null && te instanceof TileProtonStorage) {
+                if (te instanceof TileProtonStorage) {
                     TileProtonStorage tep = (TileProtonStorage) te;
                     tep.transformIO();
                     tep.getIOType().sendMessageToPlayer(playerIn);
