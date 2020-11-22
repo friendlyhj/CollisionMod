@@ -1,6 +1,7 @@
 package youyihj.collision.item;
 
 
+import net.minecraft.init.Blocks;
 import youyihj.collision.block.absorber.EnumAbsorber;
 
 public class ItemRegistrar {
@@ -18,6 +19,8 @@ public class ItemRegistrar {
         Nucleus.NUCLEUS.register();
         new Debugger().register();
         new WitherAltarWand().register();
+        new FluidDrop(Blocks.WATER).register();
+        new FluidDrop(Blocks.LAVA).register();
     }
 
     public static void registerAllPlainItem() {

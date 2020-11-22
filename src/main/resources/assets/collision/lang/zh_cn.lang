@@ -29,6 +29,8 @@ item.collision.little_ghast_drop.name=小滴恶魂之泪
 item.collision.up_shifter.name=向上偏移升级
 item.collision.down_shifter.name=向下偏移升级
 item.collision.wither_altar_wand.name=凋灵祭坛法杖
+item.collision.water_drop.name=水点滴
+item.collision.lava_drop.name=熔岩点滴
 item.collision.debugger.name=调试器
 
 fluid.collision_proton=流体质子

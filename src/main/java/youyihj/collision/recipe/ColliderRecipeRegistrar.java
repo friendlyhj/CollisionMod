@@ -5,6 +5,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.item.ItemMaterial;
+import youyihj.collision.item.ItemRegistryHandler;
 
 import static youyihj.collision.block.absorber.EnumAbsorber.NEUTRON;
 import static youyihj.collision.block.absorber.EnumAbsorber.PROTON;
@@ -101,6 +102,12 @@ public class ColliderRecipeRegistrar {
                 {null, null, null}
         }).register();
 
+        new ColliderRecipe(1, new ItemStack(ItemRegistryHandler.itemHashMap.get("water_drop")), new EnumAbsorber[][]{
+                {null, null, null},
+                {null, null, PROTON},
+                {null, NEUTRON, null}
+        }).register();
+
         new ColliderRecipe(2, new ItemStack(Blocks.NETHER_BRICK, 4), new EnumAbsorber[][] {
                 {PROTON, null, NEUTRON},
                 {PROTON, null, null},
@@ -111,6 +118,12 @@ public class ColliderRecipeRegistrar {
                 {PROTON, PROTON, null},
                 {null, null, null},
                 {null, NEUTRON, NEUTRON}
+        }).register();
+
+        new ColliderRecipe(2, new ItemStack(ItemRegistryHandler.itemHashMap.get("lava_drop")), new EnumAbsorber[][]{
+                {null, PROTON, null},
+                {PROTON, null, NEUTRON},
+                {null, NEUTRON, null}
         }).register();
 
         new ColliderRecipe(2, new ItemStack(Blocks.GRASS), new EnumAbsorber[][] {
@@ -183,6 +196,12 @@ public class ColliderRecipeRegistrar {
                 {null, PROTON, null},
                 {PROTON, null, NEUTRON},
                 {null, NEUTRON, null}
+        }).register();
+
+        new ColliderRecipe(3, new ItemStack(Items.NETHER_WART), new EnumAbsorber[][]{
+                {PROTON, null, NEUTRON},
+                {NEUTRON, null, null},
+                {null, null, PROTON}
         }).register();
 
         new ColliderRecipe(4, ItemMaterial.instance().getSubItemStack("little_ghast_drop"), new EnumAbsorber[][]{

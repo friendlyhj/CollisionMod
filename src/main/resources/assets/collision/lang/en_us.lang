@@ -29,6 +29,8 @@ item.collision.little_ghast_drop.name=Little Ghast Drop
 item.collision.up_shifter.name=Up Shift Upgrade
 item.collision.down_shifter.name=Down Shift Upgrade
 item.collision.wither_altar_wand.name=Wither Altar Wand
+item.collision.water_drop.name=Water Drop
+item.collision.lava_drop.name=Lava Drop
 item.collision.debugger.name=Debugger
 
 fluid.collision_proton=Liquid Proton
