@@ -1,6 +1,5 @@
 package youyihj.collision;
 
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
@@ -31,7 +30,7 @@ public class Collision {
 
     @EventHandler
     public void onConstruct(FMLConstructionEvent event) {
-        FluidRegistry.enableUniversalBucket();
+        // FluidRegistry.enableUniversalBucket();
     }
 
     @EventHandler
