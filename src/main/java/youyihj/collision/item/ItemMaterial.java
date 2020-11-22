@@ -8,19 +8,20 @@ import net.minecraft.util.ResourceLocation;
 import youyihj.collision.Collision;
 import youyihj.collision.util.Utils;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class ItemMaterial extends CollisionItem {
     private final String[] subItemIDs;
 
-    ItemMaterial(String... subItemIDs) {
+    private ItemMaterial() {
         super("material");
-        this.subItemIDs = subItemIDs;
+        this.subItemIDs = ItemRegistrar.plainItemsID;
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.setNoRepair();
     }
+
+    private static final ItemMaterial INSTANCE = new ItemMaterial();
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
@@ -47,8 +48,8 @@ public class ItemMaterial extends CollisionItem {
 
     @Override
     public void getModelRLs(List<ModelResourceLocation> list) {
-        for (int i = 0; i < subItemIDs.length; i++) {
-            list.add(new ModelResourceLocation(new ResourceLocation(Collision.MODID, subItemIDs[i]), "inventory"));
+        for (String subItemID : subItemIDs) {
+            list.add(new ModelResourceLocation(new ResourceLocation(Collision.MODID, subItemID), "inventory"));
         }
     }
 
@@ -61,6 +62,6 @@ public class ItemMaterial extends CollisionItem {
     }
 
     public static ItemMaterial instance() {
-        return (ItemMaterial) ItemRegistryHandler.itemHashMap.get("material");
+        return INSTANCE;
     }
 }

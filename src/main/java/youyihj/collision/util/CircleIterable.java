@@ -8,7 +8,7 @@ import java.util.function.Consumer;
  * @author youyihj
  */
 public class CircleIterable<T> implements Iterable<T> {
-    Iterable<T> internal;
+    final Iterable<T> internal;
 
     public CircleIterable(Iterable<T> iterable) {
         this.internal = iterable;

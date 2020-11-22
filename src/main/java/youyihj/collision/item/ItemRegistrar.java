@@ -5,7 +5,7 @@ import net.minecraft.init.Blocks;
 import youyihj.collision.block.absorber.EnumAbsorber;
 
 public class ItemRegistrar {
-    private static final String[] plainItemsID = {
+     static final String[] plainItemsID = {
             "metal_chunk",
             "mystical_gem",
             "little_ghast_drop",
@@ -24,6 +24,6 @@ public class ItemRegistrar {
     }
 
     public static void registerAllPlainItem() {
-        new ItemMaterial(plainItemsID).register();
+       ItemMaterial.instance().register();
     }
 }

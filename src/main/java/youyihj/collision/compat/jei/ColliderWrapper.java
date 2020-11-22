@@ -15,9 +15,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class ColliderWrapper implements IRecipeWrapper {
-    protected List<ItemStack> in;
-    protected ItemStack out;
-    protected int level;
+    protected final List<ItemStack> in;
+    protected final ItemStack out;
+    protected final int level;
 
     @SuppressWarnings("unchecked")
     public ColliderWrapper(ColliderRecipe recipe) {

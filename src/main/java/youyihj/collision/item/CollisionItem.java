@@ -9,7 +9,6 @@ import youyihj.collision.model.ModelGenerator;
 import youyihj.collision.model.ModelType;
 import youyihj.collision.creativetab.CollisionTab;
 
-import java.util.HashMap;
 import java.util.List;
 
 

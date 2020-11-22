@@ -16,7 +16,6 @@ import youyihj.collision.model.ModelType;
 
 import javax.annotation.Nullable;
 import java.awt.Color;
-import java.util.HashMap;
 import java.util.List;
 
 public class CollisionFluid extends Fluid implements IHasGeneratedModel, IRegistryObject {

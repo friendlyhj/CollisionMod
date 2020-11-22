@@ -16,8 +16,8 @@ import java.util.List;
 
 @EventBusSubscriber
 public class BlockRegistryHandler {
-    public static List<Block> blocks = new ArrayList<>();
-    public static HashMap<String, CollisionBlock> blockHashMap = new HashMap<>();
+    public static final List<Block> blocks = new ArrayList<>();
+    public static final HashMap<String, CollisionBlock> blockHashMap = new HashMap<>();
 
     @SubscribeEvent
     public static void onRegistry(RegistryEvent.Register<Block> event) {

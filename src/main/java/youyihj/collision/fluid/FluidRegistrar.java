@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FluidRegistrar {
-    public static List<CollisionFluid> fluids = new ArrayList<>();
+    public static final List<CollisionFluid> fluids = new ArrayList<>();
 
     public static void registerAll() {
         new CollisionFluid("collision_proton",

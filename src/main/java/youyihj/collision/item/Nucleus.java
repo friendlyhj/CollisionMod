@@ -27,7 +27,7 @@ public class Nucleus extends CollisionItem {
         this.setNoRepair();
     }
 
-    public static HashMap<Integer, SingleNucleus> singleHashMap = new HashMap<>();
+    public static final HashMap<Integer, SingleNucleus> singleHashMap = new HashMap<>();
     public static final Nucleus NUCLEUS = new Nucleus();
 
     static {

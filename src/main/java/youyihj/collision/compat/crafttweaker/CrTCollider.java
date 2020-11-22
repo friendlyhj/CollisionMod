@@ -48,9 +48,9 @@ public class CrTCollider {
     }
 
     public static abstract class ColliderRecipeAction implements IAction {
-        protected int level;
-        protected IItemStack out;
-        protected CrTEnumAbsorber[][] absorbers;
+        protected final int level;
+        protected final IItemStack out;
+        protected final CrTEnumAbsorber[][] absorbers;
 
         public ColliderRecipeAction(int level, IItemStack stack, CrTEnumAbsorber[][] absorbers) {
             this.level = level;

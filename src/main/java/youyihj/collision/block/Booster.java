@@ -39,7 +39,7 @@ public class Booster extends CollisionBlock {
     public static boolean doRerender;
 
     @SideOnly(Side.CLIENT)
-    public static WeakHashMap<BlockPos, Boolean> rerenderMap = new WeakHashMap<>();
+    public static final WeakHashMap<BlockPos, Boolean> rerenderMap = new WeakHashMap<>();
 
     private Booster() {
         super("booster", Material.ROCK);

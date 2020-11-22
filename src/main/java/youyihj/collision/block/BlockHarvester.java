@@ -59,7 +59,7 @@ public class BlockHarvester extends SingleItemDeviceBase.BlockModule {
         if (!worldIn.isRemote) {
             if (playerIn.isSneaking() && playerIn.getActiveItemStack().isEmpty()) {
                 TileEntity te = worldIn.getTileEntity(pos);
-                if (te != null && te instanceof TileHarvester) {
+                if (te instanceof TileHarvester) {
                     TileHarvester tep = (TileHarvester) te;
                     tep.transformWork();
                     playerIn.sendStatusMessage(tep.getShowWorkTypeText(), false);

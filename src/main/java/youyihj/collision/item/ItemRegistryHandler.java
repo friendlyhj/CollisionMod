@@ -15,11 +15,11 @@ import java.util.List;
 @EventBusSubscriber
 public class ItemRegistryHandler {
 
-    public static List<CollisionItem> items = new ArrayList<>();
-    public static HashMap<String, CollisionItem> itemHashMap = new HashMap<>();
+    public static final List<CollisionItem> items = new ArrayList<>();
+    public static final HashMap<String, CollisionItem> itemHashMap = new HashMap<>();
 
-    public static List<ItemBlock> itemBlocks = new ArrayList<>();
-    public static HashMap<String, ItemBlock> itemBlockHashMap = new HashMap<>();
+    public static final List<ItemBlock> itemBlocks = new ArrayList<>();
+    public static final HashMap<String, ItemBlock> itemBlockHashMap = new HashMap<>();
 
     @SubscribeEvent
     public static void onRegistry(RegistryEvent.Register<Item> event) {

@@ -22,7 +22,7 @@ public class ColliderRecipe implements IRegistryObject {
     private final ItemStack out;
     private final EnumAbsorber[][] input;
 
-    public static List<ColliderRecipe> colliderRecipes = new ArrayList<>();
+    public static final List<ColliderRecipe> colliderRecipes = new ArrayList<>();
 
     public int getLevel() {
         return level;
