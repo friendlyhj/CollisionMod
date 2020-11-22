@@ -21,7 +21,6 @@ import youyihj.collision.item.WitherAltarWand;
 import static youyihj.collision.item.WitherAltarWand.*;
 
 @Mod.EventBusSubscriber
-@SuppressWarnings("unused")
 public class WitherAltarWandEvent {
     @SubscribeEvent
     public static void handle(AttackEntityEvent event) {

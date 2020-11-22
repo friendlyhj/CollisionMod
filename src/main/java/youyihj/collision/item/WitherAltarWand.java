@@ -1,6 +1,8 @@
 package youyihj.collision.item;
 
 import net.minecraft.block.BlockBone;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,6 +18,8 @@ import youyihj.collision.multiblock.MultiblockElement;
 import youyihj.collision.multiblock.SimpleMultiblock;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class WitherAltarWand extends CollisionItem {
     public static final String TAG_X = "AltarPosX";
@@ -63,5 +67,19 @@ public class WitherAltarWand extends CollisionItem {
             return EnumActionResult.SUCCESS;
         }
         return EnumActionResult.PASS;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        NBTTagCompound nbt = stack.getTagCompound();
+        if (nbt != null && nbt.hasKey(TAG_X) && nbt.hasKey(TAG_Y) && nbt.hasKey(TAG_Z) && nbt.hasKey(TAG_WORLD)) {
+            tooltip.add(I18n.format("tooltip.collision.wither_altar_bound",
+                    nbt.getInteger(TAG_X),
+                    nbt.getInteger(TAG_Y),
+                    nbt.getInteger(TAG_Z),
+                    nbt.getInteger(TAG_WORLD)));
+        } else {
+            tooltip.add(I18n.format("tooltip.collision.wither_altar_no_bound"));
+        }
     }
 }

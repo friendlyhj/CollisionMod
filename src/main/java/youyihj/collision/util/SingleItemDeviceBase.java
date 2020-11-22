@@ -290,7 +290,7 @@ public final class SingleItemDeviceBase {
             int y = mouseY - top;
             if (x >= 14 && x <= 32 && y >= 18 && y <= 72) {
                 GuiUtils.drawHoveringText(Lists.newArrayList(
-                        I18n.format("collision.tooltip.energy_cap",
+                        I18n.format("tooltip.collision.energy_cap",
                                 ((ContainerModule) this.inventorySlots).energyStored, ENERGY_CAPACITY)
                 ), mouseX, mouseY, this.width, this.height, 300, this.fontRenderer);
             }

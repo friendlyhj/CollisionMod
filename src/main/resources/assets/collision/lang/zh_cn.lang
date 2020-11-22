@@ -52,4 +52,6 @@ jei.category.collision.collider=碰撞器
 
 gui.collision.no_collider=上方没有碰撞器！
 
-collision.tooltip.energy_cap=能量: %s/%s FE
+tooltip.collision.energy_cap=能量: %s/%s FE
+tooltip.collision.wither_altar_bound=凋灵祭坛绑定坐标: (%s, %s, %s), 于维度 %s
+tooltip.collision.wither_altar_no_bound=未绑定凋灵祭坛

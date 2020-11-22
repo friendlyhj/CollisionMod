@@ -52,4 +52,6 @@ jei.category.collision.collider=Collider
 
 gui.collision.no_collider=No collider above!
 
-collision.tooltip.energy_cap=Energy: %s/%s FE
+tooltip.collision.energy_cap=Energy: %s/%s FE
+tooltip.collision.wither_altar_bound=Wither altar bound Position: (%s, %s, %s), at dimension %s
+tooltip.collision.wither_altar_no_bound=Not bind a wither altar
