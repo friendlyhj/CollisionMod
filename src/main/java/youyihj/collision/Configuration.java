@@ -20,29 +20,29 @@ public class Configuration {
                 "The format is \"meta,name,color,chanceInMetalSpawner\"",
                 "chance = 1 means 0.1%"
         })
-        public final String[] nuclei = {
+        public String[] nuclei = {
                 "0,Iron,BF8040,200", "1,Gold,FFFF00,120"
         };
 
         @Config.Comment({
                 "How many nuggets will be outputted when nuclei are smelted"
         })
-        public final int nuggetsOutputCount = 3;
+        public int nuggetsOutputCount = 3;
     }
 
     public static class AbsorberConfig {
         @Config.Comment("The speed of absorbers transforms. The argument higher, the speed slower.")
-        public final int absorberSpeed = 2;
+        public int absorberSpeed = 2;
 
         @Config.Comment("Absorbers works only in daytime?")
-        public final boolean onlyWorkInDaytime = true;
+        public boolean onlyWorkInDaytime = true;
     }
 
     public static class SpawnerConfig {
         @Config.Comment("How many nuclei metal spawner spawn?")
-        public final int metalSpawnerSpawnAmount = 24;
+        public int metalSpawnerSpawnAmount = 24;
 
         @Config.Comment("How many nuclei gem spawner spawn?")
-        public final int gemSpawnerSpawnAmount = 12;
+        public int gemSpawnerSpawnAmount = 12;
     }
 }
