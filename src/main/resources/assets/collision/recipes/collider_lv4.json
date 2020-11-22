@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "group": "collision:recipe",
+  "result": {
+    "item": "collision:collider_lv4"
+  },
+  "pattern": [
+    "EDE",
+    "NDP",
+    "EDE"
+  ],
+  "key": {
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
+    },
+    "E": {
+      "type": "forge:ore_dict",
+      "ore": "enderpearl"
+    },
+    "N": {
+      "item": "collision:neutron_refined"
+    },
+    "P": {
+      "item": "collision:proton_refined"
+    }
+  }
+}

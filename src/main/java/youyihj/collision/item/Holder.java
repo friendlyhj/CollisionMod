@@ -17,7 +17,7 @@ public class Holder extends CollisionItem {
     public Holder(EnumAbsorber absorber) {
         super(absorber.name().toLowerCase() + "_holder");
         this.type = absorber;
-        this.setMaxDamage(Configuration.generalConfig.storageCapacity);
+        this.setMaxDamage(100);
         this.setNoRepair();
     }
 

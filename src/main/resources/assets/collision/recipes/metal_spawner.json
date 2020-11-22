@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "group": "collision:recipe",
+  "result": {
+    "item": "collision:metal_spawner"
+  },
+  "pattern": [
+    "SMS",
+    "MWM",
+    "SMS"
+  ],
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "cobblestone"
+    },
+    "M": {
+      "item": "collision:material",
+      "data": 0
+    },
+    "W": {
+      "item": "collision:bone_plank"
+    }
+  }
+}

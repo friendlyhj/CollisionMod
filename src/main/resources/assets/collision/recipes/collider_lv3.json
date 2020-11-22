@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "group": "collision:recipe",
+  "result": {
+    "item": "collision:collider_lv3"
+  },
+  "pattern": [
+    "IGI",
+    "NGP",
+    "IGI"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
+    },
+    "N": {
+      "item": "collision:neutron_refined"
+    },
+    "P": {
+      "item": "collision:proton_refined"
+    }
+  }
+}

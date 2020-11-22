@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "group": "collision:recipe",
+  "result": {
+    "item": "collision:gem_spawner"
+  },
+  "pattern": [
+    "WGW",
+    "GIG",
+    "WGW"
+  ],
+  "key": {
+    "W": {
+      "item": "collision:bone_plank"
+    },
+    "G": {
+      "item": "collision:material",
+      "data": 1
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    }
+  }
+}

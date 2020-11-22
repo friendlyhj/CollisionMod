@@ -18,6 +18,7 @@ tile.collision.structure_builder.name=碰撞器结构生成器
 tile.collision.harvester.name=载体收集机
 tile.collision.proton_storage.name=质子存储仓
 tile.collision.neutron_storage.name=中子存储仓
+tile.collision.wither_altar.name=凋灵祭坛
 
 item.collision.proton_holder.name=质子存储器
 item.collision.neutron_holder.name=中子存储器
@@ -27,6 +28,7 @@ item.collision.mystical_gem.name=神秘宝石
 item.collision.little_ghast_drop.name=小滴恶魂之泪
 item.collision.up_shifter.name=向上偏移升级
 item.collision.down_shifter.name=向下偏移升级
+item.collision.wither_altar_wand.name=凋灵祭坛法杖
 item.collision.debugger.name=调试器
 
 fluid.collision_proton=流体质子

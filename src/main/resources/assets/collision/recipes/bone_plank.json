@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shapeless",
+  "group": "collision:recipe",
+  "result": {
+    "item": "collision:bone_plank"
+  },
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dyeWhite"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dyeWhite"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dyeWhite"
+    }
+  ]
+}

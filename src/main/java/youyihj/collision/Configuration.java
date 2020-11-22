@@ -15,9 +15,6 @@ public class Configuration {
 
 
     public static class GeneralConfig {
-        @Config.Comment("The capacity of proton and neutron storage")
-        public int storageCapacity = 100;
-
         @Config.Comment({
                 "The list of nuclei",
                 "The format is \"meta,name,color,chanceInMetalSpawner\"",
@@ -26,6 +23,11 @@ public class Configuration {
         public String[] nuclei = {
                 "0,Iron,BF8040,200", "1,Gold,FFFF00,120"
         };
+
+        @Config.Comment({
+                "How many nuggets will be outputted when nuclei are smelted"
+        })
+        public int nuggetsOutputCount = 3;
     }
 
     public static class AbsorberConfig {

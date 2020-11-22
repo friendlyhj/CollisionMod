@@ -18,6 +18,7 @@ tile.collision.booster.name=Metal Booster
 tile.collision.structure_builder.name=Collider Structure Builder
 tile.collision.proton_storage.name=Proton Storage
 tile.collision.neutron_storage.name=Neutron Storage
+tile.collision.wither_altar.name=Wither Altar
 
 item.collision.proton_holder.name=Proton Holder
 item.collision.neutron_holder.name=Neutron Holder
@@ -27,6 +28,7 @@ item.collision.mystical_gem.name=Mystical Gem
 item.collision.little_ghast_drop.name=Little Ghast Drop
 item.collision.up_shifter.name=Up Shift Upgrade
 item.collision.down_shifter.name=Down Shift Upgrade
+item.collision.wither_altar_wand.name=Wither Altar Wand
 item.collision.debugger.name=Debugger
 
 fluid.collision_proton=Liquid Proton

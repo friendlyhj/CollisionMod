@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "group": "collision:recipe",
+  "result": {
+    "item": "collision:wither_altar"
+  },
+  "pattern": [
+    "BDB",
+    "CEC",
+    "BBB"
+  ],
+  "key": {
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "blockDiamond"
+    },
+    "E": {
+      "type": "forge:ore_dict",
+      "ore": "blockEmerald"
+    },
+    "B": {
+      "item": "minecraft:bone_block"
+    },
+    "C": {
+      "item": "minecraft:ghast_tear"
+    }
+  }
+}

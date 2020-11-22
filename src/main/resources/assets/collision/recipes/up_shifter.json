@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "group": "collision:recipe",
+  "result": {
+    "item": "collision:material",
+    "data": 3
+  },
+  "pattern": [
+    " A ",
+    "III",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "A": {
+      "item": "collision:neutron"
+    }
+  }
+}
