@@ -33,8 +33,12 @@ public class GemSpawner extends Spawner {
     }
 
     static {
-        addItem(new ItemStack(Items.REDSTONE, 1), 1000);
-        addItem(new ItemStack(Items.GLOWSTONE_DUST, 1), 800);
+        addItem(new ItemStack(Items.REDSTONE), 1000);
+        addItem(new ItemStack(Items.GLOWSTONE_DUST), 800);
+        addItem(new ItemStack(Items.DYE, 1, 4), 400);
+        addItem(new ItemStack(Items.QUARTZ), 400);
+        addItem(new ItemStack(Items.DIAMOND), 50);
+        addItem(new ItemStack(Items.EMERALD), 50);
     }
 
     @Override
@@ -45,7 +49,7 @@ public class GemSpawner extends Spawner {
             int j = 0;
             for (int m : list) {
                 if (seed < m) {
-                    temp.add(itemStacks.get(j));
+                    temp.add(itemStacks.get(j).copy());
                     break;
                 }
                 j++;
