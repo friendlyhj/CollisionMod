@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.items.ItemHandlerHelper;
 import youyihj.collision.Collision;
+import youyihj.collision.Configuration;
 import youyihj.collision.block.ColliderBase;
 import youyihj.collision.item.ItemRegistryHandler;
 
@@ -18,6 +19,9 @@ import youyihj.collision.item.ItemRegistryHandler;
 public class InitialItemEvent {
     @SubscribeEvent
     public static void handle(PlayerEvent.PlayerLoggedInEvent event) {
+        if (!Configuration.generalConfig.givePlayerInitialItems) {
+            return;
+        }
         EntityPlayer player = event.player;
         if (!player.world.isRemote) {
             NBTTagCompound nbtTagCompound = player.getEntityData();

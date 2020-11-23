@@ -27,6 +27,9 @@ public class Configuration {
                 "How many nuggets will be outputted when nuclei are smelted"
         })
         public int nuggetsOutputCount = 3;
+
+        @Config.Comment("should give player initial items? (collider lv1 and so on)")
+        public boolean givePlayerInitialItems = true;
     }
 
     public static class AbsorberConfig {

@@ -108,7 +108,7 @@ public class ColliderRecipeRegistrar {
                 {null, NEUTRON, null}
         }).register();
 
-        new ColliderRecipe(2, new ItemStack(Blocks.NETHER_BRICK, 4), new EnumAbsorber[][] {
+        new ColliderRecipe(2, new ItemStack(Blocks.NETHERRACK, 4), new EnumAbsorber[][] {
                 {PROTON, null, NEUTRON},
                 {PROTON, null, null},
                 {NEUTRON, null, null}
