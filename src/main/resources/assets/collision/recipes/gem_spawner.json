@@ -5,9 +5,9 @@
     "item": "collision:gem_spawner"
   },
   "pattern": [
-    "WGW",
+    "WIW",
     "GIG",
-    "WGW"
+    "WIW"
   ],
   "key": {
     "W": {
