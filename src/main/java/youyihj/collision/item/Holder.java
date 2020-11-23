@@ -17,6 +17,7 @@ public class Holder extends CollisionItem {
         super(absorber.name().toLowerCase() + "_holder");
         this.type = absorber;
         this.setMaxDamage(100);
+        this.setMaxStackSize(1);
         this.setNoRepair();
     }
 
