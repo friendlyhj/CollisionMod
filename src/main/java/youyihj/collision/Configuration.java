@@ -17,8 +17,7 @@ public class Configuration {
     public static class GeneralConfig {
         @Config.Comment({
                 "The list of nuclei",
-                "The format is \"meta,name,color,chanceInMetalSpawner\"",
-                "chance = 1 means 0.1%"
+                "The format is \"meta,name,color,wightInMetalSpawner\"",
         })
         public String[] nuclei = {
                 "0,Iron,BF8040,200", "1,Gold,FFFF00,120"

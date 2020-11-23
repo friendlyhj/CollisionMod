@@ -34,10 +34,10 @@ public class Nucleus extends CollisionItem {
         for (String singleInfo : Configuration.generalConfig.nuclei) {
             String[] singleInfos = singleInfo.split(",");
             if (singleInfos.length == 4) {
-                int meta = Integer.parseInt(singleInfos[0]);
-                singleHashMap.put(meta, new SingleNucleus(singleInfos[1], singleInfos[2], Integer.parseInt(singleInfos[3])));
+                int meta = Integer.parseInt(singleInfos[0].trim());
+                singleHashMap.put(meta, new SingleNucleus(singleInfos[1].trim(), singleInfos[2].trim(), Integer.parseInt(singleInfos[3].trim())));
             } else {
-                throw new IllegalArgumentException(singleInfo + " is invalid!");
+                throw new IllegalArgumentException("nuclei info: " + singleInfo + " is invalid!");
             }
         }
     }
