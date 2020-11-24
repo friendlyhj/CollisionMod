@@ -1,11 +1,8 @@
 package youyihj.collision.recipe;
 
-import net.minecraft.block.state.BlockStateBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import youyihj.collision.IRegistryObject;
-import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.util.IBlockMatcher;
 import youyihj.collision.util.Utils;
@@ -15,8 +12,8 @@ import java.util.function.Function;
 public class ColliderRecipe extends CustomColliderRecipe {
     public ColliderRecipe(int level, ItemStack out, EnumAbsorber[][] input) {
         super(level, out,
-                Utils.convertArray(input, getConversionFunction(level), IBlockMatcher.class),
-                Utils.convertArray(input, getConversionFunctionForOut(level), IBlockState.class),
+                Utils.convert2DArray(input, getConversionFunction(level), IBlockMatcher.class),
+                Utils.convert2DArray(input, getConversionFunctionForOut(level), IBlockState.class),
                 100, 100);
         this.input = input;
     }

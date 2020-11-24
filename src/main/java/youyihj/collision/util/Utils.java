@@ -6,7 +6,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import org.apache.commons.lang3.ArrayUtils;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.NeutronEmpty;
 import youyihj.collision.block.absorber.Proton;
@@ -124,8 +123,8 @@ public final class Utils {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T, R> R[][] convertArray(T[][] args, Function<T, R> function, Class<R> resultClass) {
-        R[][] temp = (R[][]) Array.newInstance(resultClass,args.length, args[0].length);
+    public static <T, R> R[][] convert2DArray(T[][] args, Function<T, R> function, Class<R> resultClass) {
+        R[][] temp = (R[][]) Array.newInstance(resultClass, args.length, args[0].length);
         for (int i = 0; i < args.length; i++) {
             temp[i] = convertArray(args[i], function, resultClass);
         }
@@ -136,7 +135,6 @@ public final class Utils {
     public static <T, R> R[] convertArray(T[] array, Function<T, R> function, Class<R> resultClass) {
         R[] temp = (R[]) Array.newInstance(resultClass, array.length);
         for (int i = 0; i < array.length; i++) {
-            T member = array[i];
             temp[i] = function.apply(array[i]);
         }
         return temp;

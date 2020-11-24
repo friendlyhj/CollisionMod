@@ -8,9 +8,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import youyihj.collision.block.absorber.Absorber;
-import youyihj.collision.block.absorber.EnumAbsorber;
-import youyihj.collision.recipe.ColliderRecipe;
 import youyihj.collision.recipe.ColliderRecipeManager;
 import youyihj.collision.recipe.CustomColliderRecipe;
 
@@ -45,8 +42,12 @@ public class ColliderBase extends CollisionBlock {
                 while (!worldIn.canSeeSky(posOffset)) {
                     posOffset = posOffset.up();
                 }
-                worldIn.spawnEntity(new EntityItem(worldIn, posOffset.getX(), posOffset.getY(), posOffset.getZ(), recipe.getOut().copy()));
-                clean(worldIn, pos, recipe);
+                if (worldIn.rand.nextInt(100) < recipe.getSuccessChance()) {
+                    worldIn.spawnEntity(new EntityItem(worldIn, posOffset.getX(), posOffset.getY(), posOffset.getZ(), recipe.getOut().copy()));
+                }
+                if (worldIn.rand.nextInt(100) < recipe.getConversionChance()) {
+                    clean(worldIn, pos, recipe);
+                }
             }
         }
     }
