@@ -15,7 +15,7 @@ import youyihj.collision.item.ItemRegistrar;
 import youyihj.collision.item.WitherAltarWand;
 import youyihj.collision.model.ModelGenerator;
 import youyihj.collision.network.NetworkRegistryHandler;
-import youyihj.collision.recipe.ColliderRecipe;
+import youyihj.collision.recipe.ColliderRecipeManager;
 import youyihj.collision.recipe.ColliderRecipeRegistrar;
 import youyihj.collision.recipe.FurnaceRecipeHandler;
 
@@ -50,7 +50,7 @@ public class Collision {
     public void postInit(FMLPostInitializationEvent event) {
         WitherAltarWand.initMultiBlock();
         FurnaceRecipeHandler.registerNucleusRecipe();
-        logger.info(String.format("%s collider recipes have registered!", ColliderRecipe.colliderRecipes.size()));
+        logger.info(String.format("%s collider recipes have registered!", ColliderRecipeManager.getColliderRecipes().size()));
         logger.info(String.format("%s nuclei registered!", MetalSpawner.initMetalList()));
         logger.info(String.format("%s spawned gem registered!", GemSpawner.initGemList()));
     }

@@ -14,8 +14,8 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import youyihj.collision.block.BlockRegistryHandler;
-import youyihj.collision.multiblock.MultiblockElement;
 import youyihj.collision.multiblock.SimpleMultiblock;
+import youyihj.collision.util.IBlockMatcher;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -37,7 +37,7 @@ public class WitherAltarWand extends CollisionItem {
 
     public static void initMultiBlock() {
         witherAltar = new SimpleMultiblock(state -> state == BlockRegistryHandler.blockHashMap.get("wither_altar").getDefaultState());
-        MultiblockElement.IBlockMatcher boneBlock = (state -> state.getBlock() instanceof BlockBone);
+        IBlockMatcher boneBlock = (state -> state.getBlock() instanceof BlockBone);
         witherAltar.addElement(new Vec3i(1, 0, 0), boneBlock)
                 .addElement(new Vec3i(-1, 0, 0), boneBlock)
                 .addElement(new Vec3i(0, 0, 1), boneBlock)

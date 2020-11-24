@@ -11,6 +11,8 @@ import net.minecraft.world.World;
 import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.recipe.ColliderRecipe;
+import youyihj.collision.recipe.ColliderRecipeManager;
+import youyihj.collision.recipe.CustomColliderRecipe;
 
 import javax.annotation.Nullable;
 
@@ -37,21 +39,21 @@ public class ColliderBase extends CollisionBlock {
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (start(worldIn, pos, fromPos)) {
             worldIn.newExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 0.1f, false, true);
-            ColliderRecipe recipe = findRecipe(worldIn, pos);
+            CustomColliderRecipe recipe = findRecipe(worldIn, pos);
             if (recipe != null) {
                 BlockPos posOffset = pos;
                 while (!worldIn.canSeeSky(posOffset)) {
                     posOffset = posOffset.up();
                 }
                 worldIn.spawnEntity(new EntityItem(worldIn, posOffset.getX(), posOffset.getY(), posOffset.getZ(), recipe.getOut().copy()));
-                clean(worldIn, pos);
+                clean(worldIn, pos, recipe);
             }
         }
     }
 
     @Nullable
-    private ColliderRecipe findRecipe(World world, BlockPos pos) {
-        for (ColliderRecipe colliderRecipe : ColliderRecipe.colliderRecipes) {
+    private CustomColliderRecipe findRecipe(World world, BlockPos pos) {
+        for (CustomColliderRecipe colliderRecipe : ColliderRecipeManager.getColliderRecipes()) {
             if (colliderRecipe.getLevel() == level) {
                 boolean flag = true;
                 for (int i = 0; i < 3; i++) {
@@ -60,9 +62,7 @@ public class ColliderBase extends CollisionBlock {
                         if ((i == 1 && j == 1) || !flag) {
                             continue;
                         }
-                        EnumAbsorber absorber = colliderRecipe.getInput()[i][j];
-                        IBlockState blockState = world.getBlockState(posOffset);
-                        flag = (absorber == null) ? world.isAirBlock(posOffset) : blockState == absorber.getInstanceByLevel(level).getDefaultState();
+                        flag = colliderRecipe.getBlocks()[i][j].test(world.getBlockState(posOffset));
                     }
                 }
                 if (flag) {
@@ -73,14 +73,15 @@ public class ColliderBase extends CollisionBlock {
         return null;
     }
 
-    private void clean(World world, BlockPos pos) {
-        Iterable<BlockPos> poses = BlockPos.getAllInBox(pos.add(-1, 0, -1), pos.add(1, 0, 1));
-        poses.forEach(pos1 -> {
-            Block block = world.getBlockState(pos1).getBlock();
-            if (block instanceof Absorber) {
-                ((Absorber) block).transform(world, pos1);
+    private void clean(World world, BlockPos pos, CustomColliderRecipe recipe) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (i == 1 && j == 1) {
+                    continue;
+                }
+                world.setBlockState(pos.add(i - 1, 0, j - 1), recipe.getConversionBlocks()[i][j]);
             }
-        });
+        }
     }
 
     private boolean start(World world, BlockPos pos, BlockPos fromPos) {

@@ -7,7 +7,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.item.ItemStack;
 import youyihj.collision.block.ColliderBase;
 import youyihj.collision.item.ItemRegistryHandler;
-import youyihj.collision.recipe.ColliderRecipe;
+import youyihj.collision.recipe.ColliderRecipeManager;
 
 import java.util.stream.Collectors;
 
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class CollisionPlugin implements IModPlugin {
     @Override
     public void register(IModRegistry registry) {
-        registry.addRecipes(ColliderRecipe.colliderRecipes.stream().map(ColliderWrapper::new).collect(Collectors.toSet()), ColliderCategory.UID);
+        registry.addRecipes(ColliderRecipeManager.getDefaultColliderRecipes().stream().map(ColliderWrapper::new).collect(Collectors.toSet()), ColliderCategory.UID);
         for (int i = 1; i < 5; i++) {
             registry.addRecipeCatalyst(new ItemStack(ItemRegistryHandler.itemBlockHashMap.get(ColliderBase.getRegistryName(i))), ColliderCategory.UID);
         }

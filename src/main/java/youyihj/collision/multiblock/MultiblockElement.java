@@ -2,8 +2,7 @@ package youyihj.collision.multiblock;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.Vec3i;
-
-import java.util.function.Predicate;
+import youyihj.collision.util.IBlockMatcher;
 
 public class MultiblockElement {
     private final Vec3i offset;
@@ -22,8 +21,4 @@ public class MultiblockElement {
         return checker.test(stateToCheck);
     }
 
-    @FunctionalInterface
-    public interface IBlockMatcher extends Predicate<IBlockState> {
-
-    }
 }

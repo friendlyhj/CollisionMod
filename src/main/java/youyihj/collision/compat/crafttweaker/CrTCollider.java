@@ -11,11 +11,11 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.recipe.ColliderRecipe;
+import youyihj.collision.recipe.ColliderRecipeManager;
+import youyihj.collision.util.Utils;
 
 import java.util.Arrays;
 import java.util.Optional;
-
-import static youyihj.collision.recipe.ColliderRecipe.*;
 
 @ZenClass("mods.collision.Collider")
 @ZenRegister
@@ -29,14 +29,8 @@ public class CrTCollider {
 
     @ZenMethod
     public static void removeRecipe(IItemStack out) {
-        Optional<ColliderRecipe> oRecipe =  colliderRecipes.stream().filter((recipe -> {
-            ItemStack stack = recipe.getOut();
-            stack.setCount(1);
-            return CraftTweakerMC.getIItemStack(stack).matchesExact(out);
-        })).findAny();
-        if (oRecipe.isPresent()){
-            ColliderRecipe recipe = oRecipe.get();
-            CraftTweakerAPI.apply(new ColliderRemove(recipe.getLevel(), CraftTweakerMC.getIItemStack(recipe.getOut()), ColliderRecipeAction.getAbsorbers(recipe.getInput())));
+        if (ColliderRecipeManager.isSuchOutputExist(CraftTweakerMC.getItemStack(out))) {
+            CraftTweakerAPI.apply(new ColliderRemove(out));
         } else {
             CraftTweakerAPI.logWarning("cannot find a collider recipe for " + out.getDisplayName() + "! Ignore this command.");
         }
@@ -59,15 +53,11 @@ public class CrTCollider {
         }
 
         protected final EnumAbsorber[][] getInternalAbsorbers() {
-            return Arrays.stream(absorbers).map((absorberArray) ->
-                Arrays.stream(absorberArray).map(CrTEnumAbsorber::getInternalStatic).toArray(EnumAbsorber[]::new
-                )).toArray(EnumAbsorber[][]::new);
+            return Utils.convertArray(absorbers, CrTEnumAbsorber::getInternal, EnumAbsorber.class);
         }
 
         protected static CrTEnumAbsorber[][] getAbsorbers(EnumAbsorber[][] absorbers) {
-            return Arrays.stream(absorbers).map((absorberArray) ->
-                    Arrays.stream(absorberArray).map(CrTEnumAbsorber::new).toArray(CrTEnumAbsorber[]::new
-                    )).toArray(CrTEnumAbsorber[][]::new);
+            return Utils.convertArray(absorbers, CrTEnumAbsorber::new, CrTEnumAbsorber.class);
         }
     }
 
@@ -90,13 +80,13 @@ public class CrTCollider {
 
     public static class ColliderRemove extends ColliderRecipeAction {
 
-        public ColliderRemove(int level, IItemStack stack, CrTEnumAbsorber[][] absorbers) {
-            super(level, stack, absorbers);
+        public ColliderRemove(IItemStack stack) {
+            super(0, stack, null);
         }
 
         @Override
         public void apply() {
-            colliderRecipes.removeIf(recipe -> CraftTweakerMC.getIItemStack(recipe.getOut()).matchesExact(out));
+            ColliderRecipeManager.removeRecipe(CraftTweakerMC.getItemStack(out));
         }
 
         @Override
@@ -113,7 +103,7 @@ public class CrTCollider {
 
         @Override
         public void apply() {
-            ColliderRecipe.colliderRecipes.clear();
+            ColliderRecipeManager.removeAllRecipe();
         }
 
         @Override

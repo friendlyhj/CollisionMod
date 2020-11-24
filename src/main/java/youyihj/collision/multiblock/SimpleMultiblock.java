@@ -3,6 +3,7 @@ package youyihj.collision.multiblock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.IBlockAccess;
+import youyihj.collision.util.IBlockMatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public class SimpleMultiblock {
 
-    public SimpleMultiblock(MultiblockElement.IBlockMatcher core) {
+    public SimpleMultiblock(IBlockMatcher core) {
         addElement(new MultiblockElement(Vec3i.NULL_VECTOR, core));
     }
 
@@ -23,7 +24,7 @@ public class SimpleMultiblock {
         return this;
     }
 
-    public SimpleMultiblock addElement(Vec3i offset, MultiblockElement.IBlockMatcher checker) {
+    public SimpleMultiblock addElement(Vec3i offset, IBlockMatcher checker) {
         return addElement(new MultiblockElement(offset, checker));
     }
 

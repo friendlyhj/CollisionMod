@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.ArrayUtils;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.NeutronEmpty;
 import youyihj.collision.block.absorber.Proton;
@@ -13,10 +14,12 @@ import youyihj.collision.block.absorber.ProtonEmpty;
 import youyihj.collision.tile.TileNeutronStorage;
 import youyihj.collision.tile.TileProtonStorage;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public final class Utils {
 
@@ -118,5 +121,24 @@ public final class Utils {
 
     public static <T> void enumerateForEach(Iterable<T> iterable, BiConsumer<Integer, ? super T> action) {
         enumerateForEach(iterable.iterator(), action);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T, R> R[][] convertArray(T[][] args, Function<T, R> function, Class<R> resultClass) {
+        R[][] temp = (R[][]) Array.newInstance(resultClass,args.length, args[0].length);
+        for (int i = 0; i < args.length; i++) {
+            temp[i] = convertArray(args[i], function, resultClass);
+        }
+        return temp;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T, R> R[] convertArray(T[] array, Function<T, R> function, Class<R> resultClass) {
+        R[] temp = (R[]) Array.newInstance(resultClass, array.length);
+        for (int i = 0; i < array.length; i++) {
+            T member = array[i];
+            temp[i] = function.apply(array[i]);
+        }
+        return temp;
     }
 }

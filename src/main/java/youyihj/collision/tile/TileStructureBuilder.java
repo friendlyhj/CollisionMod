@@ -9,6 +9,7 @@ import youyihj.collision.block.ColliderBase;
 import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.Proton;
+import youyihj.collision.recipe.ColliderRecipeManager;
 import youyihj.collision.util.IOType;
 import youyihj.collision.util.SingleItemDeviceBase;
 import youyihj.collision.util.Utils;
@@ -38,7 +39,7 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
                     }
                 }
             }
-            ColliderRecipe recipe = ColliderRecipe.getRecipe(this.item.getStackInSlot(0));
+            ColliderRecipe recipe = ColliderRecipeManager.getDefaultRecipe(this.item.getStackInSlot(0));
             if (recipe == null) {
                 return;
             }
