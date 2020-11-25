@@ -19,7 +19,7 @@ public class ColliderCategory implements IRecipeCategory<ColliderWrapper> {
 
     public ColliderCategory(IGuiHelper guiHelper) {
         background = guiHelper.drawableBuilder(new ResourceLocation(Collision.MODID, "textures/gui/collider.png"),
-                0, 0, 112, 54).build();
+                0, 0, 112, 54).addPadding(0, 10, 0, 0).build();
     }
 
     @Override

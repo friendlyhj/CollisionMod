@@ -10,12 +10,16 @@ import youyihj.collision.util.Utils;
 import java.util.function.Function;
 
 public class ColliderRecipe extends CustomColliderRecipe {
-    public ColliderRecipe(int level, ItemStack out, EnumAbsorber[][] input) {
+    public ColliderRecipe(int level, ItemStack out, EnumAbsorber[][] input, int successChance) {
         super(level, out,
-                Utils.convert2DArray(input, getConversionFunction(level), IBlockMatcher.class),
-                Utils.convert2DArray(input, getConversionFunctionForOut(level), IBlockState.class),
-                100, 100);
+                Utils.map2DArray(input, getConversionFunction(level), IBlockMatcher.class),
+                Utils.map2DArray(input, getConversionFunctionForOut(level), IBlockState.class),
+                successChance);
         this.input = input;
+    }
+
+    public ColliderRecipe(int level, ItemStack out, EnumAbsorber[][] input) {
+        this(level, out, input, 100);
     }
 
     private static Function<EnumAbsorber, IBlockMatcher> getConversionFunction(int level) {

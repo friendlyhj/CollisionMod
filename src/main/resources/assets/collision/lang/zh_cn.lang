@@ -49,8 +49,10 @@ message.collision.io.both=输入/输出
 message.collision.work_type=工作模式：%s
 message.collision.full=收集满载体
 message.collision.empty=收集空载体
+message.collision.collider_success_chance=成功几率: %s
 
 jei.category.collision.collider=碰撞器
+jei.category.collision.custom_collider=碰撞器（自定义）
 
 gui.collision.no_collider=上方没有碰撞器！
 

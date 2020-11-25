@@ -123,19 +123,19 @@ public final class Utils {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T, R> R[][] convert2DArray(T[][] args, Function<T, R> function, Class<R> resultClass) {
-        R[][] temp = (R[][]) Array.newInstance(resultClass, args.length, args[0].length);
-        for (int i = 0; i < args.length; i++) {
-            temp[i] = convertArray(args[i], function, resultClass);
+    public static <T, R> R[][] map2DArray(T[][] array, Function<T, R> mapper, Class<R> resultClass) {
+        R[][] temp = (R[][]) Array.newInstance(resultClass, array.length, array[0].length);
+        for (int i = 0; i < array.length; i++) {
+            temp[i] = mapArray(array[i], mapper, resultClass);
         }
         return temp;
     }
 
     @SuppressWarnings("unchecked")
-    public static <T, R> R[] convertArray(T[] array, Function<T, R> function, Class<R> resultClass) {
+    public static <T, R> R[] mapArray(T[] array, Function<T, R> mapper, Class<R> resultClass) {
         R[] temp = (R[]) Array.newInstance(resultClass, array.length);
         for (int i = 0; i < array.length; i++) {
-            temp[i] = function.apply(array[i]);
+            temp[i] = mapper.apply(array[i]);
         }
         return temp;
     }

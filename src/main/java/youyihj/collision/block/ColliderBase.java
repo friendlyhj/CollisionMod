@@ -4,10 +4,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import youyihj.collision.item.ItemRegistryHandler;
 import youyihj.collision.recipe.ColliderRecipeManager;
 import youyihj.collision.recipe.CustomColliderRecipe;
 
@@ -24,6 +26,10 @@ public class ColliderBase extends CollisionBlock {
 
     public static String getRegistryName(int level) {
         return "collider_lv" + level;
+    }
+
+    public static ItemStack getCollider(int level) {
+        return new ItemStack(ItemRegistryHandler.itemBlockHashMap.get(ColliderBase.getRegistryName(level)));
     }
 
     @Override
@@ -45,9 +51,7 @@ public class ColliderBase extends CollisionBlock {
                 if (worldIn.rand.nextInt(100) < recipe.getSuccessChance()) {
                     worldIn.spawnEntity(new EntityItem(worldIn, posOffset.getX(), posOffset.getY(), posOffset.getZ(), recipe.getOut().copy()));
                 }
-                if (worldIn.rand.nextInt(100) < recipe.getConversionChance()) {
-                    clean(worldIn, pos, recipe);
-                }
+                clean(worldIn, pos, recipe);
             }
         }
     }

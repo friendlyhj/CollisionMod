@@ -3,6 +3,7 @@ package youyihj.collision.compat.jei;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import youyihj.collision.block.ColliderBase;
 import youyihj.collision.block.absorber.EnumAbsorber;
@@ -18,17 +19,18 @@ public class ColliderWrapper implements IRecipeWrapper {
     protected final List<ItemStack> in;
     protected final ItemStack out;
     protected final int level;
+    protected final int successChance;
 
-    @SuppressWarnings("unchecked")
     public ColliderWrapper(ColliderRecipe recipe) {
         this.out = recipe.getOut();
         this.level = recipe.getLevel();
+        this.successChance = recipe.getSuccessChance();
         ItemStack[] in = new ItemStack[9];
 
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
                 in[x + y * 3] = (x == 1 && y == 1)
-                        ? new ItemStack(ItemRegistryHandler.itemBlockHashMap.get(ColliderBase.getRegistryName(level)))
+                        ? ColliderBase.getCollider(level)
                         : getAbsorberItem(recipe.getInput()[x][y], level);
             }
         }
@@ -43,5 +45,10 @@ public class ColliderWrapper implements IRecipeWrapper {
 
     private static ItemStack getAbsorberItem(EnumAbsorber absorber, int level) {
         return absorber == null ? ItemStack.EMPTY : new ItemStack(absorber.getInstanceByLevel(level));
+    }
+
+    @Override
+    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+        ChanceDrawer.draw(minecraft, recipeWidth, successChance);
     }
 }

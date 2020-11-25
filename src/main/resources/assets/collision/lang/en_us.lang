@@ -49,8 +49,10 @@ message.collision.io.both=Both
 message.collision.work_type=Work Mode: %s
 message.collision.full=Harvest Full Absorbers
 message.collision.empty=Harvest Empty Absorbers
+message.collision.collider_success_chance=Success Chance: %s
 
 jei.category.collision.collider=Collider
+jei.category.collision.custom_collider=Collider (Custom)
 
 gui.collision.no_collider=No collider above!
 

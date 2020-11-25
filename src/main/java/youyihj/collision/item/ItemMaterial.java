@@ -5,6 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import org.apache.commons.lang3.ArrayUtils;
 import youyihj.collision.Collision;
 import youyihj.collision.util.Utils;
 
@@ -54,7 +55,7 @@ public class ItemMaterial extends CollisionItem {
     }
 
     public ItemStack getSubItemStack(int count, String name) {
-        return new ItemStack(this, count, Utils.search(subItemIDs, name, false));
+        return new ItemStack(this, count, ArrayUtils.indexOf(subItemIDs, name));
     }
 
     public ItemStack getSubItemStack(String name) {
