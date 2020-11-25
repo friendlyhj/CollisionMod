@@ -8,13 +8,8 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import youyihj.collision.Collision;
-
-import java.util.Arrays;
-import java.util.Optional;
 
 /**
  * @author youyihj
@@ -25,7 +20,7 @@ public class CustomColliderCategory implements IRecipeCategory<CustomColliderWra
 
     public CustomColliderCategory(IGuiHelper guiHelper) {
         background = guiHelper.drawableBuilder(new ResourceLocation(Collision.MODID, "textures/gui/custom_collider.png"),
-                0, 0, 139, 54).addPadding(0, 10, 0, 0).build();
+                0, 0, 139, 54).addPadding(0, 20, 0, 0).build();
     }
 
     @Override

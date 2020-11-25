@@ -14,7 +14,7 @@ public class ColliderRecipe extends CustomColliderRecipe {
         super(level, out,
                 Utils.map2DArray(input, getConversionFunction(level), IBlockMatcher.class),
                 Utils.map2DArray(input, getConversionFunctionForOut(level), IBlockState.class),
-                successChance);
+                successChance, 100);
         this.input = input;
     }
 

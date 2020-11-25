@@ -42,8 +42,8 @@ public class CrTCollider {
     }
 
     @ZenMethod
-    public static void addRecipe(int level, IItemStack out, IIngredient[][] blocks, @Optional(valueDouble = 100.0) int successChance, @Optional IIngredient[][] conversionBlocks) {
-        CraftTweakerAPI.apply(new ColliderAddCustom(level, out, blocks, successChance, conversionBlocks));
+    public static void addRecipe(int level, IItemStack out, IIngredient[][] blocks, @Optional(valueDouble = 100.0) int successChance, @Optional(valueDouble = 100.0) int conversionChance, @Optional IIngredient[][] conversionBlocks) {
+        CraftTweakerAPI.apply(new ColliderAddCustom(level, out, blocks, successChance, conversionChance, conversionBlocks));
     }
 
     @ZenMethod
@@ -94,11 +94,13 @@ public class CrTCollider {
     public static class ColliderAddCustom extends ColliderAdd {
         private final IIngredient[][] blocks;
         private final IIngredient[][] conversionBlocks;
+        private final int conversionChance;
 
-        public ColliderAddCustom(int level, IItemStack stack, IIngredient[][] blocks, int successChance, IIngredient[][] conversionBlocks) {
+        public ColliderAddCustom(int level, IItemStack stack, IIngredient[][] blocks, int successChance, int conversionChance, IIngredient[][] conversionBlocks) {
             super(level, stack, null, successChance);
             this.blocks = blocks;
             this.conversionBlocks = conversionBlocks;
+            this.conversionChance = conversionChance;
         }
 
         @Override
@@ -113,7 +115,7 @@ public class CrTCollider {
                         IItemStack stack = ingredient.getItems().get(0);
                         return CraftTweakerMC.getBlockState(stack.asBlock().getDefinition().getStateFromMeta(stack.getMetadata()));
             }, IBlockState.class);
-            new CustomColliderRecipe(level, CraftTweakerMC.getItemStack(out), matchers, conversionBlocks, successChance).register();
+            new CustomColliderRecipe(level, CraftTweakerMC.getItemStack(out), matchers, conversionBlocks, conversionChance, successChance).register();
             ItemStack[][] outBlocks = this.conversionBlocks == null
                     ? Utils.map2DArray(new Object[3][3], (obj) -> ItemStack.EMPTY, ItemStack.class)
                     : Utils.map2DArray(this.conversionBlocks, (ingredient) -> {
@@ -126,7 +128,8 @@ public class CrTCollider {
                     Utils.map2DArray(blocks, CraftTweakerMC::getIngredient, Ingredient.class),
                     CraftTweakerMC.getItemStack(out),
                     outBlocks,
-                    successChance
+                    successChance,
+                    conversionChance
             );
         }
     }

@@ -34,7 +34,7 @@ public class CollisionPlugin implements IModPlugin {
         registry.addRecipeCategories(new CustomColliderCategory(registry.getJeiHelpers().getGuiHelper()));
     }
 
-    public static void addJEICustomColliderRecipe(int level, Ingredient[][] inputs, ItemStack out, ItemStack[][] outBlocks, int successChance) {
+    public static void addJEICustomColliderRecipe(int level, Ingredient[][] inputs, ItemStack out, ItemStack[][] outBlocks, int successChance, int conversionChance) {
         Ingredient[] inputArray = new Ingredient[9];
         ItemStack[] outArray = new ItemStack[9];
         for (int i = 0; i < 3; i++) {
@@ -50,7 +50,7 @@ public class CollisionPlugin implements IModPlugin {
             }
         }
         JEI_CUSTOM_COLLIDER_RECIPES.add(
-                new CustomColliderWrapper(Lists.newArrayList(inputArray), level, successChance, Lists.newArrayList(outArray))
+                new CustomColliderWrapper(Lists.newArrayList(inputArray), level, successChance, conversionChance, Lists.newArrayList(outArray))
         );
     }
 }

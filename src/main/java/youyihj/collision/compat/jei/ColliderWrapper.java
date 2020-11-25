@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import youyihj.collision.block.ColliderBase;
 import youyihj.collision.block.absorber.EnumAbsorber;
-import youyihj.collision.item.ItemRegistryHandler;
 import youyihj.collision.recipe.ColliderRecipe;
 
 import javax.annotation.Nonnull;
@@ -49,6 +48,6 @@ public class ColliderWrapper implements IRecipeWrapper {
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        ChanceDrawer.draw(minecraft, recipeWidth, successChance);
+        ChanceDrawer.draw(minecraft, recipeWidth, successChance, 100);
     }
 }

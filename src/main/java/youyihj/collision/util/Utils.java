@@ -98,18 +98,6 @@ public final class Utils {
         return world.getBlockState(pos).getBlock().isPassable(world, pos);
     }
 
-    public static <T> int search(T[] array, T obj, boolean isSorted) {
-        if (isSorted) {
-            return Arrays.binarySearch(array, obj);
-        }
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(obj)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
     public static <T> void enumerateForEach(Iterator<T> iterator, BiConsumer<Integer, ? super T> action) {
         Objects.requireNonNull(action);
         int i = 0;

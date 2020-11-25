@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author youyihj
  */
 public class CustomColliderRecipe implements IRegistryObject {
-    public CustomColliderRecipe(int level, ItemStack out, IBlockMatcher[][] input, IBlockState[][] conversionBlocks, int successChance) {
+    public CustomColliderRecipe(int level, ItemStack out, IBlockMatcher[][] input, IBlockState[][] conversionBlocks, int successChance, int conversionChance) {
         this.level = level;
         this.out = out;
         for (IBlockMatcher[] iBlockMatchers : input) {
@@ -30,20 +30,18 @@ public class CustomColliderRecipe implements IRegistryObject {
             throw new IllegalArgumentException("Input argument must be 3 * 3 array!");
         }
         this.successChance = successChance;
+        this.conversionChance = conversionChance;
     }
 
     public CustomColliderRecipe(int level, ItemStack out, IBlockMatcher[][] blocks, IBlockState[][] conversionBlocks) {
-        this.level = level;
-        this.out = out;
-        this.blocks = blocks;
-        this.conversionBlocks = conversionBlocks;
-        this.successChance = 100;
+        this(level, out, blocks, conversionBlocks, 100, 100);
     }
 
     private final int level;
     private final ItemStack out;
     private final IBlockMatcher[][] blocks;
     private final int successChance;
+    private final int conversionChance;
     private final IBlockState[][] conversionBlocks;
 
     public int getLevel() {
@@ -73,6 +71,10 @@ public class CustomColliderRecipe implements IRegistryObject {
 
     public int getSuccessChance() {
         return successChance;
+    }
+
+    public int getConversionChance() {
+        return conversionChance;
     }
 
     public boolean isDefault() {

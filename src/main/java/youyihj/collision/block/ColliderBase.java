@@ -51,7 +51,9 @@ public class ColliderBase extends CollisionBlock {
                 if (worldIn.rand.nextInt(100) < recipe.getSuccessChance()) {
                     worldIn.spawnEntity(new EntityItem(worldIn, posOffset.getX(), posOffset.getY(), posOffset.getZ(), recipe.getOut().copy()));
                 }
-                clean(worldIn, pos, recipe);
+                if (worldIn.rand.nextInt(100) < recipe.getConversionChance()) {
+                    convert(worldIn, pos, recipe);
+                }
             }
         }
     }
@@ -78,7 +80,7 @@ public class ColliderBase extends CollisionBlock {
         return null;
     }
 
-    private void clean(World world, BlockPos pos, CustomColliderRecipe recipe) {
+    private void convert(World world, BlockPos pos, CustomColliderRecipe recipe) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (i == 1 && j == 1) {

@@ -50,6 +50,7 @@ message.collision.work_type=工作模式：%s
 message.collision.full=收集满载体
 message.collision.empty=收集空载体
 message.collision.collider_success_chance=成功几率: %s
+message.collision.collider_convert_chance=转变几率: %s
 
 jei.category.collision.collider=碰撞器
 jei.category.collision.custom_collider=碰撞器（自定义）

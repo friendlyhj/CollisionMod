@@ -7,7 +7,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.ArrayUtils;
 import youyihj.collision.Collision;
-import youyihj.collision.util.Utils;
 
 import java.util.List;
 

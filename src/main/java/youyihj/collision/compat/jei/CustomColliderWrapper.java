@@ -6,11 +6,11 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import youyihj.collision.block.ColliderBase;
-import youyihj.collision.item.ItemRegistryHandler;
-import youyihj.collision.recipe.CustomColliderRecipe;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author youyihj
@@ -20,21 +20,24 @@ public class CustomColliderWrapper implements IRecipeWrapper {
     protected final List<ItemStack> out;
     protected final int level;
     protected final int successChance;
+    protected final int conversionChance;
 
     @Override
     public void getIngredients(IIngredients ingredients) {
-        out.forEach((outBlock) -> ingredients.setOutput(VanillaTypes.ITEM, outBlock));
+        ingredients.setOutputLists(VanillaTypes.ITEM, Collections.singletonList(out));
+        ingredients.setInputLists(VanillaTypes.ITEM, in.stream().map(Ingredient::getMatchingStacks).map(Arrays::asList).collect(Collectors.toList()));
     }
 
-    public CustomColliderWrapper(List<Ingredient> in, int level, int successChance, List<ItemStack> outBlocks) {
+    public CustomColliderWrapper(List<Ingredient> in, int level, int successChance, int conversionChance, List<ItemStack> outBlocks) {
         this.in = in;
         this.level = level;
         this.successChance = successChance;
+        this.conversionChance = conversionChance;
         this.out = outBlocks;
     }
 
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-        ChanceDrawer.draw(minecraft, recipeWidth, successChance);
+        ChanceDrawer.draw(minecraft, recipeWidth, successChance, conversionChance);
     }
 }
