@@ -27,7 +27,7 @@ public class InitialItemEvent {
             NBTTagCompound nbtTagCompound = player.getEntityData();
             NBTTagCompound data = nbtTagCompound.hasKey(EntityPlayer.PERSISTED_NBT_TAG) ? nbtTagCompound.getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG) : new NBTTagCompound();
             if (!data.hasKey(Collision.MODID) || !data.getBoolean(Collision.MODID)) {
-                ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(ItemRegistryHandler.itemBlockHashMap.get(ColliderBase.getRegistryName(1))));
+                ItemHandlerHelper.giveItemToPlayer(player, ColliderBase.getCollider(1));
                 ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(ItemRegistryHandler.itemBlockHashMap.get("proton_empty"), 2, 0));
                 ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(ItemRegistryHandler.itemBlockHashMap.get("neutron_empty"), 2, 0));
                 data.setBoolean(Collision.MODID, true);
