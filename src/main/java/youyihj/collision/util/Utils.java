@@ -14,11 +14,11 @@ import youyihj.collision.tile.TileNeutronStorage;
 import youyihj.collision.tile.TileProtonStorage;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public final class Utils {
 
@@ -110,20 +110,46 @@ public final class Utils {
         enumerateForEach(iterable.iterator(), action);
     }
 
-    @SuppressWarnings("unchecked")
     public static <T, R> R[][] map2DArray(T[][] array, Function<T, R> mapper, Class<R> resultClass) {
+        return map2DArray(array, mapper, resultClass, null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T, R> R[][] map2DArray(T[][] array, Function<T, R> mapper, Class<R> resultClass, R nullValue) {
         R[][] temp = (R[][]) Array.newInstance(resultClass, array.length, array[0].length);
         for (int i = 0; i < array.length; i++) {
-            temp[i] = mapArray(array[i], mapper, resultClass);
+            temp[i] = mapArray(array[i], mapper, resultClass, nullValue);
+        }
+        return temp;
+    }
+
+    public static <T, R> R[] mapArray(T[] array, Function<T, R> mapper, Class<R> resultClass) {
+        return mapArray(array, mapper, resultClass, null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T, R> R[] mapArray(T[] array, Function<T, R> mapper, Class<R> resultClass, R nullValue) {
+        R[] temp = (R[]) Array.newInstance(resultClass, array.length);
+        for (int i = 0; i < array.length; i++) {
+            temp[i] = Lazy.of(array[i]).map(mapper).orElse(nullValue);
         }
         return temp;
     }
 
     @SuppressWarnings("unchecked")
-    public static <T, R> R[] mapArray(T[] array, Function<T, R> mapper, Class<R> resultClass) {
-        R[] temp = (R[]) Array.newInstance(resultClass, array.length);
-        for (int i = 0; i < array.length; i++) {
-            temp[i] = mapper.apply(array[i]);
+    public static <T> T[] createArray(Supplier<T> supplier, Class<T> clazz, int size) {
+        T[] temp = (T[]) Array.newInstance(clazz, size);
+        for (int i = 0; i < size; i++) {
+            temp[i] = supplier.get();
+        }
+        return temp;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T[][] create2DArray(Supplier<T> supplier, Class<T> clazz, int sizeX, int sizeY) {
+        T[][] temp = (T[][]) Array.newInstance(clazz, sizeX, sizeY);
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = createArray(supplier, clazz, sizeX);
         }
         return temp;
     }

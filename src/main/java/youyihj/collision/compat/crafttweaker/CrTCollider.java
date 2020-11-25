@@ -20,6 +20,7 @@ import youyihj.collision.recipe.ColliderRecipe;
 import youyihj.collision.recipe.ColliderRecipeManager;
 import youyihj.collision.recipe.CustomColliderRecipe;
 import youyihj.collision.util.IBlockMatcher;
+import youyihj.collision.util.Lazy;
 import youyihj.collision.util.Utils;
 
 @ZenClass("mods.collision.Collider")
@@ -105,25 +106,14 @@ public class CrTCollider {
 
         @Override
         public void apply() {
-            IBlockMatcher[][] matchers = Utils.map2DArray(this.blocks, CrTBlockMatcherGetter::get, IBlockMatcher.class);
-            IBlockState[][] conversionBlocks = this.conversionBlocks == null
-                    ? Utils.map2DArray(new Object[3][3], (obj) -> Blocks.AIR.getDefaultState(), IBlockState.class)
-                    : Utils.map2DArray(this.conversionBlocks, (ingredient) -> {
-                        if (ingredient == null) {
-                            return Blocks.AIR.getDefaultState();
-                        }
-                        IItemStack stack = ingredient.getItems().get(0);
-                        return CraftTweakerMC.getBlockState(stack.asBlock().getDefinition().getStateFromMeta(stack.getMetadata()));
-            }, IBlockState.class);
+            IBlockMatcher[][] matchers = Utils.map2DArray(this.blocks, CraftTweakerUtils::get, IBlockMatcher.class, IBlockMatcher.Impl.air());
+            IBlockState[][] conversionBlocks = Lazy.of(this.conversionBlocks)
+                    .map(blocks -> Utils.map2DArray(blocks, CraftTweakerUtils::itemToState, IBlockState.class, Blocks.AIR.getDefaultState()))
+                    .orElse(Utils.create2DArray(Blocks.AIR::getDefaultState, IBlockState.class, 3, 3));
             new CustomColliderRecipe(level, CraftTweakerMC.getItemStack(out), matchers, conversionBlocks, conversionChance, successChance).register();
-            ItemStack[][] outBlocks = this.conversionBlocks == null
-                    ? Utils.map2DArray(new Object[3][3], (obj) -> ItemStack.EMPTY, ItemStack.class)
-                    : Utils.map2DArray(this.conversionBlocks, (ingredient) -> {
-                if (ingredient == null) {
-                    return ItemStack.EMPTY;
-                }
-                return CraftTweakerMC.getItemStack(ingredient.getItems().get(0));
-            }, ItemStack.class);
+            ItemStack[][] outBlocks = Lazy.of(this.conversionBlocks)
+                    .map(ingredients -> Utils.map2DArray(ingredients, CraftTweakerMC::getItemStack, ItemStack.class))
+                    .orElse(Utils.create2DArray(() -> ItemStack.EMPTY, ItemStack.class, 3, 3));
             CollisionPlugin.addJEICustomColliderRecipe(level,
                     Utils.map2DArray(blocks, CraftTweakerMC::getIngredient, Ingredient.class),
                     CraftTweakerMC.getItemStack(out),

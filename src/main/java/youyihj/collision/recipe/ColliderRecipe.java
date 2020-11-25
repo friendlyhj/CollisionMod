@@ -12,8 +12,8 @@ import java.util.function.Function;
 public class ColliderRecipe extends CustomColliderRecipe {
     public ColliderRecipe(int level, ItemStack out, EnumAbsorber[][] input, int successChance) {
         super(level, out,
-                Utils.map2DArray(input, getConversionFunction(level), IBlockMatcher.class),
-                Utils.map2DArray(input, getConversionFunctionForOut(level), IBlockState.class),
+                Utils.map2DArray(input, getConversionFunction(level), IBlockMatcher.class, IBlockMatcher.Impl.air()),
+                Utils.map2DArray(input, getConversionFunctionForOut(level), IBlockState.class, Blocks.AIR.getDefaultState()),
                 successChance, 100);
         this.input = input;
     }
@@ -25,9 +25,9 @@ public class ColliderRecipe extends CustomColliderRecipe {
     private static Function<EnumAbsorber, IBlockMatcher> getConversionFunction(int level) {
         return absorber -> {
             if (absorber == null) {
-                return IBlockMatcher.AIR;
+                return IBlockMatcher.Impl.air();
             } else {
-                return (iBlockState -> absorber.getInstanceByLevel(level) == iBlockState.getBlock());
+                return IBlockMatcher.Impl.fromBlock(absorber.getInstanceByLevel(level));
             }
         };
     }

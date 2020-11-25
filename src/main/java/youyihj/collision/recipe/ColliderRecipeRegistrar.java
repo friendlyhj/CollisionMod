@@ -48,12 +48,6 @@ public class ColliderRecipeRegistrar {
                 {null, null, null}
         }).register();
 
-        new ColliderRecipe(1, new ItemStack(Blocks.SAPLING, 1, 1), new EnumAbsorber[][]{
-                {PROTON, null, NEUTRON},
-                {null, null, null},
-                {null, null, null}
-        }).register();
-
         new ColliderRecipe(1, new ItemStack(Blocks.SAPLING, 1, 2), new EnumAbsorber[][]{
                 {PROTON, null, null},
                 {null, null, NEUTRON},

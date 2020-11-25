@@ -33,10 +33,6 @@ public class CustomColliderRecipe implements IRegistryObject {
         this.conversionChance = conversionChance;
     }
 
-    public CustomColliderRecipe(int level, ItemStack out, IBlockMatcher[][] blocks, IBlockState[][] conversionBlocks) {
-        this(level, out, blocks, conversionBlocks, 100, 100);
-    }
-
     private final int level;
     private final ItemStack out;
     private final IBlockMatcher[][] blocks;
