@@ -8,6 +8,7 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import youyihj.collision.Collision;
 
@@ -51,7 +52,11 @@ public class CustomColliderCategory implements IRecipeCategory<CustomColliderWra
                 int x = (i % 3) * 18;
                 int y = i / 3 * 18;
                 guiItems.init(i, true, x, y);
-                guiItems.set(i, Lists.newArrayList(recipeWrapper.in.get(i).getMatchingStacks()));
+                Ingredient ingredient = recipeWrapper.in.get(i);
+                if (ingredient == null || ingredient == Ingredient.EMPTY) {
+                    continue;
+                }
+                guiItems.set(i, Lists.newArrayList(ingredient.getMatchingStacks()));
             } else {
                 int j = i - 9;
                 int x = (j % 3) * 18 + 85;

@@ -25,7 +25,11 @@ public class CustomColliderWrapper implements IRecipeWrapper {
     @Override
     public void getIngredients(IIngredients ingredients) {
         ingredients.setOutputLists(VanillaTypes.ITEM, Collections.singletonList(out));
-        ingredients.setInputLists(VanillaTypes.ITEM, in.stream().map(Ingredient::getMatchingStacks).map(Arrays::asList).collect(Collectors.toList()));
+        ingredients.setInputLists(VanillaTypes.ITEM, in.stream()
+                .filter(ingredient -> ingredient != null && ingredient != Ingredient.EMPTY)
+                .map(Ingredient::getMatchingStacks)
+                .map(Arrays::asList)
+                .collect(Collectors.toList()));
     }
 
     public CustomColliderWrapper(List<Ingredient> in, int level, int successChance, int conversionChance, List<ItemStack> outBlocks) {
