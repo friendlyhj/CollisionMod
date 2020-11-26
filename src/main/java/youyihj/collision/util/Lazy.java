@@ -20,7 +20,7 @@ public class Lazy<T> {
         return t == null ? NULL : new Lazy<>(t);
     }
 
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings("unchecked")
     public <R> Lazy<R> map(Function<T, R> mapper) {
         return this.isNull() ? NULL : of(mapper.apply((T) this.value));
     }

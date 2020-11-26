@@ -14,10 +14,6 @@ public class ColliderRecipeManager {
     private static final List<CustomColliderRecipe> COLLIDER_RECIPES = new ArrayList<>();
     private static final List<ColliderRecipe> DEFAULT_COLLIDER_RECIPES = new ArrayList<>();
 
-    public static boolean isSuchOutputExist(Item item) {
-        return COLLIDER_RECIPES.stream().anyMatch(recipe -> recipe.getOut().getItem() == item);
-    }
-
     public static CustomColliderRecipe getRecipe(ItemStack itemStack) {
         return COLLIDER_RECIPES.stream().filter(recipe -> recipe.getOut().isItemEqual(itemStack)).findFirst().orElse(null);
     }
@@ -27,7 +23,7 @@ public class ColliderRecipeManager {
     }
 
     public static boolean isSuchOutputExist(ItemStack itemStack) {
-        return isSuchOutputExist(itemStack.getItem());
+        return COLLIDER_RECIPES.stream().anyMatch(recipe -> recipe.getOut().isItemEqual(itemStack));
     }
 
     public static List<CustomColliderRecipe> getColliderRecipes() {

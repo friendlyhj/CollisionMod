@@ -36,6 +36,7 @@ public class Collision {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
+        checkCompatCrTVersion();
         ItemRegistrar.registerAllPlainItem();
         ItemRegistrar.registerAllSpecialItem();
         BlockRegistrar.registerAllBlock();
@@ -53,5 +54,16 @@ public class Collision {
         logger.info(String.format("%s collider recipes have registered!", ColliderRecipeManager.getColliderRecipes().size()));
         logger.info(String.format("%s nuclei registered!", MetalSpawner.initMetalList()));
         logger.info(String.format("%s spawned gem registered!", GemSpawner.initGemList()));
+    }
+
+    private static void checkCompatCrTVersion() {
+        try {
+            Class<?> blockDefClass = Class.forName("crafttweaker.api.block.IBlockDefinition");
+            blockDefClass.getMethod("getStateFromMeta", int.class);
+        } catch (ClassNotFoundException e) {
+            logger.info("Not install CraftTweaker, Skip checking");
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException("The version of CraftTweaker must be 4.1.20.582 or above");
+        }
     }
 }

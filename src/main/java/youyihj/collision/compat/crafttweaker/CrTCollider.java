@@ -29,7 +29,7 @@ import youyihj.collision.util.Utils;
 public class CrTCollider {
 
     @ZenMethod
-    public static void addRecipe(int level, IItemStack out, CrTEnumAbsorber[][] absorbers, @Optional(valueDouble = 100.0) int successChance) {
+    public static void addRecipe(int level, IItemStack out, CrTEnumAbsorber[][] absorbers, @Optional(valueLong = 100) int successChance) {
         CraftTweakerAPI.apply(new ColliderAdd(level, out, absorbers, successChance));
     }
 
@@ -43,7 +43,7 @@ public class CrTCollider {
     }
 
     @ZenMethod
-    public static void addRecipe(int level, IItemStack out, IIngredient[][] blocks, @Optional(valueDouble = 100.0) int successChance, @Optional(valueDouble = 100.0) int conversionChance, @Optional IIngredient[][] conversionBlocks) {
+    public static void addCustomRecipe(int level, IItemStack out, IIngredient[][] blocks, @Optional(valueLong = 100) int successChance, @Optional(valueLong = 100) int conversionChance, @Optional IIngredient[][] conversionBlocks) {
         CraftTweakerAPI.apply(new ColliderAddCustom(level, out, blocks, successChance, conversionChance, conversionBlocks));
     }
 
