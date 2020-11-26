@@ -5,10 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import youyihj.collision.Configuration;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GemSpawner extends Spawner {
     public GemSpawner() {
@@ -25,7 +22,12 @@ public class GemSpawner extends Spawner {
     }
 
     public static void removeItem(ItemStack itemStack) {
-        spawnItemPool.remove(itemStack);
+        for (ItemStack item : spawnItemPool.keySet()) {
+            if (item.isItemEqual(itemStack)) {
+                spawnItemPool.remove(item);
+                return;
+            }
+        }
     }
 
     public static void removeAll() {

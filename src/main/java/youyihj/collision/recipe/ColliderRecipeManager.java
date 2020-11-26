@@ -44,6 +44,7 @@ public class ColliderRecipeManager {
 
     public static void removeRecipe(ItemStack out) {
         COLLIDER_RECIPES.removeIf(recipe -> recipe.getOut().isItemEqual(out));
+        DEFAULT_COLLIDER_RECIPES.removeIf(recipe -> recipe.getOut().isItemEqual(out));
     }
 
     public static void removeAllRecipe() {
