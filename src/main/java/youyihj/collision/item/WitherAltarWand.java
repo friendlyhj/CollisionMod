@@ -1,9 +1,9 @@
 package youyihj.collision.item;
 
-import net.minecraft.block.BlockBone;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
@@ -36,8 +36,8 @@ public class WitherAltarWand extends CollisionItem {
     public static SimpleMultiblock witherAltar;
 
     public static void initMultiBlock() {
-        witherAltar = new SimpleMultiblock(state -> state == BlockRegistryHandler.blockHashMap.get("wither_altar").getDefaultState());
-        IBlockMatcher boneBlock = (state -> state.getBlock() instanceof BlockBone);
+        witherAltar = new SimpleMultiblock(IBlockMatcher.Impl.fromBlock(BlockRegistryHandler.blockHashMap.get("wither_altar")));
+        IBlockMatcher boneBlock = IBlockMatcher.Impl.fromBlock(Blocks.BONE_BLOCK);
         witherAltar.addElement(new Vec3i(1, 0, 0), boneBlock)
                 .addElement(new Vec3i(-1, 0, 0), boneBlock)
                 .addElement(new Vec3i(0, 0, 1), boneBlock)

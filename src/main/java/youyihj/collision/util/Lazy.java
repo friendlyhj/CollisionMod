@@ -1,9 +1,13 @@
 package youyihj.collision.util;
 
+import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.function.Function;
 
 /**
+ * It is much like Optional of jdk, but a custom one.
  * @author youyihj
+ * @see java.util.Optional
  */
 @SuppressWarnings("rawtypes")
 public class Lazy<T> {
@@ -16,12 +20,13 @@ public class Lazy<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> Lazy<T> of(T t) {
+    public static <T> Lazy<T> of(@Nullable T t) {
         return t == null ? NULL : new Lazy<>(t);
     }
 
     @SuppressWarnings("unchecked")
     public <R> Lazy<R> map(Function<T, R> mapper) {
+        Objects.requireNonNull(mapper);
         return this.isNull() ? NULL : of(mapper.apply((T) this.value));
     }
 
@@ -41,4 +46,27 @@ public class Lazy<T> {
     }
 
     private final Object value;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lazy<?> lazy = (Lazy<?>) o;
+        return Objects.equals(value, lazy.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        if (this.isNull()) {
+            return "Lazy{NULL}";
+        }
+        return "Lazy{" +
+                "value=" + value +
+                '}';
+    }
 }

@@ -106,7 +106,7 @@ public class CrTCollider {
 
         @Override
         public void apply() {
-            IBlockMatcher[][] matchers = Utils.map2DArray(this.blocks, CraftTweakerUtils::get, IBlockMatcher.class, IBlockMatcher.Impl.air());
+            IBlockMatcher[][] matchers = Utils.map2DArray(this.blocks, CraftTweakerUtils::getBlockMatcher, IBlockMatcher.class, IBlockMatcher.Impl.air());
             IBlockState[][] conversionBlocks = Lazy.of(this.conversionBlocks)
                     .map(blocks -> Utils.map2DArray(blocks, CraftTweakerUtils::itemToState, IBlockState.class, Blocks.AIR.getDefaultState()))
                     .orElse(Utils.create2DArray(Blocks.AIR::getDefaultState, IBlockState.class, 3, 3));

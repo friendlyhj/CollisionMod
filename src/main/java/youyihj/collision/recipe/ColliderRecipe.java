@@ -5,6 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import youyihj.collision.block.absorber.EnumAbsorber;
 import youyihj.collision.util.IBlockMatcher;
+import youyihj.collision.util.Lazy;
 import youyihj.collision.util.Utils;
 
 import java.util.function.Function;
@@ -23,23 +24,11 @@ public class ColliderRecipe extends CustomColliderRecipe {
     }
 
     private static Function<EnumAbsorber, IBlockMatcher> getConversionFunction(int level) {
-        return absorber -> {
-            if (absorber == null) {
-                return IBlockMatcher.Impl.air();
-            } else {
-                return IBlockMatcher.Impl.fromBlock(absorber.getInstanceByLevel(level));
-            }
-        };
+        return absorber -> Lazy.of(absorber).map(absorber1 -> IBlockMatcher.Impl.fromBlock(absorber1.getInstanceByLevel(level))).orElse(IBlockMatcher.Impl.air());
     }
 
     private static Function<EnumAbsorber, IBlockState> getConversionFunctionForOut(int level) {
-        return absorber -> {
-            if (absorber == null) {
-                return Blocks.AIR.getDefaultState();
-            } else {
-                return absorber.getTransformAbsorber().getInstanceByLevel(level).getDefaultState();
-            }
-        };
+        return absorber -> Lazy.of(absorber).map(absorber1 -> absorber1.getTransformAbsorber().getInstanceByLevel(level).getDefaultState()).orElse(Blocks.AIR.getDefaultState());
     }
 
     private final EnumAbsorber[][] input;

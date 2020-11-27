@@ -14,7 +14,13 @@ import youyihj.collision.util.IBlockMatcher;
  * @author youyihj
  */
 public class CraftTweakerUtils {
-    public static IBlockMatcher get(IIngredient ingredient) {
+    private static final Ingredient ANY_BLOCK = Ingredient.fromStacks(MCGame.INSTANCE.getItems().stream()
+            .flatMap(itemDef -> itemDef.getSubItems().stream())
+            .filter(IItemStack::isItemBlock)
+            .map(CraftTweakerMC::getItemStack)
+            .toArray(ItemStack[]::new));
+
+    public static IBlockMatcher getBlockMatcher(IIngredient ingredient) {
         if (ingredient instanceof IngredientAny) {
             return IBlockMatcher.Impl.acceptAll();
         }
@@ -31,11 +37,7 @@ public class CraftTweakerUtils {
 
     public static Ingredient getIngredientOrAnyBlock(IIngredient ingredient) {
         if (ingredient instanceof IngredientAny) {
-            return Ingredient.fromStacks(MCGame.INSTANCE.getItems().stream()
-                    .flatMap(itemDef -> itemDef.getSubItems().stream())
-                    .filter(IItemStack::isItemBlock)
-                    .map(CraftTweakerMC::getItemStack)
-                    .toArray(ItemStack[]::new));
+            return ANY_BLOCK;
         }
         return CraftTweakerMC.getIngredient(ingredient);
     }

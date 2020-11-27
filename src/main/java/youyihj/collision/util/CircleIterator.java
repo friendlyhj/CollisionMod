@@ -1,6 +1,5 @@
 package youyihj.collision.util;
 
-
 import java.util.Iterator;
 import java.util.function.Consumer;
 
