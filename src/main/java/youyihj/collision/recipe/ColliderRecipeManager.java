@@ -49,5 +49,6 @@ public class ColliderRecipeManager {
 
     public static void removeAllRecipe() {
         COLLIDER_RECIPES.clear();
+        DEFAULT_COLLIDER_RECIPES.clear();
     }
 }

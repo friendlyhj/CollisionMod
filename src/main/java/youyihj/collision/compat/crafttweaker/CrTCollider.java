@@ -115,7 +115,7 @@ public class CrTCollider {
                     .map(ingredients -> Utils.map2DArray(ingredients, CraftTweakerMC::getItemStack, ItemStack.class))
                     .orElse(Utils.create2DArray(() -> ItemStack.EMPTY, ItemStack.class, 3, 3));
             CollisionPlugin.addJEICustomColliderRecipe(level,
-                    Utils.map2DArray(blocks, CraftTweakerMC::getIngredient, Ingredient.class),
+                    Utils.map2DArray(blocks, CraftTweakerUtils::getIngredientOrAnyBlock, Ingredient.class),
                     CraftTweakerMC.getItemStack(out),
                     outBlocks,
                     successChance,

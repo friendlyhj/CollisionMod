@@ -39,7 +39,7 @@ public interface IBlockMatcher extends Predicate<IBlockState> {
 
     final class Impl {
         private static final IBlockMatcher AIR = (state) -> state.getMaterial() == Material.AIR;
-        private static final IBlockMatcher ACCEPT_ALL = (state) -> true;
+        private static final IBlockMatcher ACCEPT_ALL = AIR.negate();
 
         public static IBlockMatcher air() {
             return AIR;
