@@ -1,7 +1,6 @@
 package youyihj.collision.recipe;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
