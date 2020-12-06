@@ -17,29 +17,23 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.Proton;
+import youyihj.collision.event.RenderEventHandler;
 import youyihj.collision.item.Nucleus;
 import youyihj.collision.item.SingleNucleus;
 import youyihj.collision.tile.TileBooster;
+import youyihj.collision.util.INeedRenderUpdate;
 
 import javax.annotation.Nullable;
 import java.util.WeakHashMap;
 
 
-public class Booster extends CollisionBlock {
+public class Booster extends CollisionBlock implements INeedRenderUpdate {
 
     public static final Booster INSTANCE = new Booster();
-
-    @SideOnly(Side.CLIENT)
-    public static boolean doRerender;
-
-    @SideOnly(Side.CLIENT)
-    public static final WeakHashMap<BlockPos, Boolean> rerenderMap = new WeakHashMap<>();
 
     private Booster() {
         super("booster", Material.ROCK);
@@ -78,7 +72,7 @@ public class Booster extends CollisionBlock {
                 TileBooster tileBooster = (TileBooster) tileEntity;
                 if (!tileBooster.isFull()) {
                     if (worldIn.isRemote) {
-                        setRerender(worldIn, pos);
+                        RenderEventHandler.mark(pos);
                         return true;
                     }
                     stack.shrink(1);
@@ -91,14 +85,6 @@ public class Booster extends CollisionBlock {
             }
         }
         return false;
-    }
-
-    @SideOnly(Side.CLIENT)
-    private void setRerender(IBlockAccess world, BlockPos pos) {
-        doRerender = true;
-        if (world.getTileEntity(pos) instanceof TileBooster) {
-            rerenderMap.put(pos, true);
-        }
     }
 
     private boolean work(IBlockAccess world, BlockPos pos) {
@@ -139,6 +125,21 @@ public class Booster extends CollisionBlock {
                 ((Absorber) world.getBlockState(posOffset).getBlock()).transform(world, posOffset);
             }
         }
+    }
+
+    @Override
+    public boolean needRenderUpdate(World world, BlockPos pos) {
+        TileEntity te = world.getTileEntity(pos);
+        if (te == null) {
+            return false;
+        } else {
+            return ((TileBooster) te).isFull();
+        }
+    }
+
+    @Override
+    public boolean isDelay() {
+        return true;
     }
 
     @Mod.EventBusSubscriber
