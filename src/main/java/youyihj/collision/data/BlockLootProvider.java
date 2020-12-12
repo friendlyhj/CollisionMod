@@ -44,7 +44,7 @@ public class BlockLootProvider implements IDataProvider {
 
     @Override
     public String getName() {
-        return "Infinity Cog BlockLoot Provider";
+        return "Collision BlockLoot Provider";
     }
 
     private static LootTable.Builder genRegular(Block b) {

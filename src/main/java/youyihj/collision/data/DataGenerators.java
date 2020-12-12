@@ -27,12 +27,7 @@ public class DataGenerators {
             event.getGenerator().addProvider(new BlockStateProvider(event.getGenerator(), Collision.MODID, event.getExistingFileHelper()) {
                 @Override
                 protected void registerStatesAndModels() {
-                    for (BlockBase blockBase : BlockRegistry.getBlocks()
-                            .values()) {
-                        if (blockBase.isGenerateModel()) {
-                            simpleBlock(blockBase);
-                        }
-                    }
+                    BlockRegistry.getBlocks().values().stream().filter(BlockBase::isGenerateModel).forEach(this::simpleBlock);
                 }
             });
             event.getGenerator().addProvider(new ItemModelProvider(event.getGenerator(), Collision.MODID, event.getExistingFileHelper()) {

@@ -1,6 +1,7 @@
 package youyihj.collision.item;
 
 import net.minecraft.item.Item;
+import youyihj.collision.itemgroup.CollisionGroup;
 
 import javax.annotation.Nonnull;
 
@@ -11,7 +12,7 @@ public class ItemBase extends Item {
     private final String name;
 
     public ItemBase(String name, Properties properties) {
-        super(properties);
+        super(properties.group(CollisionGroup.INSTANCE));
         this.name = name;
     }
 

@@ -5,7 +5,9 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
+import youyihj.collision.Collision;
 import youyihj.collision.item.ItemRegistry;
+import youyihj.collision.itemgroup.CollisionGroup;
 
 import java.util.function.Supplier;
 
@@ -33,7 +35,7 @@ public class BlockBase extends Block {
     }
 
     public Supplier<BlockItem> getBlockItemSupplier() {
-        return () -> new BlockItem(this, new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
+        return () -> new BlockItem(this, new Item.Properties().group(CollisionGroup.INSTANCE));
     }
 
     public RegistryObject<Block> register() {

@@ -51,7 +51,7 @@ public class ItemRegistry {
 
     private static class InternalRegistry {
         private static void registerInternal() {
-            new ItemBase("test", new Item.Properties().group(ItemGroup.MISC)).register();
+            new ItemBase("test", new Item.Properties()).register();
         }
     }
 }
