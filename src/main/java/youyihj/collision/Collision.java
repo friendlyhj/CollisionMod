@@ -1,69 +1,86 @@
 package youyihj.collision;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import youyihj.collision.block.BlockRegistrar;
-import youyihj.collision.block.spawner.GemSpawner;
-import youyihj.collision.block.spawner.MetalSpawner;
-import youyihj.collision.fluid.FluidRegistrar;
-import youyihj.collision.item.ItemRegistrar;
-import youyihj.collision.item.WitherAltarWand;
-import youyihj.collision.model.ModelGenerator;
-import youyihj.collision.network.NetworkRegistryHandler;
-import youyihj.collision.recipe.ColliderRecipeManager;
-import youyihj.collision.recipe.ColliderRecipeRegistrar;
-import youyihj.collision.recipe.FurnaceRecipeHandler;
 
-@Mod(modid = Collision.MODID, name = Collision.NAME, version = Collision.VERSION, dependencies = Collision.DEPENDENCIES)
+import java.util.stream.Collectors;
+
+// The value here should match an entry in the META-INF/mods.toml file
+@Mod(Collision.MODID)
 public class Collision {
+
+    // Directly reference a log4j logger.
+    private static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "collision";
-    public static final String NAME = "Collision";
-    public static final String VERSION = "1.0.4";
-    public static final String DEPENDENCIES = "before:crafttweaker";
 
-    private static Logger logger;
+    public Collision() {
+        // Register the setup method for modloading
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        // Register the enqueueIMC method for modloading
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+        // Register the processIMC method for modloading
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+        // Register the doClientStuff method for modloading
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
-    @EventHandler
-    public void onConstruct(FMLConstructionEvent event) {
-        // FluidRegistry.enableUniversalBucket();
+        // Register ourselves for server and other game events we are interested in
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
-        checkCompatCrTVersion();
-        ItemRegistrar.registerAllPlainItem();
-        ItemRegistrar.registerAllSpecialItem();
-        BlockRegistrar.registerAllBlock();
-        FluidRegistrar.registerAll();
-        NetworkRegistryHandler.register();
-        ModelGenerator.generate();
-        new ColliderRecipeRegistrar();
-        FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "youyihj.collision.compat.theoneprobe.TOPCompatHandler");
+    private void setup(final FMLCommonSetupEvent event) {
+        // some preinit code
+        LOGGER.info("HELLO FROM PREINIT");
+        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        WitherAltarWand.initMultiBlock();
-        FurnaceRecipeHandler.registerNucleusRecipe();
-        logger.info(String.format("%s collider recipes have registered!", ColliderRecipeManager.getColliderRecipes().size()));
-        logger.info(String.format("%s nuclei registered!", MetalSpawner.initMetalList()));
-        logger.info(String.format("%s spawned gem registered!", GemSpawner.initGemList()));
+    private void doClientStuff(final FMLClientSetupEvent event) {
+        // do something that can only be done on the client
+        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
-    private static void checkCompatCrTVersion() {
-        try {
-            Class<?> blockDefClass = Class.forName("crafttweaker.api.block.IBlockDefinition");
-            blockDefClass.getMethod("getStateFromMeta", int.class);
-        } catch (ClassNotFoundException e) {
-            logger.info("Not install CraftTweaker, Skip checking");
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException("The version of CraftTweaker must be 4.1.20.582 or above");
+    private void enqueueIMC(final InterModEnqueueEvent event) {
+        // some example code to dispatch IMC to another mod
+        InterModComms.sendTo("Collision", "helloworld", () -> {
+            LOGGER.info("Hello world from the MDK");
+            return "Hello world";
+        });
+    }
+
+    private void processIMC(final InterModProcessEvent event) {
+        // some example code to receive and process InterModComms from other mods
+        LOGGER.info("Got IMC {}", event.getIMCStream().
+                map(m -> m.getMessageSupplier().get()).
+                collect(Collectors.toList()));
+    }
+
+    // You can use SubscribeEvent and let the Event Bus discover methods to call
+    @SubscribeEvent
+    public void onServerStarting(FMLServerStartingEvent event) {
+        // do something when the server starts
+        LOGGER.info("HELLO from server starting");
+    }
+
+    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
+    // Event bus for receiving Registry Events)
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class RegistryEvents {
+        @SubscribeEvent
+        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
+            // register a new block here
+            LOGGER.info("HELLO from Register Block");
         }
     }
 }
