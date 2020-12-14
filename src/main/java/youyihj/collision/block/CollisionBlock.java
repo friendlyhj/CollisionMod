@@ -22,7 +22,7 @@ public class CollisionBlock extends Block implements IRegistryObject, IHasGenera
         this.setCreativeTab(CollisionTab.COLLISION_TAB);
     }
 
-    public ItemBlock getItemBlock() {
+    protected ItemBlock getItemBlock() {
         return new ItemBlock(this);
     }
 

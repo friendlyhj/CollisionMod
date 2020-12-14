@@ -49,7 +49,7 @@ public abstract class Absorber extends CollisionBlock {
     }
 
     @Override
-    public ItemBlock getItemBlock() {
+    protected ItemBlock getItemBlock() {
         return new ItemBlock(this) {
             @Override
             public boolean hasContainerItem(ItemStack stack) {
