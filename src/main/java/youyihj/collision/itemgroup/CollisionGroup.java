@@ -2,6 +2,7 @@ package youyihj.collision.itemgroup;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import youyihj.collision.Collision;
 
 /**
@@ -16,6 +17,6 @@ public class CollisionGroup extends ItemGroup {
 
     @Override
     public ItemStack createIcon() {
-        return null;
+        return new ItemStack(Items.PUMPKIN);
     }
 }

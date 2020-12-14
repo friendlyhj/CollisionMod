@@ -33,4 +33,15 @@ public class ItemStackList extends NonNullList<ItemStack> {
     public ItemStack get(int index) {
         return super.get(index).copy();
     }
+
+    @Override
+    @Nonnull
+    public ItemStack set(int index, ItemStack stack) {
+        return super.set(index, stack.copy());
+    }
+
+    @Override
+    public void add(int index, ItemStack stack) {
+        super.add(index, stack.copy());
+    }
 }

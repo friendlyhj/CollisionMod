@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -17,7 +18,9 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.config.Configuration;
+import youyihj.collision.item.ItemRegistry;
 
 import java.util.stream.Collectors;
 
@@ -30,12 +33,16 @@ public class Collision {
     public static final String MODID = "collision";
 
     public Collision() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.config);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.config);
+        eventBus.addListener(this::setup);
+        eventBus.addListener(this::enqueueIMC);
+        eventBus.addListener(this::processIMC);
+        eventBus.addListener(this::doClientStuff);
+
+        ItemRegistry.register(eventBus);
+        BlockRegistry.register(eventBus);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }

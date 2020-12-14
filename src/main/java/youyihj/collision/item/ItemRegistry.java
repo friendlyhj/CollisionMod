@@ -51,7 +51,11 @@ public class ItemRegistry {
 
     private static class InternalRegistry {
         private static void registerInternal() {
-            new ItemBase("test", new Item.Properties()).register();
+            new ItemBase("metal_chunk", new Item.Properties()).register();
+            new ItemBase("mystical_gem", new Item.Properties()).register();
+            new ItemBase("little_ghast_drop", new Item.Properties()).register();
+            new ItemBase("up_shifter", new Item.Properties().maxStackSize(4)).register();
+            new ItemBase("down_shifter", new Item.Properties().maxStackSize(4)).register();
         }
     }
 }

@@ -36,7 +36,7 @@ public class BlockRegistry {
 
     private static class InternalRegistry {
         private static void registerInternal() {
-            new BlockBase("machine_casing", AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(5.0f, 45.0f)).register();
+//            new BlockBase("machine_casing", AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(5.0f, 45.0f)).register();
         }
     }
 }
