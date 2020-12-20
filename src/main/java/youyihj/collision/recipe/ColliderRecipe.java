@@ -11,6 +11,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import youyihj.collision.Collision;
+import youyihj.collision.block.BlockRegistry;
+import youyihj.collision.block.ColliderBase;
 import youyihj.collision.block.absorber.Absorber;
 
 import java.util.Arrays;
@@ -43,7 +45,8 @@ public class ColliderRecipe implements IRecipe<IInventory> {
     public boolean matches(IInventory inv, World worldIn, BlockPos pos) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                Block block = worldIn.getBlockState(pos).getBlock();
+                BlockPos posOffset = pos.add(i - 1, 0, j - 1);
+                Block block = worldIn.getBlockState(posOffset).getBlock();
                 if (i == 1 && j == 1) continue;
                 Absorber.Type a = in[i][j];
                 if ((block != Blocks.AIR || a != null) && (!(block instanceof Absorber) || ((Absorber) block).getType() != a)) {
@@ -101,6 +104,11 @@ public class ColliderRecipe implements IRecipe<IInventory> {
             }
         }
         return temp;
+    }
+
+    @Override
+    public ItemStack getIcon() {
+        return new ItemStack(BlockRegistry.getBlock(ColliderBase.getRegistryName(1)));
     }
 
     @Override

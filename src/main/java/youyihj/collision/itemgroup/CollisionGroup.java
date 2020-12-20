@@ -4,6 +4,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import youyihj.collision.Collision;
+import youyihj.collision.block.absorber.Proton;
 
 /**
  * @author youyihj
@@ -17,6 +18,6 @@ public class CollisionGroup extends ItemGroup {
 
     @Override
     public ItemStack createIcon() {
-        return new ItemStack(Items.PUMPKIN);
+        return new ItemStack(Proton.INSTANCE);
     }
 }
