@@ -15,6 +15,7 @@ import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.block.ColliderBase;
 import youyihj.collision.block.absorber.Absorber;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -42,14 +43,14 @@ public class ColliderRecipe implements IRecipe<IInventory> {
         return false;
     }
 
-    public boolean matches(IInventory inv, World worldIn, BlockPos pos) {
+    public boolean matches(World worldIn, BlockPos pos) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 BlockPos posOffset = pos.add(i - 1, 0, j - 1);
                 Block block = worldIn.getBlockState(posOffset).getBlock();
                 if (i == 1 && j == 1) continue;
                 Absorber.Type a = in[i][j];
-                if ((block != Blocks.AIR || a != null) && (!(block instanceof Absorber) || ((Absorber) block).getType() != a)) {
+                if ((block != Blocks.AIR || a != null) && ((!(block instanceof Absorber) || ((Absorber) block).getType() != a) || ((Absorber) block).isRefined() != this.isRefined())) {
                     return false;
                 }
             }
@@ -58,7 +59,7 @@ public class ColliderRecipe implements IRecipe<IInventory> {
     }
 
     @Override
-    public ItemStack getCraftingResult(IInventory inv) {
+    public ItemStack getCraftingResult(@Nullable IInventory inv) {
         return this.out.copy();
     }
 
@@ -79,6 +80,14 @@ public class ColliderRecipe implements IRecipe<IInventory> {
 
     public int getLevel() {
         return level;
+    }
+
+    public boolean isRefined() {
+        return getLevel() > 2;
+    }
+
+    public Absorber.Type[][] getIn() {
+        return in;
     }
 
     @Override

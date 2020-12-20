@@ -52,9 +52,9 @@ public class ColliderRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializ
 
     @Override
     public void write(PacketBuffer buffer, ColliderRecipe recipe) {
-        buffer.writeItemStack(recipe.getRecipeOutput());
-        buffer.writeVarInt(recipe.getLevel());
         buffer.writeVarIntArray(recipe.inSerial());
+        buffer.writeVarInt(recipe.getLevel());
+        buffer.writeItemStack(recipe.getRecipeOutput());
     }
 
     private static Absorber.Type[] outMapper(String s) {

@@ -71,6 +71,10 @@ public abstract class Absorber extends BlockBase {
         return type;
     }
 
+    public boolean isRefined() {
+        return isRefined;
+    }
+
     private boolean work(World world) {
         return !Configuration.onlyWorkInDaytime.get() || world.isDaytime();
     }
@@ -133,6 +137,8 @@ public abstract class Absorber extends BlockBase {
             return this == PROTON_EMPTY || this == NEUTRON_EMPTY;
         }
 
-
+        public Absorber getAbsorberByLevel(int level) {
+            return level > 2 ? getRefinedAbsorber() : getAbsorber();
+        }
     }
 }
