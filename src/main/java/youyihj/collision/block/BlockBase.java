@@ -3,9 +3,7 @@ package youyihj.collision.block;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
-import youyihj.collision.Collision;
 import youyihj.collision.item.ItemRegistry;
 import youyihj.collision.itemgroup.CollisionGroup;
 
@@ -38,9 +36,8 @@ public class BlockBase extends Block {
         return () -> new BlockItem(this, new Item.Properties().group(CollisionGroup.INSTANCE));
     }
 
-    public RegistryObject<Block> register() {
+    public void register() {
         RegistryObject<Block> block = BlockRegistry.registerBlock(this);
         ItemRegistry.registerBlockItem(this, block);
-        return block;
     }
 }

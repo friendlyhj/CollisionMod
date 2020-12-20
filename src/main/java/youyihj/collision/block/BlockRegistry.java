@@ -9,6 +9,10 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import youyihj.collision.Collision;
+import youyihj.collision.block.absorber.Neutron;
+import youyihj.collision.block.absorber.NeutronEmpty;
+import youyihj.collision.block.absorber.Proton;
+import youyihj.collision.block.absorber.ProtonEmpty;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,9 +38,24 @@ public class BlockRegistry {
         return ImmutableMap.copyOf(BLOCKS);
     }
 
+    public static BlockBase getBlock(String name) {
+        return BLOCKS.get(name);
+    }
+
     private static class InternalRegistry {
         private static void registerInternal() {
-//            new BlockBase("machine_casing", AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(5.0f, 45.0f)).register();
+            Neutron.INSTANCE.register();
+            Neutron.Refined.INSTANCE.register();
+            Proton.INSTANCE.register();
+            Proton.Refined.INSTANCE.register();
+            NeutronEmpty.INSTANCE.register();
+            NeutronEmpty.Refined.INSTANCE.register();
+            ProtonEmpty.INSTANCE.register();
+            ProtonEmpty.Refined.INSTANCE.register();
+
+            for (int i = 1; i < 5; i++) {
+                new ColliderBase(i).register();
+            }
         }
     }
 }

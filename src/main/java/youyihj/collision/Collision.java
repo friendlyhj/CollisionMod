@@ -21,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.config.Configuration;
 import youyihj.collision.item.ItemRegistry;
+import youyihj.collision.recipe.ColliderRecipeType;
 
 import java.util.stream.Collectors;
 

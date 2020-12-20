@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "collision:block/neutron_empty_refined"
+    }
+  }
+}

@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -31,14 +30,14 @@ public class ItemRegistry {
         REGISTER.register(bus);
     }
 
-    public static RegistryObject<BlockItem> registerBlockItem(BlockBase blockBase, RegistryObject<Block> blockRegistryObject) {
+    public static void registerBlockItem(BlockBase blockBase, RegistryObject<Block> blockRegistryObject) {
         BLOCK_ITEMS.add(blockBase.getBlockItemSupplier().get());
-        return REGISTER.register(blockBase.getName(), blockBase.getBlockItemSupplier());
+        REGISTER.register(blockBase.getName(), blockBase.getBlockItemSupplier());
     }
 
-    public static RegistryObject<ItemBase> registerItem(ItemBase itemBase) {
+    public static void registerItem(ItemBase itemBase) {
         ITEMS.put(itemBase.getBaseName(), itemBase);
-        return REGISTER.register(itemBase.getBaseName(), () -> itemBase);
+        REGISTER.register(itemBase.getBaseName(), () -> itemBase);
     }
 
     public static List<BlockItem> getBlockItems() {
@@ -47,6 +46,10 @@ public class ItemRegistry {
 
     public static Map<String, ItemBase> getItems() {
         return ImmutableMap.copyOf(ITEMS);
+    }
+
+    public static Item getItem(String name) {
+        return ITEMS.get(name);
     }
 
     private static class InternalRegistry {

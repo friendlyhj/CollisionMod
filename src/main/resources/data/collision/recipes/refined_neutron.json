@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "result": {
+    "item": "collision:neutron_refined"
+  },
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "item": "collision:neutron"
+    },
+    "B": {
+      "item": "collision:neutron_empty_refined"
+    }
+  }
+}
