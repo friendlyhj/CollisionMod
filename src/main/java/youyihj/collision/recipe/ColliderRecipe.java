@@ -104,6 +104,10 @@ public class ColliderRecipe implements IRecipe<IInventory> {
         int temp = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
+                if (in[i][j] == null) {
+                    temp *= 4;
+                    continue;
+                }
                 switch (in[i][j]) {
                     case PROTON:
                         temp = temp * 4 + 2;
