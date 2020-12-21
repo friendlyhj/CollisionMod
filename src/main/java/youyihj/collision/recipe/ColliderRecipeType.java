@@ -10,12 +10,12 @@ import net.minecraftforge.fml.common.Mod;
 /**
  * @author youyihj
  */
-public class ColliderRecipeType implements IRecipeType<ColliderRecipe> {
-    public static final ColliderRecipeType INSTANCE = new ColliderRecipeType();
+public enum ColliderRecipeType implements IRecipeType<ColliderRecipe> {
+    INSTANCE;
 
     @Override
     public String toString() {
-        return ColliderRecipe.ID.getPath();
+        return ColliderRecipe.ID.toString();
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)

@@ -24,4 +24,8 @@ public class ItemBase extends Item {
     public String getBaseName() {
         return name;
     }
+
+    public String getTexturePath() {
+        return this.getRegistryName().getPath();
+    }
 }

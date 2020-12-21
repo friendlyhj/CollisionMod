@@ -39,7 +39,7 @@ public class DataGenerators {
                     }));
                     ItemRegistry.getItems().values().forEach(item -> {
                         String name = item.getRegistryName().getPath();
-                        withExistingParent(name, ITEM_GENERATE).texture("layer0", "item/" + name);
+                        withExistingParent(name, ITEM_GENERATE).texture("layer0", "item/" + item.getTexturePath());
                     });
                 }
             });

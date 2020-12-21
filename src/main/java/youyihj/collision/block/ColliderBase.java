@@ -39,8 +39,8 @@ public class ColliderBase extends BlockBase {
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
         if (worldIn instanceof ServerWorld) {
             ServerWorld world = (ServerWorld) worldIn;
-            world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 0.1f, false, Explosion.Mode.NONE);
             if (start(world, pos, fromPos)) {
+                world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 0.1f, false, Explosion.Mode.NONE);
                 ColliderRecipe recipe = world.getRecipeManager().getRecipes()
                         .stream()
                         .filter(iRecipe -> iRecipe instanceof ColliderRecipe)

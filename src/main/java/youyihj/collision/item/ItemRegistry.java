@@ -11,6 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import youyihj.collision.Collision;
 import youyihj.collision.block.BlockBase;
+import youyihj.collision.config.Configuration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +60,11 @@ public class ItemRegistry {
             new ItemBase("little_ghast_drop", new Item.Properties()).register();
             new ItemBase("up_shifter", new Item.Properties().maxStackSize(4)).register();
             new ItemBase("down_shifter", new Item.Properties().maxStackSize(4)).register();
+
+            Configuration.nuclei.get().forEach(string -> {
+                String[] strings = string.split(",");
+                new ItemNucleus(strings[0].trim(), Integer.parseInt(strings[1], 16), Integer.parseInt(strings[2])).register();
+            });
         }
     }
 }

@@ -28,7 +28,7 @@ public class Configuration {
         givePlayerInitialItems = configBuilder.comment("should give player initial items? (collider lv1 and so on)").define("givePlayerInitialItems", true);
         nuggetsOutputCount = configBuilder.comment("How many nuggets will be outputted when nuclei are smelted").defineInRange("nuggetsOutputCount", 3, 0, 64);
         nuclei = configBuilder.comment("The list of nuclei", "The format is \"meta,name,color,wightInMetalSpawner\"")
-                .defineList("nuclei", Lists.newArrayList("Iron,BF8040,200", "Gold,FFFF00,120"),
+                .defineList("nuclei", Lists.newArrayList("iron,BF8040,200", "gold,FFFF00,120"),
                         s -> ((String) s).split(",").length == 3);
         configBuilder.pop();
 

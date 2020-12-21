@@ -33,7 +33,7 @@ public class ColliderRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializ
     @Nullable
     @Override
     public ColliderRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        int[] intArray = buffer.readVarIntArray();
+        int[] intArray = buffer.readVarIntArray(9);
         Absorber.Type[][] temp = new Absorber.Type[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {

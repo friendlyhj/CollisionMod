@@ -12,7 +12,6 @@ import net.minecraftforge.common.ToolType;
 import youyihj.collision.block.BlockBase;
 import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.config.Configuration;
-import youyihj.collision.item.ItemRegistry;
 import youyihj.collision.itemgroup.CollisionGroup;
 
 import javax.annotation.Nonnull;

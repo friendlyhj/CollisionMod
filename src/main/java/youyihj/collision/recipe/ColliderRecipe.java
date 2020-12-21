@@ -100,7 +100,7 @@ public class ColliderRecipe implements IRecipe<IInventory> {
         return ColliderRecipeType.INSTANCE;
     }
 
-    public int[] inSerial() {
+    int[] inSerial() {
         int[] temp = new int[9];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
