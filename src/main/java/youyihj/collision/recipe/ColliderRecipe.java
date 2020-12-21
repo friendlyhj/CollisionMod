@@ -131,7 +131,7 @@ public class ColliderRecipe implements IRecipe<IInventory> {
         ColliderRecipe that = (ColliderRecipe) o;
         return level == that.level &&
                 Objects.equals(out, that.out) &&
-                Arrays.equals(in, that.in) &&
+                inSerial() == that.inSerial() &&
                 Objects.equals(name, that.name);
     }
 

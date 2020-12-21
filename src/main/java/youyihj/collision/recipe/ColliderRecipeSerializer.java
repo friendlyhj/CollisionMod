@@ -42,6 +42,7 @@ public class ColliderRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializ
                     break;
                 case 3:
                     temp[i / 3][i % 3] = Absorber.Type.NEUTRON;
+                    break;
                 default:
                     temp[i / 3][i % 3] = null;
             }
