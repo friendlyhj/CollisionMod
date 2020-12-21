@@ -100,15 +100,19 @@ public class ColliderRecipe implements IRecipe<IInventory> {
         return ColliderRecipeType.INSTANCE;
     }
 
-    int[] inSerial() {
-        int[] temp = new int[9];
+    int inSerial() {
+        int temp = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                Absorber.Type a = in[i][j];
-                if (a == Absorber.Type.PROTON) {
-                    temp[i + j * 3] = 2;
-                } else if (a == Absorber.Type.NEUTRON) {
-                    temp[i + j * 3] = 3;
+                switch (in[i][j]) {
+                    case PROTON:
+                        temp = temp * 4 + 2;
+                        break;
+                    case NEUTRON:
+                        temp = temp * 4 + 3;
+                        break;
+                    default:
+                        temp = temp * 4;
                 }
             }
         }

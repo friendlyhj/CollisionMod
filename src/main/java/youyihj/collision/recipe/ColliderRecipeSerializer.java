@@ -33,26 +33,26 @@ public class ColliderRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializ
     @Nullable
     @Override
     public ColliderRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        int[] intArray = buffer.readVarIntArray(9);
+        int intSerialValue = buffer.readVarInt();
         Absorber.Type[][] temp = new Absorber.Type[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                int a = intArray[i + j * 3];
-                if (a == 0) {
-                    temp[i][j] = null;
-                } else if (a == 2) {
-                    temp[i][j] = Absorber.Type.PROTON;
-                } else if (a == 3) {
-                    temp[i][j] = Absorber.Type.NEUTRON;
-                }
+        for (int i = 8; i >= 0; i--) {
+            switch (intSerialValue % 4) {
+                case 2:
+                    temp[i / 3][i % 3] = Absorber.Type.PROTON;
+                    break;
+                case 3:
+                    temp[i / 3][i % 3] = Absorber.Type.NEUTRON;
+                default:
+                    temp[i / 3][i % 3] = null;
             }
+            intSerialValue = intSerialValue >> 2;
         }
         return new ColliderRecipe(recipeId, buffer.readInt(), buffer.readItemStack(), temp);
     }
 
     @Override
     public void write(PacketBuffer buffer, ColliderRecipe recipe) {
-        buffer.writeVarIntArray(recipe.inSerial());
+        buffer.writeVarInt(recipe.inSerial());
         buffer.writeVarInt(recipe.getLevel());
         buffer.writeItemStack(recipe.getRecipeOutput());
     }
