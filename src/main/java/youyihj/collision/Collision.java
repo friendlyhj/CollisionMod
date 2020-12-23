@@ -1,7 +1,6 @@
 package youyihj.collision;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,7 +20,8 @@ import org.apache.logging.log4j.Logger;
 import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.config.Configuration;
 import youyihj.collision.item.ItemRegistry;
-import youyihj.collision.recipe.ColliderRecipeType;
+import youyihj.collision.tile.TileEntityRegistry;
+import youyihj.collision.tile.TileGemSpawner;
 
 import java.util.stream.Collectors;
 
@@ -44,14 +44,13 @@ public class Collision {
 
         ItemRegistry.register(eventBus);
         BlockRegistry.register(eventBus);
+        TileEntityRegistry.register(eventBus);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        TileGemSpawner.initGemList();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

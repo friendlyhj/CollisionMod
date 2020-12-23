@@ -1,6 +1,10 @@
 package youyihj.collision.util;
 
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.StringUtils;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.server.ServerWorld;
 
 /**
  * @author youyihj
@@ -38,5 +42,9 @@ public class Utils {
             isFirst = false;
         }
         return sb.toString().toLowerCase();
+    }
+
+    public static boolean spawnEntityItem(ServerWorld world, BlockPos pos, ItemStack stack) {
+        return world.summonEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack));
     }
 }

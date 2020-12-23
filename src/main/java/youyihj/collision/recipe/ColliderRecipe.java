@@ -16,7 +16,6 @@ import youyihj.collision.block.ColliderBase;
 import youyihj.collision.block.absorber.Absorber;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**

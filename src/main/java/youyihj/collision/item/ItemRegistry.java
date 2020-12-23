@@ -60,6 +60,7 @@ public class ItemRegistry {
             new ItemBase("little_ghast_drop", new Item.Properties()).register();
             new ItemBase("up_shifter", new Item.Properties().maxStackSize(4)).register();
             new ItemBase("down_shifter", new Item.Properties().maxStackSize(4)).register();
+            new ItemDebugger().register();
 
             Configuration.nuclei.get().forEach(string -> {
                 String[] strings = string.split(",");

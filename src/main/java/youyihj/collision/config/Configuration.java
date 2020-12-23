@@ -20,6 +20,9 @@ public class Configuration {
 
     public static ForgeConfigSpec.IntValue metalSpawnerSpawnAmount;
     public static ForgeConfigSpec.IntValue gemSpawnerSpawnAmount;
+    public static ForgeConfigSpec.IntValue metalSpawnerSpawnSpeed;
+    public static ForgeConfigSpec.IntValue gemSpawnerSpawnSpeed;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> gemSpawnerItemPool;
 
     static {
         ForgeConfigSpec.Builder configBuilder = new ForgeConfigSpec.Builder();
@@ -40,6 +43,17 @@ public class Configuration {
         configBuilder.push("spawner");
         metalSpawnerSpawnAmount = configBuilder.comment("How many nuclei metal spawner spawn?").defineInRange("metalSpawnerSpawnAmount", 24, 0, Integer.MAX_VALUE);
         gemSpawnerSpawnAmount = configBuilder.comment("How many nuclei gem spawner spawn?").defineInRange("gemSpawnerSpawnAmount", 12, 0, Integer.MAX_VALUE);
+        metalSpawnerSpawnSpeed = configBuilder.comment("The speed of metal spawner spawns items, the argument higher, the speed slower.").defineInRange("metalSpawnerSpawnSpeed", 40, 0, Integer.MAX_VALUE);
+        gemSpawnerSpawnSpeed = configBuilder.comment("The speed of gem spawner spawns items, the argument higher, the speed slower.").defineInRange("gemSpawnerSpawnSpeed", 40, 0, Integer.MAX_VALUE);
+        gemSpawnerItemPool = configBuilder.comment("The pool of gem spawner", "The format is \"id, wight\"")
+                .defineList("gemSpawnerItemPool", Lists.newArrayList(
+                        "minecraft:redstone,1000",
+                        "minecraft:glowstone_dust,800",
+                        "minecraft:lapis_lazuli,400",
+                        "minecraft:quartz,400",
+                        "minecraft:diamond,50",
+                        "minecraft:emerald,50"
+                ), s -> ((String) s).split(",").length == 2);
         configBuilder.pop();
 
         config = configBuilder.build();

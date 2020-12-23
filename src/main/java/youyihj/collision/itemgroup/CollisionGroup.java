@@ -2,7 +2,6 @@ package youyihj.collision.itemgroup;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import youyihj.collision.Collision;
 import youyihj.collision.block.absorber.Proton;
 

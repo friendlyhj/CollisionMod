@@ -1,9 +1,7 @@
 package youyihj.collision.block;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -13,6 +11,8 @@ import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.NeutronEmpty;
 import youyihj.collision.block.absorber.Proton;
 import youyihj.collision.block.absorber.ProtonEmpty;
+import youyihj.collision.block.spawner.BlockGemSpawner;
+import youyihj.collision.block.spawner.BlockMetalSpawner;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +52,8 @@ public class BlockRegistry {
             NeutronEmpty.Refined.INSTANCE.register();
             ProtonEmpty.INSTANCE.register();
             ProtonEmpty.Refined.INSTANCE.register();
+            BlockMetalSpawner.INSTANCE.register();
+            BlockGemSpawner.INSTANCE.register();
 
             for (int i = 1; i < 5; i++) {
                 new ColliderBase(i).register();

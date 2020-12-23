@@ -13,7 +13,7 @@ import java.util.List;
  * @author youyihj
  */
 public class ItemNucleus extends ItemBase implements IItemColorized {
-    public static List<NucleusEntry> nuclei = new ArrayList<>();
+    public static final List<NucleusEntry> nuclei = new ArrayList<>();
 
     public ItemNucleus(String metalName, int color, int chance) {
         super(Utils.toLineString(metalName) + "_nucleus", new Properties());

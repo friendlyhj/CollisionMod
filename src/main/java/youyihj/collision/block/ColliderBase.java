@@ -3,7 +3,6 @@ package youyihj.collision.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
@@ -11,6 +10,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import youyihj.collision.recipe.ColliderRecipe;
+import youyihj.collision.util.Utils;
 
 import javax.annotation.Nullable;
 
@@ -53,7 +53,7 @@ public class ColliderBase extends BlockBase {
                     while (!world.isAirBlock(posOffset)) {
                         posOffset = posOffset.up();
                     }
-                    world.summonEntity(new ItemEntity(world, posOffset.getX(), posOffset.getY(), posOffset.getZ(), recipe.getRecipeOutput()));
+                    Utils.spawnEntityItem(world, posOffset, recipe.getRecipeOutput());
                 }
             }
         }
