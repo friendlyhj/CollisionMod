@@ -40,7 +40,7 @@ public class ItemNucleus extends ItemBase implements IItemColorized {
 
     @Override
     public ITextComponent getDisplayName(ItemStack stack) {
-        return new TranslationTextComponent("item.collision.nucleus", new TranslationTextComponent("material.nucleus." + Utils.toLineString(this.getType().getName())).getString());
+        return new TranslationTextComponent("item.collision.nucleus", new TranslationTextComponent("material.nucleus." + this.getType().getName()).getString());
     }
 
     public static class NucleusEntry {
@@ -49,7 +49,7 @@ public class ItemNucleus extends ItemBase implements IItemColorized {
         private final int chance;
 
         private NucleusEntry(String name, int color, int chance) {
-            this.name = name;
+            this.name = Utils.toLineString(name);
             this.color = color;
             this.chance = chance;
         }

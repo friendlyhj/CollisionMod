@@ -28,18 +28,12 @@ public class BlockLootProvider implements IDataProvider {
 
     @Override
     public void act(DirectoryCache cache) throws IOException {
-        BlockRegistry.getBlocks()
-                .values()
-                .stream()
-                .filter(BlockBase::enableBlockLootGenerator)
-                .forEach(block -> {
-                    Path path = generator.getOutputFolder().resolve("data/" + Collision.MODID + "/loot_tables/blocks/" + block.getName() + ".json");
-                    try {
-                        IDataProvider.save(GSON, cache, LootTableManager.toJson(genRegular(block).setParameterSet(LootParameterSets.BLOCK).build()), path);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+        for (BlockBase block : BlockRegistry.getBlocks().values()) {
+            if (block.enableBlockLootGenerator()) {
+                Path path = generator.getOutputFolder().resolve("data/" + Collision.MODID + "/loot_tables/blocks/" + block.getName() + ".json");
+                IDataProvider.save(GSON, cache, LootTableManager.toJson(genRegular(block).setParameterSet(LootParameterSets.BLOCK).build()), path);
+            }
+        }
     }
 
     @Override

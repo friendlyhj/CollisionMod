@@ -44,7 +44,7 @@ public class Utils {
         return sb.toString().toLowerCase();
     }
 
-    public static boolean spawnEntityItem(ServerWorld world, BlockPos pos, ItemStack stack) {
-        return world.summonEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack));
+    public static void spawnEntityItem(ServerWorld world, BlockPos pos, ItemStack stack) {
+        world.summonEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack));
     }
 }

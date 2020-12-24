@@ -1,6 +1,9 @@
 package youyihj.collision;
 
 import net.minecraft.block.Block;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RecipesUpdatedEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,6 +23,7 @@ import org.apache.logging.log4j.Logger;
 import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.config.Configuration;
 import youyihj.collision.item.ItemRegistry;
+import youyihj.collision.recipe.NucleusSmeltingHandler;
 import youyihj.collision.tile.TileEntityRegistry;
 import youyihj.collision.tile.TileGemSpawner;
 
@@ -76,8 +80,13 @@ public class Collision {
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
-        // do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        new NucleusSmeltingHandler(event.getServer().getRecipeManager()).register();
+    }
+
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public void onRecipeUpdate(RecipesUpdatedEvent event) {
+        new NucleusSmeltingHandler(event.getRecipeManager()).register();
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD

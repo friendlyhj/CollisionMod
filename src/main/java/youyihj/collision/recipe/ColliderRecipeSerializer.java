@@ -6,6 +6,7 @@ import com.google.gson.JsonSyntaxException;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import youyihj.collision.block.absorber.Absorber;
@@ -20,7 +21,7 @@ public class ColliderRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializ
 
     @Override
     public ColliderRecipe read(ResourceLocation recipeId, JsonObject json) {
-        int level = json.getAsJsonPrimitive("level").getAsInt();
+        int level = JSONUtils.getInt(json, "level", 1);
         Ingredient out = Ingredient.deserialize(json.get("result"));
         JsonArray jsonElements = json.getAsJsonArray("in");
         Absorber.Type[][] in = new Absorber.Type[3][3];
