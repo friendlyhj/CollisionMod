@@ -54,6 +54,7 @@ public class BlockRegistry {
             ProtonEmpty.Refined.INSTANCE.register();
             BlockMetalSpawner.INSTANCE.register();
             BlockGemSpawner.INSTANCE.register();
+            new Booster().register();
 
             for (int i = 1; i < 5; i++) {
                 new ColliderBase(i).register();

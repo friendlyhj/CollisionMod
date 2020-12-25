@@ -1,6 +1,5 @@
 package youyihj.collision.recipe;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;
 import net.minecraft.item.Item;
@@ -29,7 +28,7 @@ public class NucleusSmeltingHandler {
 
     public List<FurnaceRecipe> genRecipes() {
         List<FurnaceRecipe> temp = new ArrayList<>();
-        ItemNucleus.nuclei.forEach(nucleusEntry -> {
+        ItemNucleus.nuclei.values().forEach(nucleusEntry -> {
             ITag<Item> nuggetTag = ItemTags.getCollection().get(new ResourceLocation("forge", "nuggets/" + nucleusEntry.getName()));
             if (nuggetTag != null) {
                 JsonObject json = new JsonObject();
@@ -50,9 +49,7 @@ public class NucleusSmeltingHandler {
     public void register() {
         Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> recipes = new HashMap<>(recipeManager.recipes);
         Map<ResourceLocation, IRecipe<?>> furnaceRecipes = new HashMap<>(recipes.get(IRecipeType.SMELTING));
-        genRecipes().forEach(recipe -> {
-            furnaceRecipes.put(recipe.getId(), recipe);
-        });
+        genRecipes().forEach(recipe -> furnaceRecipes.put(recipe.getId(), recipe));
         recipes.put(IRecipeType.SMELTING, furnaceRecipes);
         recipeManager.recipes = ImmutableMap.copyOf(recipes);
     }

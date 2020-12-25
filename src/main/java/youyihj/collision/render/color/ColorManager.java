@@ -1,4 +1,4 @@
-package youyihj.collision.color;
+package youyihj.collision.render.color;
 
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;

@@ -3,26 +3,28 @@ package youyihj.collision.item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import youyihj.collision.color.IItemColorized;
+import youyihj.collision.render.color.IItemColorized;
 import youyihj.collision.util.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author youyihj
  */
 public class ItemNucleus extends ItemBase implements IItemColorized {
-    public static final List<NucleusEntry> nuclei = new ArrayList<>();
+    public static final Map<String, NucleusEntry> nuclei = new HashMap<>();
 
     public ItemNucleus(String metalName, int color, int chance) {
         super(Utils.toLineString(metalName) + "_nucleus", new Properties());
         NucleusEntry entry = new NucleusEntry(metalName, color, chance);
         this.type = entry;
-        nuclei.add(entry);
+        nuclei.put(Utils.toLineString(metalName), entry);
     }
 
-    public final NucleusEntry type;
+    private final NucleusEntry type;
 
     @Override
     public int getColor(ItemStack stack, int tintIndex) {
@@ -44,6 +46,8 @@ public class ItemNucleus extends ItemBase implements IItemColorized {
     }
 
     public static class NucleusEntry {
+        private static final NucleusEntry INVALID = new NucleusEntry("invalid", -1, 0);
+
         private final String name;
         private final int color;
         private final int chance;
@@ -64,6 +68,10 @@ public class ItemNucleus extends ItemBase implements IItemColorized {
 
         public int getChance() {
             return chance;
+        }
+
+        public static NucleusEntry getInvalid() {
+            return INVALID;
         }
     }
 }

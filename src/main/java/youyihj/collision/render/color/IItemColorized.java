@@ -1,4 +1,4 @@
-package youyihj.collision.color;
+package youyihj.collision.render.color;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
