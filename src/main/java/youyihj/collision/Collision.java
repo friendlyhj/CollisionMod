@@ -26,6 +26,7 @@ import youyihj.collision.item.ItemRegistry;
 import youyihj.collision.recipe.NucleusSmeltingHandler;
 import youyihj.collision.tile.TileEntityRegistry;
 import youyihj.collision.tile.TileGemSpawner;
+import youyihj.collision.tile.TileMetalSpawner;
 
 import java.util.stream.Collectors;
 
@@ -55,6 +56,7 @@ public class Collision {
 
     private void setup(final FMLCommonSetupEvent event) {
         TileGemSpawner.initGemList();
+        TileMetalSpawner.initMetalList();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

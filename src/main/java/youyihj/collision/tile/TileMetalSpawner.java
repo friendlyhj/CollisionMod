@@ -23,9 +23,7 @@ public class TileMetalSpawner extends TileSpawner {
 
     public static void initMetalList() {
         Map<Item, Integer> temp = new HashMap<>();
-        ItemNucleus.nuclei.values().forEach(nucleusEntry -> {
-            temp.put(ItemRegistry.getItem(nucleusEntry.getName() + "_nucleus"), nucleusEntry.getChance());
-        });
+        ItemNucleus.nuclei.values().forEach(nucleusEntry -> temp.put(ItemRegistry.getItem(nucleusEntry.getName() + "_nucleus"), nucleusEntry.getChance()));
         pool = WeightList.create(temp);
     }
 

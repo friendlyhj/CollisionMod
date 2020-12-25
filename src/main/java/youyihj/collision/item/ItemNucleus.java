@@ -6,9 +6,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import youyihj.collision.render.color.IItemColorized;
 import youyihj.collision.util.Utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

@@ -4,7 +4,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
 import youyihj.collision.block.BlockBase;
 
 import javax.annotation.Nonnull;
@@ -25,6 +24,7 @@ public abstract class BlockHasTileEntityBase<T extends TileEntity> extends Block
     }
 
     @Nonnull
+    @Override
     public abstract T createTileEntity(BlockState state, IBlockReader world);
 
     public abstract Class<T> getTileEntityClass();
