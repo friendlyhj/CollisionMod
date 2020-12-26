@@ -4,14 +4,23 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockDisplayReader;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import youyihj.collision.block.absorber.Absorber;
+import youyihj.collision.block.absorber.Neutron;
+import youyihj.collision.block.absorber.Proton;
 import youyihj.collision.item.ItemNucleus;
 import youyihj.collision.render.INeedRenderUpdate;
 import youyihj.collision.render.RenderUpdateHandler;
@@ -38,13 +47,14 @@ public class Booster extends BlockHasTileEntityBase<TileBooster> implements INee
             TileBooster te = getLinkedTileEntity(worldIn, pos);
             if (te == null || te.isFull())
                 return ActionResultType.FAIL;
+            te.setNucleusType(((ItemNucleus) handItem.getItem()).getType());
             handItem.shrink(1);
             te.setFull(true);
-            te.setNucleusType(((ItemNucleus) handItem.getItem()).getType());
             if (worldIn.isRemote) {
                 RenderUpdateHandler.mark(pos);
             }
-            return ActionResultType.SUCCESS;
+            neighborChanged(state, worldIn, pos, state.getBlock(), pos, false);
+            return ActionResultType.CONSUME;
         }
         return ActionResultType.PASS;
     }
@@ -63,6 +73,45 @@ public class Booster extends BlockHasTileEntityBase<TileBooster> implements INee
     @Override
     public int getColor(BlockState state, @Nullable IBlockDisplayReader world, @Nullable BlockPos pos, int tintIndex) {
         return Optional.ofNullable(getLinkedTileEntity(world, pos)).map(te -> te.getNucleusType().getColor()).orElse(-1);
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+        if (!worldIn.isRemote) {
+            TileBooster tileBooster = getLinkedTileEntity(worldIn, pos);
+            if (tileBooster != null) {
+                ITag<Item> oreTag = ItemTags.getCollection().get(new ResourceLocation("forge", "ores/" + tileBooster.getNucleusType().getName()));
+                if (oreTag != null) {
+                    Block ore = null;
+                    for (Item item : oreTag.getAllElements()) {
+                        if (item instanceof BlockItem) {
+                            ore = ((BlockItem) item).getBlock();
+                            break;
+                        }
+                    }
+                    if (ore == null)
+                        return;
+                    int n = 0;
+                    int p = 0;
+                    for (int i = 0; i < 4; i++) {
+                        Block block = worldIn.getBlockState(pos.offset(Direction.byHorizontalIndex(i))).getBlock();
+                        if (block == Neutron.INSTANCE) {
+                            n++;
+                        } else if (block == Proton.INSTANCE) {
+                            p++;
+                        }
+                    }
+                    if (n == 2 && p == 2) {
+                        worldIn.setBlockState(pos, ore.getDefaultState());
+                        for (int i = 0; i < 4; i++) {
+                            BlockPos posOffset = pos.offset(Direction.byHorizontalIndex(i));
+                            Absorber absorber = (Absorber) worldIn.getBlockState(posOffset).getBlock();
+                            absorber.transform(worldIn, posOffset);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override

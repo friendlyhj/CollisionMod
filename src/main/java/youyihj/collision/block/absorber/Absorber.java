@@ -6,6 +6,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorldWriter;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
@@ -39,6 +40,10 @@ public abstract class Absorber extends BlockBase {
 
     public Absorber getTransformAbsorber() {
         return isRefined ? this.getType().transform().getRefinedAbsorber() : this.getType().transform().getAbsorber();
+    }
+
+    public void transform(World world, BlockPos pos) {
+        world.setBlockState(pos, getTransformAbsorber().getDefaultState());
     }
 
     @Override
