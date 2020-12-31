@@ -26,6 +26,8 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import youyihj.collision.block.BlockNeutronStorage;
+import youyihj.collision.block.BlockProtonStorage;
 import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.config.Configuration;
 import youyihj.collision.item.ItemRegistry;
@@ -67,6 +69,9 @@ public class Collision {
     @SuppressWarnings("unchecked")
     private void doClientStuff(final FMLClientSetupEvent event) {
         ScreenManager.registerFactory(((ContainerType<ContainerHarvester>) ContainerRegistry.getContainerType("harvester")), ScreenHarvester::new);
+        ScreenManager.registerFactory(((ContainerType<ContainerNeutronStorage>) ContainerRegistry.getContainerType(BlockNeutronStorage.NAME)), ScreenNeutronStorage::new);
+        ScreenManager.registerFactory(((ContainerType<ContainerProtonStorage>) ContainerRegistry.getContainerType(BlockProtonStorage.NAME)), ScreenProtonStorage::new);
+        // ScreenManager.registerFactory(((ContainerType<ContainerHarvester>) ContainerRegistry.getContainerType("harvester")), ScreenHarvester::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
@@ -102,7 +107,6 @@ public class Collision {
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            // register a new block here
             LOGGER.info("HELLO from Register Block");
         }
     }

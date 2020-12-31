@@ -10,8 +10,12 @@ import java.util.function.Consumer;
 public class CircleIterable<T> implements Iterable<T> {
     final Iterable<T> internal;
 
-    public CircleIterable(Iterable<T> iterable) {
+    private CircleIterable(Iterable<T> iterable) {
         this.internal = iterable;
+    }
+
+    public static <T> CircleIterable<T> of(Iterable<T> iterable) {
+        return new CircleIterable<>(iterable);
     }
 
     @Override

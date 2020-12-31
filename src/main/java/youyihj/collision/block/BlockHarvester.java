@@ -36,11 +36,17 @@ public class BlockHarvester extends SingleItemDeviceBase.BlockModule<TileHarvest
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote && handIn == Hand.MAIN_HAND) {
-            Optional<TileHarvester> teo = getLinkedTileEntity(worldIn, pos);
-            teo.ifPresent(tileHarvester -> NetworkHooks.openGui(((ServerPlayerEntity) player), tileHarvester, (packetBuffer -> {
-                packetBuffer.writeBlockPos(tileHarvester.getPos());
-            })));
+        if (!worldIn.isRemote) {
+            getLinkedTileEntity(worldIn, pos).ifPresent(tileHarvester -> {
+                if (player.isSneaking() && player.getHeldItem(handIn).isEmpty()) {
+                    tileHarvester.transformWork();
+                    player.sendStatusMessage(tileHarvester.getShowWorkTypeText(), true);
+                } else {
+                    NetworkHooks.openGui(((ServerPlayerEntity) player), tileHarvester, packetBuffer -> {
+                        packetBuffer.writeBlockPos(pos);
+                    });
+                }
+            });
         }
         return ActionResultType.SUCCESS;
     }

@@ -13,9 +13,11 @@ import net.minecraftforge.common.ToolType;
 import youyihj.collision.block.BlockBase;
 import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.config.Configuration;
+import youyihj.collision.item.ItemRegistry;
 import youyihj.collision.itemgroup.CollisionGroup;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -51,6 +53,21 @@ public abstract class Absorber extends BlockBase {
         if (this.willTransform && random.nextInt(Configuration.absorberSpeed.get()) == 0 && work(worldIn)) {
             worldIn.setBlockState(pos, getTransformAbsorber().getDefaultState());
         }
+    }
+
+    public boolean match(ItemStack itemStack, boolean allowAir) {
+        if (allowAir && itemStack.isEmpty()) {
+            return true;
+        }
+        if (itemStack.getItem() instanceof BlockItem) {
+            BlockItem itemBlock = ((BlockItem) itemStack.getItem());
+            return Objects.deepEquals(itemBlock.getBlock(), this);
+        }
+        return false;
+    }
+
+    public ItemStack getItemStack() {
+        return new ItemStack(this.asItem());
     }
 
     @Override

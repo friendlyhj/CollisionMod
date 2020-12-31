@@ -55,6 +55,8 @@ public class BlockRegistry {
             BlockMetalSpawner.INSTANCE.register();
             BlockGemSpawner.INSTANCE.register();
             new Booster().register();
+            BlockNeutronStorage.INSTANCE.register();
+            BlockProtonStorage.INSTANCE.register();
             BlockHarvester.INSTANCE.register();
 
             for (int i = 1; i < 5; i++) {
