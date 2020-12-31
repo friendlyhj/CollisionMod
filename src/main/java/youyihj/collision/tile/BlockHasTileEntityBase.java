@@ -8,6 +8,7 @@ import youyihj.collision.block.BlockBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 /**
  * @author youyihj
@@ -29,12 +30,11 @@ public abstract class BlockHasTileEntityBase<T extends TileEntity> extends Block
 
     public abstract Class<T> getTileEntityClass();
 
-    @Nullable
     @SuppressWarnings("unchecked")
-    public T getLinkedTileEntity(@Nullable IBlockReader world, @Nullable BlockPos pos) {
-        if (world == null || pos == null || world.getTileEntity(pos) == null)
-            return null;
-        return (T) world.getTileEntity(pos);
+    public Optional<T> getLinkedTileEntity(@Nullable IBlockReader world, @Nullable BlockPos pos) {
+        if (world == null || pos == null)
+            return Optional.empty();
+        return (Optional<T>) Optional.ofNullable(world.getTileEntity(pos));
     }
 
     @Override

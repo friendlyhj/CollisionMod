@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,8 +16,7 @@ import java.util.List;
 /**
  * @author youyihj
  */
-@Mod.EventBusSubscriber
-@OnlyIn(Dist.CLIENT)
+@Mod.EventBusSubscriber(Dist.CLIENT)
 public class RenderUpdateHandler {
     private static final LinkedList<BlockPos> renderPoses = new LinkedList<>();
     private static final List<BlockPos> failPoses = new ArrayList<>();

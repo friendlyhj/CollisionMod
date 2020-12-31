@@ -44,9 +44,10 @@ public class Booster extends BlockHasTileEntityBase<TileBooster> implements INee
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         ItemStack handItem = player.getHeldItem(handIn);
         if (handItem.getItem() instanceof ItemNucleus) {
-            TileBooster te = getLinkedTileEntity(worldIn, pos);
-            if (te == null || te.isFull())
+            Optional<TileBooster> teo = getLinkedTileEntity(worldIn, pos);
+            if (!teo.isPresent() || teo.map(TileBooster::isFull).get())
                 return ActionResultType.FAIL;
+            TileBooster te = teo.get();
             te.setNucleusType(((ItemNucleus) handItem.getItem()).getType());
             handItem.shrink(1);
             te.setFull(true);
@@ -72,42 +73,40 @@ public class Booster extends BlockHasTileEntityBase<TileBooster> implements INee
 
     @Override
     public int getColor(BlockState state, @Nullable IBlockDisplayReader world, @Nullable BlockPos pos, int tintIndex) {
-        return Optional.ofNullable(getLinkedTileEntity(world, pos)).map(te -> te.getNucleusType().getColor()).orElse(-1);
+        return getLinkedTileEntity(world, pos).map(te -> te.getNucleusType().getColor()).orElse(-1);
     }
 
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
         if (!worldIn.isRemote) {
-            TileBooster tileBooster = getLinkedTileEntity(worldIn, pos);
-            if (tileBooster != null) {
-                ITag<Item> oreTag = ItemTags.getCollection().get(new ResourceLocation("forge", "ores/" + tileBooster.getNucleusType().getName()));
-                if (oreTag != null) {
-                    Block ore = null;
-                    for (Item item : oreTag.getAllElements()) {
-                        if (item instanceof BlockItem) {
-                            ore = ((BlockItem) item).getBlock();
-                            break;
-                        }
+            Optional<TileBooster> tileBooster = getLinkedTileEntity(worldIn, pos);
+            ITag<Item> oreTag = ItemTags.getCollection().get(new ResourceLocation("forge", "ores/" + tileBooster.map(te -> te.getNucleusType().getName()).orElse("")));
+            if (oreTag != null) {
+                Block ore = null;
+                for (Item item : oreTag.getAllElements()) {
+                    if (item instanceof BlockItem) {
+                        ore = ((BlockItem) item).getBlock();
+                        break;
                     }
-                    if (ore == null)
-                        return;
-                    int n = 0;
-                    int p = 0;
+                }
+                if (ore == null)
+                    return;
+                int n = 0;
+                int p = 0;
+                for (int i = 0; i < 4; i++) {
+                    Block block = worldIn.getBlockState(pos.offset(Direction.byHorizontalIndex(i))).getBlock();
+                    if (block == Neutron.INSTANCE) {
+                        n++;
+                    } else if (block == Proton.INSTANCE) {
+                        p++;
+                    }
+                }
+                if (n == 2 && p == 2) {
+                    worldIn.setBlockState(pos, ore.getDefaultState());
                     for (int i = 0; i < 4; i++) {
-                        Block block = worldIn.getBlockState(pos.offset(Direction.byHorizontalIndex(i))).getBlock();
-                        if (block == Neutron.INSTANCE) {
-                            n++;
-                        } else if (block == Proton.INSTANCE) {
-                            p++;
-                        }
-                    }
-                    if (n == 2 && p == 2) {
-                        worldIn.setBlockState(pos, ore.getDefaultState());
-                        for (int i = 0; i < 4; i++) {
-                            BlockPos posOffset = pos.offset(Direction.byHorizontalIndex(i));
-                            Absorber absorber = (Absorber) worldIn.getBlockState(posOffset).getBlock();
-                            absorber.transform(worldIn, posOffset);
-                        }
+                        BlockPos posOffset = pos.offset(Direction.byHorizontalIndex(i));
+                        Absorber absorber = (Absorber) worldIn.getBlockState(posOffset).getBlock();
+                        absorber.transform(worldIn, posOffset);
                     }
                 }
             }
@@ -121,7 +120,7 @@ public class Booster extends BlockHasTileEntityBase<TileBooster> implements INee
 
     @Override
     public boolean needRenderUpdate(World world, BlockPos pos) {
-        return Optional.ofNullable(getLinkedTileEntity(world, pos)).map(TileBooster::isFull).orElse(false);
+        return getLinkedTileEntity(world, pos).map(TileBooster::isFull).orElse(false);
     }
 
     @Override

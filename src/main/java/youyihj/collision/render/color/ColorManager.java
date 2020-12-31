@@ -13,8 +13,7 @@ import youyihj.collision.item.ItemRegistry;
 /**
  * @author youyihj
  */
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-@OnlyIn(Dist.CLIENT)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ColorManager {
     @SubscribeEvent
     public static void itemColors(ColorHandlerEvent.Item event) {

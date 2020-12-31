@@ -1,6 +1,12 @@
 package youyihj.collision;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
@@ -24,9 +30,7 @@ import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.config.Configuration;
 import youyihj.collision.item.ItemRegistry;
 import youyihj.collision.recipe.NucleusSmeltingHandler;
-import youyihj.collision.tile.TileEntityRegistry;
-import youyihj.collision.tile.TileGemSpawner;
-import youyihj.collision.tile.TileMetalSpawner;
+import youyihj.collision.tile.*;
 
 import java.util.stream.Collectors;
 
@@ -50,6 +54,7 @@ public class Collision {
         ItemRegistry.register(eventBus);
         BlockRegistry.register(eventBus);
         TileEntityRegistry.register(eventBus);
+        ContainerRegistry.register(eventBus);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -59,9 +64,9 @@ public class Collision {
         TileMetalSpawner.initMetalList();
     }
 
+    @SuppressWarnings("unchecked")
     private void doClientStuff(final FMLClientSetupEvent event) {
-        // do something that can only be done on the client
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+        ScreenManager.registerFactory(((ContainerType<ContainerHarvester>) ContainerRegistry.getContainerType("harvester")), ScreenHarvester::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
