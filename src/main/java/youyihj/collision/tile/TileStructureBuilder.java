@@ -103,6 +103,7 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
                                 protonStorage.item.extractItem(0, p, false);
                                 neutronStorage.item.extractItem(0, n, false);
                             } else return;
+                        } else {
                             if (Proton.INSTANCE.match(itemP, true) && Neutron.INSTANCE.match(itemN, true)) {
                                 protonStorage.item.extractItem(0, p, false);
                                 neutronStorage.item.extractItem(0, p, false);
