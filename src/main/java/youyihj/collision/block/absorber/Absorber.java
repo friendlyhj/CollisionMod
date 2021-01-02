@@ -6,14 +6,12 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldWriter;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
 import youyihj.collision.block.BlockBase;
 import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.config.Configuration;
-import youyihj.collision.item.ItemRegistry;
 import youyihj.collision.itemgroup.CollisionGroup;
 
 import javax.annotation.Nonnull;

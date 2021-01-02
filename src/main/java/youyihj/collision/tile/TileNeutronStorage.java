@@ -3,7 +3,6 @@ package youyihj.collision.tile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.tileentity.TileEntityType;
 import youyihj.collision.block.BlockNeutronStorage;
 import youyihj.collision.util.IOType;
 import youyihj.collision.util.SingleItemDeviceBase;

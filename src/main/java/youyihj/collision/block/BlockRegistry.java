@@ -58,6 +58,7 @@ public class BlockRegistry {
             BlockNeutronStorage.INSTANCE.register();
             BlockProtonStorage.INSTANCE.register();
             BlockHarvester.INSTANCE.register();
+            BlockStructureBuilder.INSTANCE.register();
 
             for (int i = 1; i < 5; i++) {
                 new ColliderBase(i).register();

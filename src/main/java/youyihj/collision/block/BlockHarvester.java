@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.state.StateContainer;
@@ -21,7 +20,6 @@ import youyihj.collision.tile.TileHarvester;
 import youyihj.collision.util.SingleItemDeviceBase;
 
 import javax.annotation.Nonnull;
-import java.util.Optional;
 
 /**
  * @author youyihj
@@ -43,7 +41,7 @@ public class BlockHarvester extends SingleItemDeviceBase.BlockModule<TileHarvest
                     player.sendStatusMessage(tileHarvester.getShowWorkTypeText(), true);
                 } else {
                     NetworkHooks.openGui(((ServerPlayerEntity) player), tileHarvester, packetBuffer -> {
-                        packetBuffer.writeBlockPos(pos);
+                        packetBuffer.writeBlockPos(tileHarvester.getPos());
                     });
                 }
             });

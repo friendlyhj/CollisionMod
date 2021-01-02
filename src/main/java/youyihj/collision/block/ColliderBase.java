@@ -10,6 +10,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import youyihj.collision.recipe.ColliderRecipe;
+import youyihj.collision.recipe.ColliderRecipeCache;
 import youyihj.collision.util.Utils;
 
 import javax.annotation.Nullable;
@@ -41,20 +42,15 @@ public class ColliderBase extends BlockBase {
             ServerWorld world = (ServerWorld) worldIn;
             if (start(world, pos, fromPos)) {
                 world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 0.1f, false, Explosion.Mode.NONE);
-                ColliderRecipe recipe = world.getRecipeManager().getRecipes()
-                        .stream()
-                        .filter(iRecipe -> iRecipe instanceof ColliderRecipe)
-                        .map(iRecipe -> (ColliderRecipe) iRecipe)
-                        .filter(recipe1 -> recipe1.getLevel() == level && recipe1.matches(world, pos))
-                        .findFirst().orElse(null);
-                if (recipe != null) {
-                    convert(world, pos, recipe);
-                    BlockPos posOffset = pos;
-                    while (!world.isAirBlock(posOffset)) {
-                        posOffset = posOffset.up();
-                    }
-                    Utils.spawnEntityItem(world, posOffset, recipe.getRecipeOutput());
-                }
+                ColliderRecipeCache.get(world.getRecipeManager(), pos, recipe -> recipe.getLevel() == level && recipe.matches(world, pos))
+                        .ifPresent(recipe -> {
+                            convert(world, pos, recipe);
+                            BlockPos posOffset = pos;
+                            while (!world.isAirBlock(posOffset)) {
+                                posOffset = posOffset.up();
+                            }
+                            Utils.spawnEntityItem(world, posOffset, recipe.getRecipeOutput());
+                        });
             }
         }
     }
@@ -74,5 +70,11 @@ public class ColliderBase extends BlockBase {
     private boolean start(World world, BlockPos pos, BlockPos fromPos) {
         BlockState fromBlock = world.getBlockState(fromPos);
         return (!world.isRemote && world.isBlockPowered(pos) && fromBlock.canProvidePower() && !world.isAirBlock(fromPos));
+    }
+
+    @Override
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        super.onReplaced(state, worldIn, pos, newState, isMoving);
+        ColliderRecipeCache.removeCachePos(pos);
     }
 }

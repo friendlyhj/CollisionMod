@@ -12,7 +12,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import youyihj.collision.tile.ContainerNeutronStorage;
-import youyihj.collision.tile.ContainerProtonStorage;
 import youyihj.collision.tile.ContainerRegistry;
 import youyihj.collision.tile.TileNeutronStorage;
 import youyihj.collision.util.SingleItemDeviceBase;

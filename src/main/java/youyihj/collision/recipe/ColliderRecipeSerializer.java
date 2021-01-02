@@ -19,6 +19,10 @@ import javax.annotation.Nullable;
 public class ColliderRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ColliderRecipe> {
     public static final ColliderRecipeSerializer INSTANCE = new ColliderRecipeSerializer();
 
+    private ColliderRecipeSerializer() {
+        super();
+    }
+
     @Override
     public ColliderRecipe read(ResourceLocation recipeId, JsonObject json) {
         int level = JSONUtils.getInt(json, "level", 1);
