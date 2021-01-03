@@ -1,7 +1,9 @@
 package youyihj.collision.block;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -63,6 +65,8 @@ public class BlockRegistry {
             for (int i = 1; i < 5; i++) {
                 new ColliderBase(i).register();
             }
+
+            new BlockBase("bone_plank", AbstractBlock.Properties.create(Material.WOOD)).register();
         }
     }
 }

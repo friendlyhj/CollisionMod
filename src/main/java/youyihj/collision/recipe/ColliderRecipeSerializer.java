@@ -51,9 +51,9 @@ public class ColliderRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializ
                 default:
                     temp[i / 3][i % 3] = null;
             }
-            intSerialValue = intSerialValue >> 2;
+            intSerialValue >>= 2;
         }
-        return new ColliderRecipe(recipeId, buffer.readInt(), buffer.readItemStack(), temp);
+        return new ColliderRecipe(recipeId, buffer.readVarInt(), buffer.readItemStack(), temp);
     }
 
     @Override

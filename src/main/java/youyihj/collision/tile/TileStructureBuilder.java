@@ -50,7 +50,7 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
 
     @Override
     public void tick() {
-        if (world == null || pos == null)
+        if (world == null)
             return;
 //        if (!this.energy.consumeEnergy(500, true))
 //            return;
@@ -118,7 +118,7 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
                                 if (type == null)
                                     continue;
                                 posOffset.move(i - 1, 0, j - 1);
-                                world.setBlockState(posOffset, type.getAbsorberByLevel(recipe.getLevel()).getDefaultState());
+                                world.setBlockState(posOffset, type.getAbsorberByRecipe(recipe).getDefaultState());
                                 posOffset.move(1 - i, 0, 1 - j);
                             }
                         }

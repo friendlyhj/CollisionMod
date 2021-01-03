@@ -59,10 +59,7 @@ public class ColliderBase extends BlockBase {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 BlockPos posOffset = pos.add(i - 1, 0, j - 1);
-                if ((i == 1 && j == 1) || world.isAirBlock(posOffset)) {
-                    continue;
-                }
-                recipe.getIn()[i][j].getAbsorberByLevel(recipe.getLevel()).transform(world, posOffset);
+                recipe.getInAbsorber(i, j).ifPresent(absorber -> absorber.transform(world, posOffset));
             }
         }
     }

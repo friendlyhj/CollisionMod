@@ -1,7 +1,7 @@
 package youyihj.collision.recipe;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.material.Material;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -17,6 +17,7 @@ import youyihj.collision.block.absorber.Absorber;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author youyihj
@@ -46,15 +47,23 @@ public class ColliderRecipe implements IRecipe<IInventory> {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 BlockPos posOffset = pos.add(i - 1, 0, j - 1);
-                Block block = worldIn.getBlockState(posOffset).getBlock();
+                BlockState blockState = worldIn.getBlockState(posOffset);
                 if (i == 1 && j == 1) continue;
-                Absorber.Type a = in[i][j];
-                if ((block != Blocks.AIR || a != null) && ((!(block instanceof Absorber) || ((Absorber) block).getType() != a) || ((Absorber) block).isRefined() != this.isRefined())) {
-                    return false;
+                Optional<Absorber> absorber = getInAbsorber(i, j);
+                if (absorber.isPresent()) {
+                    if (absorber.get() != blockState.getBlock())
+                        return false;
+                } else {
+                    if (blockState.getMaterial() != Material.AIR)
+                        return false;
                 }
             }
         }
         return true;
+    }
+
+    public Optional<Absorber> getInAbsorber(int x, int y) {
+        return Optional.ofNullable(this.getIn()[x][y]).map(type -> type.getAbsorberByRecipe(this));
     }
 
     @Override
@@ -103,19 +112,17 @@ public class ColliderRecipe implements IRecipe<IInventory> {
         int temp = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
+                temp <<= 2;
                 if (in[i][j] == null) {
-                    temp *= 4;
                     continue;
                 }
                 switch (in[i][j]) {
                     case PROTON:
-                        temp = temp * 4 + 2;
+                        temp += 2;
                         break;
                     case NEUTRON:
-                        temp = temp * 4 + 3;
+                        temp += 3;
                         break;
-                    default:
-                        temp = temp * 4;
                 }
             }
         }

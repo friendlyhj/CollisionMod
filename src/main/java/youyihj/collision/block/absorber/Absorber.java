@@ -13,6 +13,7 @@ import youyihj.collision.block.BlockBase;
 import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.config.Configuration;
 import youyihj.collision.itemgroup.CollisionGroup;
+import youyihj.collision.recipe.ColliderRecipe;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -156,8 +157,8 @@ public abstract class Absorber extends BlockBase {
             return this == PROTON_EMPTY || this == NEUTRON_EMPTY;
         }
 
-        public Absorber getAbsorberByLevel(int level) {
-            return level > 2 ? getRefinedAbsorber() : getAbsorber();
+        public Absorber getAbsorberByRecipe(ColliderRecipe recipe) {
+            return recipe.isRefined() ? getRefinedAbsorber() : getAbsorber();
         }
     }
 }
