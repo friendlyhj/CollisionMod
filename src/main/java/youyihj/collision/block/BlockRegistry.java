@@ -56,7 +56,7 @@ public class BlockRegistry {
             ProtonEmpty.Refined.INSTANCE.register();
             BlockMetalSpawner.INSTANCE.register();
             BlockGemSpawner.INSTANCE.register();
-            new Booster().register();
+            Booster.INSTANCE.register();
             BlockNeutronStorage.INSTANCE.register();
             BlockProtonStorage.INSTANCE.register();
             BlockHarvester.INSTANCE.register();

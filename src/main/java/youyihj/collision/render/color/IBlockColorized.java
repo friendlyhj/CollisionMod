@@ -12,6 +12,4 @@ import javax.annotation.Nullable;
  */
 public interface IBlockColorized {
     int getColor(BlockState state, @Nullable IBlockDisplayReader world, @Nullable BlockPos pos, int tintIndex);
-
-    Block getSelf();
 }

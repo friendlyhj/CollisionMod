@@ -16,6 +16,7 @@ import youyihj.collision.block.ColliderBase;
 import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.Proton;
+import youyihj.collision.config.Configuration;
 import youyihj.collision.recipe.ColliderRecipeCache;
 import youyihj.collision.util.IOType;
 import youyihj.collision.util.SingleItemDeviceBase;
@@ -52,13 +53,14 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
     public void tick() {
         if (world == null)
             return;
-//        if (!this.energy.consumeEnergy(500, true))
-//            return;
+        if (!Configuration.noEnergyNeeded.get() && !this.energy.consumeEnergy(500, true)) {
+            return;
+        }
         if (!world.isRemote && world.getGameTime() % 10 == 0) {
             BlockPos.Mutable posOffset = pos.up().toMutable();
             int posOffsetY = 1;
             while (!(world.getBlockState(posOffset).getBlock() instanceof ColliderBase)) {
-                if (!world.getBlockState(posOffset).allowsMovement(world, pos, PathType.AIR) || World.isOutsideBuildHeight(pos))
+                if (!world.getBlockState(posOffset).allowsMovement(world, posOffset, PathType.AIR) || World.isOutsideBuildHeight(posOffset))
                     return;
                 posOffsetY++;
                 posOffset.move(Direction.UP);
@@ -79,8 +81,10 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
                         TileNeutronStorage neutronStorage = Utils.getNeutronStorage(world, pos, false, 1);
                         if (protonStorage == null || neutronStorage == null)
                             return;
-//                        if (!(protonStorage.energy.consumeEnergy(100, true) && neutronStorage.energy.consumeEnergy(100, true)))
-//                            return;
+                        if (!Configuration.noEnergyNeeded.get()) {
+                            if (!(protonStorage.energy.consumeEnergy(100, true) && neutronStorage.energy.consumeEnergy(100, true)))
+                                return;
+                        }
                         for (int i = 0; i < 3; i++) {
                             for (int j = 0; j < 3; j++) {
                                 if (i == 1 && j == 1)
@@ -93,7 +97,7 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
                             }
                         }
                         ItemStack itemN = neutronStorage.item.extractItem(0, n, true);
-                        ItemStack itemP = neutronStorage.item.extractItem(0, p, true);
+                        ItemStack itemP = protonStorage.item.extractItem(0, p, true);
                         if (itemP.getCount() < p || itemN.getCount() < n)
                             return;
                         if (itemP.isEmpty() && itemN.isEmpty())
@@ -106,12 +110,14 @@ public class TileStructureBuilder extends SingleItemDeviceBase.TileEntityModule 
                         } else {
                             if (Proton.INSTANCE.match(itemP, true) && Neutron.INSTANCE.match(itemN, true)) {
                                 protonStorage.item.extractItem(0, p, false);
-                                neutronStorage.item.extractItem(0, p, false);
+                                neutronStorage.item.extractItem(0, n, false);
                             } else return;
                         }
-//                        this.energy.consumeEnergy(500, false);
-//                        protonStorage.energy.consumeEnergy(100, false);
-//                        neutronStorage.energy.consumeEnergy(100, false);
+                        if (!Configuration.noEnergyNeeded.get()) {
+                            this.energy.consumeEnergy(500, false);
+                            protonStorage.energy.consumeEnergy(100, false);
+                            neutronStorage.energy.consumeEnergy(100, false);
+                        }
                         for (int i = 0; i < 3; i++) {
                             for (int j = 0; j < 3; j++) {
                                 Absorber.Type type = recipe.getIn()[i][j];

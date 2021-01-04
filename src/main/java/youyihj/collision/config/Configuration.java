@@ -14,6 +14,7 @@ public class Configuration {
     public static ForgeConfigSpec.BooleanValue givePlayerInitialItems;
     public static ForgeConfigSpec.IntValue nuggetsOutputCount;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> nuclei;
+    public static ForgeConfigSpec.BooleanValue noEnergyNeeded;
 
     public static ForgeConfigSpec.IntValue absorberSpeed;
     public static ForgeConfigSpec.BooleanValue onlyWorkInDaytime;
@@ -33,6 +34,7 @@ public class Configuration {
         nuclei = configBuilder.comment("The list of nuclei", "The format is \"meta,name,color,wightInMetalSpawner\"")
                 .defineList("nuclei", Lists.newArrayList("iron,BF8040,200", "gold,FFFF00,120"),
                         s -> ((String) s).split(",").length == 3);
+        noEnergyNeeded = configBuilder.comment("set it true, then all machines won't need energy").define("noEnergyNeeded", false);
         configBuilder.pop();
 
         configBuilder.push("absorber");

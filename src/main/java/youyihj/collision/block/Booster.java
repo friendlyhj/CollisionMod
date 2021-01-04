@@ -36,9 +36,11 @@ import java.util.Optional;
  * @author youyihj
  */
 public class Booster extends BlockHasTileEntityBase<TileBooster> implements INeedRenderUpdate, IBlockColorized {
-    public Booster() {
+    private Booster() {
         super("booster", Properties.create(Material.IRON).hardnessAndResistance(5.0f, 100.0f));
     }
+
+    public static final Booster INSTANCE = new Booster();
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
@@ -111,11 +113,6 @@ public class Booster extends BlockHasTileEntityBase<TileBooster> implements INee
                 }
             }
         }
-    }
-
-    @Override
-    public Block getSelf() {
-        return this;
     }
 
     @Override

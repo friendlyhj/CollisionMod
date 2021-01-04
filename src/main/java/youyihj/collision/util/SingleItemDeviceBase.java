@@ -259,6 +259,7 @@ public class SingleItemDeviceBase {
 
         @Override
         public void detectAndSendChanges() {
+            super.detectAndSendChanges();
             TileEntity tileEntity = this.world.getTileEntity(pos);
             if (tileEntity != null && TileEntityModule.class.isAssignableFrom(tileEntity.getClass())) {
                 int energy = ((TileEntityModule) tileEntity).energy.getEnergyStored();
@@ -266,7 +267,6 @@ public class SingleItemDeviceBase {
                     this.energyBarNumber.set(0, energy);
                 }
             }
-            super.detectAndSendChanges();
         }
 
         public BlockPos getPos() {

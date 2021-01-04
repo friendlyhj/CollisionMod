@@ -12,6 +12,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.items.IItemHandler;
 import youyihj.collision.block.absorber.Absorber;
+import youyihj.collision.config.Configuration;
 import youyihj.collision.item.ItemRegistry;
 import youyihj.collision.util.CircleIterable;
 import youyihj.collision.util.IOType;
@@ -78,11 +79,13 @@ public class TileHarvester extends SingleItemDeviceBase.TileEntityModule impleme
             TileNeutronStorage tileNeutronStorage = Utils.getNeutronStorage(world, pos, true, 1);
             TileProtonStorage tileProtonStorage = Utils.getProtonStorage(world, pos, true, 1);
             if (tileNeutronStorage != null && tileProtonStorage != null) {
-//                if (!this.energy.consumeEnergy(100, true) ||
-//                    !tileNeutronStorage.energy.consumeEnergy(20, true) ||
-//                    !tileProtonStorage.energy.consumeEnergy(20, true)) {
-//                    return;
-//                }
+                if (!Configuration.noEnergyNeeded.get()) {
+                    if (!this.energy.consumeEnergy(100, true) ||
+                            !tileNeutronStorage.energy.consumeEnergy(20, true) ||
+                            !tileProtonStorage.energy.consumeEnergy(20, true)) {
+                        return;
+                    }
+                }
                 IItemHandler itemN = tileNeutronStorage.item;
                 IItemHandler itemP = tileProtonStorage.item;
                 boolean success = false;
@@ -113,9 +116,11 @@ public class TileHarvester extends SingleItemDeviceBase.TileEntityModule impleme
                 }
                 if (success) {
                     world.destroyBlock(workPos, false);
-//                    this.energy.consumeEnergy(100, false);
-//                    tileNeutronStorage.energy.consumeEnergy(20, false);
-//                    tileProtonStorage.energy.consumeEnergy(20, false);
+                    if (!Configuration.noEnergyNeeded.get()) {
+                        this.energy.consumeEnergy(100, false);
+                        tileNeutronStorage.energy.consumeEnergy(20, false);
+                        tileProtonStorage.energy.consumeEnergy(20, false);
+                    }
                 }
             }
         }
