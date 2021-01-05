@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockDisplayReader;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.Neutron;
@@ -116,7 +117,7 @@ public class Booster extends BlockHasTileEntityBase<TileBooster> implements INee
     }
 
     @Override
-    public boolean needRenderUpdate(World world, BlockPos pos) {
+    public boolean needRenderUpdate(IWorldReader world, BlockPos pos) {
         return getLinkedTileEntity(world, pos).map(TileBooster::isFull).orElse(false);
     }
 

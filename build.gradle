@@ -94,6 +94,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.16.4-35.1.13'
 
+    compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.1.65")
     // Only for energy test! Collision Mod doesn't need mek.
     runtimeOnly fg.deobf("mekanism:Mekanism:1.16.4-10.0.18.445")
     runtimeOnly fg.deobf("mekanism:Mekanism:1.16.4-10.0.18.445:additions")
@@ -101,7 +102,15 @@ dependencies {
 }
 
 repositories {
-    maven { url 'https://modmaven.dev/' }
+    maven {
+        name "mek"
+        url 'https://modmaven.dev/'
+    }
+
+    maven {
+        name "jei"
+        url "https://dvs1.progwml6.com/files/maven"
+    }
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
