@@ -14,6 +14,11 @@ import youyihj.collision.block.absorber.ProtonEmpty;
 import youyihj.collision.tile.TileNeutronStorage;
 import youyihj.collision.tile.TileProtonStorage;
 
+import java.lang.reflect.Array;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 /**
  * @author youyihj
  */
@@ -88,5 +93,49 @@ public class Utils {
             }
         }
         return null;
+    }
+
+    public static <T, R> R[][] map2DArray(T[][] array, Function<T, R> mapper, Class<R> resultClass) {
+        return map2DArray(array, mapper, resultClass, null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T, R> R[][] map2DArray(T[][] array, Function<T, R> mapper, Class<R> resultClass, R nullValue) {
+        R[][] temp = (R[][]) Array.newInstance(resultClass, array.length, array[0].length);
+        for (int i = 0; i < array.length; i++) {
+            temp[i] = mapArray(array[i], mapper, resultClass, nullValue);
+        }
+        return temp;
+    }
+
+    public static <T, R> R[] mapArray(T[] array, Function<T, R> mapper, Class<R> resultClass) {
+        return mapArray(array, mapper, resultClass, null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T, R> R[] mapArray(T[] array, Function<T, R> mapper, Class<R> resultClass, R nullValue) {
+        R[] temp = (R[]) Array.newInstance(resultClass, array.length);
+        for (int i = 0; i < array.length; i++) {
+            temp[i] = Optional.ofNullable(array[i]).map(mapper).orElse(nullValue);
+        }
+        return temp;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T[] createArray(Supplier<T> supplier, Class<T> clazz, int size) {
+        T[] temp = (T[]) Array.newInstance(clazz, size);
+        for (int i = 0; i < size; i++) {
+            temp[i] = supplier.get();
+        }
+        return temp;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T[][] create2DArray(Supplier<T> supplier, Class<T> clazz, int sizeX, int sizeY) {
+        T[][] temp = (T[][]) Array.newInstance(clazz, sizeX, sizeY);
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = createArray(supplier, clazz, sizeX);
+        }
+        return temp;
     }
 }

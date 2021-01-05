@@ -94,7 +94,9 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.16.4-35.1.13'
 
-    compileOnly fg.deobf("mezz.jei:jei-1.16.4:7.6.1.65")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
     // Only for energy test! Collision Mod doesn't need mek.
     runtimeOnly fg.deobf("mekanism:Mekanism:1.16.4-10.0.18.445")
     runtimeOnly fg.deobf("mekanism:Mekanism:1.16.4-10.0.18.445:additions")
