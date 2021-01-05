@@ -1,0 +1,12 @@
+{
+  "type": "collision:collider",
+  "level": 2,
+  "result": {
+    "item": "minecraft:cocoa_beans"
+  },
+  "in": [
+    "P  ",
+    "N N",
+    "P  "
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "collision:collider",
+  "level": 1,
+  "result": {
+    "item": "minecraft:string"
+  },
+  "in": [
+    " P ",
+    "   ",
+    " N "
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "collision:collider",
+  "level": 2,
+  "result": {
+    "item": "collision:metal_chunk"
+  },
+  "in": [
+    "N  ",
+    "P P",
+    "N  "
+  ]
+}

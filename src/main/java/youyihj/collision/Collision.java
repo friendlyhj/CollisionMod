@@ -28,13 +28,9 @@ import youyihj.collision.item.ItemRegistry;
 import youyihj.collision.recipe.NucleusSmeltingHandler;
 import youyihj.collision.tile.*;
 
-import java.util.stream.Collectors;
-
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(Collision.MODID)
 public class Collision {
 
-    // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "collision";
 
@@ -51,17 +47,19 @@ public class Collision {
         BlockRegistry.register(eventBus);
         TileEntityRegistry.register(eventBus);
         ContainerRegistry.register(eventBus);
-        // Register ourselves for server and other game events we are interested in
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+        LOGGER.info("init spawner item pool");
         TileGemSpawner.initGemList();
         TileMetalSpawner.initMetalList();
     }
 
     @SuppressWarnings("unchecked")
     private void doClientStuff(final FMLClientSetupEvent event) {
+        LOGGER.info("registering screen...");
         ScreenManager.registerFactory(((ContainerType<ContainerHarvester>) ContainerRegistry.getContainerType("harvester")), ScreenHarvester::new);
         ScreenManager.registerFactory(((ContainerType<ContainerNeutronStorage>) ContainerRegistry.getContainerType(BlockNeutronStorage.NAME)), ScreenNeutronStorage::new);
         ScreenManager.registerFactory(((ContainerType<ContainerProtonStorage>) ContainerRegistry.getContainerType(BlockProtonStorage.NAME)), ScreenProtonStorage::new);
@@ -72,10 +70,6 @@ public class Collision {
     }
 
     private void processIMC(final InterModProcessEvent event) {
-        // some example code to receive and process InterModComms from other mods
-        LOGGER.info("Got IMC {}", event.getIMCStream().
-                map(m -> m.getMessageSupplier().get()).
-                collect(Collectors.toList()));
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

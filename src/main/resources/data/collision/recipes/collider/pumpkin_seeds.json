@@ -1,0 +1,12 @@
+{
+  "type": "collision:collider",
+  "level": 2,
+  "result": {
+    "item": "minecraft:pumpkin_seeds"
+  },
+  "in": [
+    "P  ",
+    "P  ",
+    "N N"
+  ]
+}

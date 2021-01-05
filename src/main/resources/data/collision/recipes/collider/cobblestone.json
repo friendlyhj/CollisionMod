@@ -1,0 +1,13 @@
+{
+  "type": "collision:collider",
+  "level": 1,
+  "result": {
+    "item": "minecraft:cobblestone",
+    "count": 4
+  },
+  "in": [
+    " P ",
+    "  N",
+    "   "
+  ]
+}

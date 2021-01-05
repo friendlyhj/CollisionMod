@@ -1,0 +1,12 @@
+{
+  "type": "collision:collider",
+  "level": 3,
+  "result": {
+    "item": "collision:mystical_gem"
+  },
+  "in": [
+    "NN ",
+    "   ",
+    " PP"
+  ]
+}

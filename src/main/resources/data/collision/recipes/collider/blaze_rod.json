@@ -1,0 +1,12 @@
+{
+  "type": "collision:collider",
+  "level": 3,
+  "result": {
+    "item": "minecraft:blaze_rod"
+  },
+  "in": [
+    " P ",
+    "P N",
+    " N "
+  ]
+}

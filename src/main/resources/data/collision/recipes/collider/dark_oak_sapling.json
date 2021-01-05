@@ -1,0 +1,12 @@
+{
+  "type": "collision:collider",
+  "level": 1,
+  "result": {
+    "item": "minecraft:dark_oak_sapling"
+  },
+  "in": [
+    "P  ",
+    "   ",
+    " N "
+  ]
+}

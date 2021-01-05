@@ -1,0 +1,12 @@
+{
+  "type": "collision:collider",
+  "level": 3,
+  "result": {
+    "item": "minecraft:nether_wart"
+  },
+  "in": [
+    "P N",
+    "N  ",
+    "  P"
+  ]
+}

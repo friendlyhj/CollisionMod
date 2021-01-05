@@ -1,0 +1,13 @@
+{
+  "type": "collision:collider",
+  "level": 1,
+  "result": {
+    "item": "minecraft:sand",
+    "count": 4
+  },
+  "in": [
+    "   ",
+    "  N",
+    "  P"
+  ]
+}

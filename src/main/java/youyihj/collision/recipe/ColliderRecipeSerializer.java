@@ -3,8 +3,9 @@ package youyihj.collision.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.ShapedRecipe;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
@@ -26,13 +27,13 @@ public class ColliderRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializ
     @Override
     public ColliderRecipe read(ResourceLocation recipeId, JsonObject json) {
         int level = JSONUtils.getInt(json, "level", 1);
-        Ingredient out = Ingredient.deserialize(json.get("result"));
-        JsonArray jsonElements = json.getAsJsonArray("in");
+        ItemStack out = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
+        JsonArray jsonElements = JSONUtils.getJsonArray(json, "in");
         Absorber.Type[][] in = new Absorber.Type[3][3];
         for (int i = 0; i < 3; i++) {
             in[i] = outMapper(jsonElements.get(i).getAsString());
         }
-        return new ColliderRecipe(recipeId, level, out.getMatchingStacks()[0], in);
+        return new ColliderRecipe(recipeId, level, out, in);
     }
 
     @Nullable

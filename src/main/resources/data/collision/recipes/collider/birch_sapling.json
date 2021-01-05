@@ -2,11 +2,11 @@
   "type": "collision:collider",
   "level": 1,
   "result": {
-    "item": "minecraft:bread"
+    "item": "minecraft:birch_sapling"
   },
   "in": [
-    ["P P"],
-    ["   "],
-    ["P P"]
+    "P  ",
+    "  N",
+    "   "
   ]
 }

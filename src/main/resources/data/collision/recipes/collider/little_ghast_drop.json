@@ -1,0 +1,12 @@
+{
+  "type": "collision:collider",
+  "level": 4,
+  "result": {
+    "item": "collision:little_ghast_drop"
+  },
+  "in": [
+    "PNN",
+    "   ",
+    "PNP"
+  ]
+}

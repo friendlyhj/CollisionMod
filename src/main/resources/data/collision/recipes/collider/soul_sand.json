@@ -1,0 +1,13 @@
+{
+  "type": "collision:collider",
+  "level": 2,
+  "result": {
+    "item": "minecraft:soul_sand",
+    "count": 4
+  },
+  "in": [
+    "PP ",
+    "   ",
+    " NN"
+  ]
+}

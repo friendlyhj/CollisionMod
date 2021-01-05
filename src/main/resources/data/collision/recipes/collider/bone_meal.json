@@ -1,0 +1,13 @@
+{
+  "type": "collision:collider",
+  "level": 1,
+  "result": {
+    "item": "minecraft:bone_meal",
+    "count": 2
+  },
+  "in": [
+    "   ",
+    "P N",
+    "   "
+  ]
+}
