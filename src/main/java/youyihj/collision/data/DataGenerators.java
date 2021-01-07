@@ -9,6 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import youyihj.collision.Collision;
 import youyihj.collision.block.BlockBase;
 import youyihj.collision.block.BlockRegistry;
+import youyihj.collision.item.ItemBase;
 import youyihj.collision.item.ItemRegistry;
 
 /**
@@ -37,7 +38,7 @@ public class DataGenerators {
                         String name = blockItem.getBlock().getRegistryName().getPath();
                         withExistingParent(name, new ResourceLocation(Collision.MODID, "block/" + name));
                     }));
-                    ItemRegistry.getItems().values().forEach(item -> {
+                    ItemRegistry.getItems().values().stream().filter(ItemBase::isGenerateModel).forEach(item -> {
                         String name = item.getRegistryName().getPath();
                         withExistingParent(name, ITEM_GENERATE).texture("layer0", "item/" + item.getTexturePath());
                     });

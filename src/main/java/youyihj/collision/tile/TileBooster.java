@@ -22,7 +22,7 @@ public class TileBooster extends TileEntity {
         super(TileEntityRegistry.getTileEntityType("booster"));
     }
 
-    private ItemNucleus.NucleusEntry type = ItemNucleus.NucleusEntry.getInvalid();
+    private ItemNucleus.NucleusEntry type = ItemNucleus.NucleusEntry.invalid();
     private boolean isFull;
 
     @Override

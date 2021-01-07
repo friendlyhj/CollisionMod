@@ -30,8 +30,8 @@ public class ItemNucleus extends ItemBase implements IItemColorized {
     }
 
     @Override
-    public String getTexturePath() {
-        return "nucleus";
+    public boolean isGenerateModel() {
+        return false;
     }
 
     public NucleusEntry getType() {
@@ -68,7 +68,7 @@ public class ItemNucleus extends ItemBase implements IItemColorized {
             return chance;
         }
 
-        public static NucleusEntry getInvalid() {
+        public static NucleusEntry invalid() {
             return INVALID;
         }
     }
