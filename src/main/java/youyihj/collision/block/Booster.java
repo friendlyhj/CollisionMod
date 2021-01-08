@@ -22,13 +22,13 @@ import net.minecraft.world.World;
 import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.Proton;
+import youyihj.collision.data.DisableModelGenerator;
 import youyihj.collision.item.ItemNucleus;
 import youyihj.collision.render.INeedRenderUpdate;
 import youyihj.collision.render.RenderUpdateHandler;
 import youyihj.collision.render.color.IBlockColorized;
 import youyihj.collision.tile.BlockHasTileEntityBase;
 import youyihj.collision.tile.TileBooster;
-import youyihj.collision.util.annotation.DisableModelGenerator;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

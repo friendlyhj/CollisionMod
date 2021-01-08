@@ -2,8 +2,8 @@ package youyihj.collision.block.spawner;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.world.IBlockReader;
+import youyihj.collision.data.DisableBlockLootGenerator;
 import youyihj.collision.tile.TileGemSpawner;
-import youyihj.collision.util.annotation.DisableBlockLootGenerator;
 
 import javax.annotation.Nonnull;
 

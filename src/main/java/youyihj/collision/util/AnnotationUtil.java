@@ -1,4 +1,4 @@
-package youyihj.collision.util.annotation;
+package youyihj.collision.util;
 
 import java.lang.annotation.Annotation;
 

@@ -9,8 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import youyihj.collision.Collision;
 import youyihj.collision.block.BlockRegistry;
 import youyihj.collision.item.ItemRegistry;
-import youyihj.collision.util.annotation.AnnotationUtil;
-import youyihj.collision.util.annotation.DisableModelGenerator;
+import youyihj.collision.util.AnnotationUtil;
 
 /**
  * @author youyihj

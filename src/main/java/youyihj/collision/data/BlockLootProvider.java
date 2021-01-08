@@ -11,8 +11,7 @@ import net.minecraft.loot.conditions.SurvivesExplosion;
 import youyihj.collision.Collision;
 import youyihj.collision.block.BlockBase;
 import youyihj.collision.block.BlockRegistry;
-import youyihj.collision.util.annotation.AnnotationUtil;
-import youyihj.collision.util.annotation.DisableBlockLootGenerator;
+import youyihj.collision.util.AnnotationUtil;
 
 import java.io.IOException;
 import java.nio.file.Path;

@@ -1,4 +1,4 @@
-package youyihj.collision.util.annotation;
+package youyihj.collision.data;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface DisableBlockLootGenerator {
+public @interface DisableModelGenerator {
 }

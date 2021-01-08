@@ -3,9 +3,9 @@ package youyihj.collision.item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import youyihj.collision.data.DisableModelGenerator;
 import youyihj.collision.render.color.IItemColorized;
 import youyihj.collision.util.Utils;
-import youyihj.collision.util.annotation.DisableModelGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
