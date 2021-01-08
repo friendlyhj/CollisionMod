@@ -28,8 +28,4 @@ public class ItemBase extends Item {
     public String getTexturePath() {
         return this.getRegistryName().getPath();
     }
-
-    public boolean isGenerateModel() {
-        return true;
-    }
 }

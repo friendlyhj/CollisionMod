@@ -20,16 +20,8 @@ public class BlockBase extends Block {
         this.name = name;
     }
 
-    public boolean isGenerateModel() {
-        return true;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public boolean enableBlockLootGenerator() {
-        return true;
     }
 
     public Supplier<BlockItem> getBlockItemSupplier() {

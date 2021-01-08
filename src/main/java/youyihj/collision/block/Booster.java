@@ -28,6 +28,7 @@ import youyihj.collision.render.RenderUpdateHandler;
 import youyihj.collision.render.color.IBlockColorized;
 import youyihj.collision.tile.BlockHasTileEntityBase;
 import youyihj.collision.tile.TileBooster;
+import youyihj.collision.util.annotation.DisableModelGenerator;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -36,6 +37,7 @@ import java.util.Optional;
 /**
  * @author youyihj
  */
+@DisableModelGenerator
 public class Booster extends BlockHasTileEntityBase<TileBooster> implements INeedRenderUpdate, IBlockColorized {
     private Booster() {
         super("booster", Properties.create(Material.IRON).hardnessAndResistance(5.0f, 100.0f));
@@ -126,8 +128,4 @@ public class Booster extends BlockHasTileEntityBase<TileBooster> implements INee
         return true;
     }
 
-    @Override
-    public boolean isGenerateModel() {
-        return false;
-    }
 }

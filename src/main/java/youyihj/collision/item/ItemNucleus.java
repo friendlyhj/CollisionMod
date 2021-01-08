@@ -5,6 +5,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import youyihj.collision.render.color.IItemColorized;
 import youyihj.collision.util.Utils;
+import youyihj.collision.util.annotation.DisableModelGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.Map;
 /**
  * @author youyihj
  */
+@DisableModelGenerator
 public class ItemNucleus extends ItemBase implements IItemColorized {
     public static final Map<String, NucleusEntry> nuclei = new HashMap<>();
 
@@ -27,11 +29,6 @@ public class ItemNucleus extends ItemBase implements IItemColorized {
     @Override
     public int getColor(ItemStack stack, int tintIndex) {
         return this.type.getColor();
-    }
-
-    @Override
-    public boolean isGenerateModel() {
-        return false;
     }
 
     public NucleusEntry getType() {

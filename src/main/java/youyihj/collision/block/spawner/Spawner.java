@@ -17,9 +17,4 @@ public abstract class Spawner<T extends TileSpawner> extends BlockHasTileEntityB
                 .harvestLevel(1)
         );
     }
-
-    @Override
-    public boolean enableBlockLootGenerator() {
-        return false;
-    }
 }

@@ -11,6 +11,8 @@ import net.minecraft.loot.conditions.SurvivesExplosion;
 import youyihj.collision.Collision;
 import youyihj.collision.block.BlockBase;
 import youyihj.collision.block.BlockRegistry;
+import youyihj.collision.util.annotation.AnnotationUtil;
+import youyihj.collision.util.annotation.DisableBlockLootGenerator;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -29,7 +31,7 @@ public class BlockLootProvider implements IDataProvider {
     @Override
     public void act(DirectoryCache cache) throws IOException {
         for (BlockBase block : BlockRegistry.getBlocks().values()) {
-            if (block.enableBlockLootGenerator()) {
+            if (AnnotationUtil.hasNotAnnotation(block, DisableBlockLootGenerator.class)) {
                 Path path = generator.getOutputFolder().resolve("data/" + Collision.MODID + "/loot_tables/blocks/" + block.getName() + ".json");
                 IDataProvider.save(GSON, cache, LootTableManager.toJson(genRegular(block).setParameterSet(LootParameterSets.BLOCK).build()), path);
             }
