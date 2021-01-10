@@ -11,6 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import youyihj.collision.Collision;
 import youyihj.collision.block.BlockBase;
+import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.config.Configuration;
 
 import java.util.ArrayList;
@@ -61,6 +62,8 @@ public class ItemRegistry {
             new ItemBase("up_shifter", new Item.Properties().maxStackSize(4)).register();
             new ItemBase("down_shifter", new Item.Properties().maxStackSize(4)).register();
             new ItemDebugger().register();
+            new ItemHolder(Absorber.Type.PROTON).register();
+            new ItemHolder(Absorber.Type.NEUTRON).register();
 
             Configuration.nuclei.get().forEach(string -> {
                 String[] strings = string.split(",");

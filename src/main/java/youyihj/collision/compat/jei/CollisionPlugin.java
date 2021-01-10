@@ -18,7 +18,7 @@ import youyihj.collision.recipe.ColliderRecipeType;
  */
 @JeiPlugin
 public class CollisionPlugin implements IModPlugin {
-    private static final ResourceLocation UID = new ResourceLocation(Collision.MODID, "jei_plugin");
+    private static final ResourceLocation UID = Collision.rl("jei_plugin");
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {

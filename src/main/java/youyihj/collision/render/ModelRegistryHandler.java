@@ -7,6 +7,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import youyihj.collision.Collision;
 import youyihj.collision.item.ItemNucleus;
 import youyihj.collision.item.ItemRegistry;
 
@@ -22,7 +23,7 @@ public class ModelRegistryHandler {
                 .filter(ItemNucleus.class::isInstance)
                 .map(ItemNucleus.class::cast)
                 .forEach(itemNucleus -> {
-                    itemRenderer.getItemModelMesher().register(itemNucleus, new ModelResourceLocation(itemNucleus.getRegistryName(), "inventory"));
+                    itemRenderer.getItemModelMesher().register(itemNucleus, new ModelResourceLocation(Collision.rl("item/nucleus"), "inventory"));
                 });
     }
 }

@@ -35,7 +35,7 @@ public class DataGenerators {
                 protected void registerModels() {
                     ItemRegistry.getBlockItems().forEach((blockItem -> {
                         String name = blockItem.getBlock().getRegistryName().getPath();
-                        withExistingParent(name, new ResourceLocation(Collision.MODID, "block/" + name));
+                        withExistingParent(name, Collision.rl( "block/" + name));
                     }));
                     ItemRegistry.getItems().values().stream().filter(itemBase -> AnnotationUtil.hasNotAnnotation(itemBase, DisableModelGenerator.class)).forEach(item -> {
                         String name = item.getRegistryName().getPath();

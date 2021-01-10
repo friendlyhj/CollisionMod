@@ -1,5 +1,6 @@
 package youyihj.collision.util;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -14,6 +15,7 @@ import youyihj.collision.block.absorber.ProtonEmpty;
 import youyihj.collision.tile.TileNeutronStorage;
 import youyihj.collision.tile.TileProtonStorage;
 
+import javax.annotation.Nullable;
 import java.lang.reflect.Array;
 import java.util.Optional;
 import java.util.function.Function;
@@ -137,5 +139,13 @@ public class Utils {
             temp[i] = createArray(supplier, clazz, sizeX);
         }
         return temp;
+    }
+
+    public static void damageItem(ItemStack stack, int amount, @Nullable LivingEntity entityIn, World world) {
+        if (entityIn == null) {
+            stack.attemptDamageItem(amount, world.rand, null);
+        } else {
+            stack.damageItem(amount, entityIn, entity -> {});
+        }
     }
 }

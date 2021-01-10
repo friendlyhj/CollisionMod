@@ -23,7 +23,7 @@ import java.util.Optional;
  * @author youyihj
  */
 public class ColliderRecipe implements IRecipe<IInventory> {
-    public static final ResourceLocation ID = new ResourceLocation(Collision.MODID, "collider");
+    public static final ResourceLocation ID = Collision.rl("collider");
 
     private final ItemStack out;
     private final Absorber.Type[][] in;

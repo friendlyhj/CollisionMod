@@ -33,14 +33,14 @@ public class NucleusSmeltingHandler {
             if (nuggetTag != null) {
                 JsonObject json = new JsonObject();
                 JsonObject ingredient = new JsonObject();
-                ingredient.addProperty("item", new ResourceLocation(Collision.MODID, nucleusEntry.getName() + "_nucleus").toString());
+                ingredient.addProperty("item", Collision.rl( nucleusEntry.getName() + "_nucleus").toString());
                 json.add("ingredient", ingredient);
                 Item nugget = nuggetTag.getAllElements().get(0);
                 JsonObject result = new JsonObject();
                 result.addProperty("item", nugget.getRegistryName().toString());
                 result.addProperty("count", Configuration.nuggetsOutputCount.get());
                 json.add("result", result);
-                temp.add(IRecipeSerializer.SMELTING.read(new ResourceLocation(Collision.MODID, nucleusEntry.getName() + "nucleus_to_nugget"), json));
+                temp.add(IRecipeSerializer.SMELTING.read(Collision.rl(nucleusEntry.getName() + "nucleus_to_nugget"), json));
             }
         });
         return temp;

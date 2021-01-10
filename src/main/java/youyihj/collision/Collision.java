@@ -2,6 +2,7 @@ package youyihj.collision;
 
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
@@ -49,6 +50,10 @@ public class Collision {
         ContainerRegistry.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    public static ResourceLocation rl(String path) {
+        return new ResourceLocation(Collision.MODID, path);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

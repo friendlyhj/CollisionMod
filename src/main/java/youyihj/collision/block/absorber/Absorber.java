@@ -160,5 +160,17 @@ public abstract class Absorber extends BlockBase {
         public Absorber getAbsorberByRecipe(ColliderRecipe recipe) {
             return recipe.isRefined() ? getRefinedAbsorber() : getAbsorber();
         }
+
+        @Nonnull
+        public Absorber.Type toFullType() {
+            switch (this) {
+                case PROTON_EMPTY:
+                    return PROTON;
+                case NEUTRON_EMPTY:
+                    return NEUTRON;
+                default:
+                    return this;
+            }
+        }
     }
 }

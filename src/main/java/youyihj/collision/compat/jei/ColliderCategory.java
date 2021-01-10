@@ -29,7 +29,7 @@ public class ColliderCategory implements IRecipeCategory<ColliderRecipe> {
     private final IDrawable icon;
 
     public ColliderCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.drawableBuilder(new ResourceLocation(Collision.MODID, "textures/gui/collider.png"),
+        this.background = guiHelper.drawableBuilder(Collision.rl("textures/gui/collider.png"),
                 0, 0, 112, 54).addPadding(0, 10, 0, 0).build();
         this.icon = guiHelper.createDrawableIngredient(new ItemStack(ColliderBase.getItem(1)));
     }

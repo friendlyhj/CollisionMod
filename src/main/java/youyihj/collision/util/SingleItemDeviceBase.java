@@ -281,7 +281,7 @@ public class SingleItemDeviceBase {
     @OnlyIn(Dist.CLIENT)
     public static abstract class ScreenModule<T extends ContainerModule> extends ContainerScreen<T> {
 
-        private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(Collision.MODID, "textures/gui/single_item_device.png");
+        private static final ResourceLocation DEFAULT_TEXTURE = Collision.rl( "textures/gui/single_item_device.png");
 
         protected final BlockPos pos;
 
