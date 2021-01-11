@@ -60,7 +60,7 @@ public class Booster extends BlockHasTileEntityBase<TileBooster> implements INee
                 RenderUpdateHandler.mark(pos);
             }
             neighborChanged(state, worldIn, pos, state.getBlock(), pos, false);
-            return ActionResultType.CONSUME;
+            return ActionResultType.SUCCESS;
         }
         return ActionResultType.PASS;
     }
