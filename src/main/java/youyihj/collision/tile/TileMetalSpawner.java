@@ -1,10 +1,8 @@
 package youyihj.collision.tile;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import youyihj.collision.config.Configuration;
 import youyihj.collision.item.ItemNucleus;
-import youyihj.collision.item.ItemRegistry;
 import youyihj.collision.util.WeightList;
 
 import java.util.HashMap;
@@ -19,11 +17,11 @@ public class TileMetalSpawner extends TileSpawner {
         super(TileEntityRegistry.getTileEntityType("metal_spawner"));
     }
 
-    private static WeightList<Item> pool;
+    private static WeightList<ItemStack> pool;
 
     public static void initMetalList() {
-        Map<Item, Integer> temp = new HashMap<>();
-        ItemNucleus.nuclei.values().forEach(nucleusEntry -> temp.put(ItemRegistry.getItem(nucleusEntry.getName() + "_nucleus"), nucleusEntry.getChance()));
+        Map<ItemStack, Integer> temp = new HashMap<>();
+        ItemNucleus.nuclei.values().forEach(nucleusEntry -> temp.put(ItemNucleus.withType(nucleusEntry), nucleusEntry.getChance()));
         pool = WeightList.create(temp);
     }
 
@@ -39,6 +37,6 @@ public class TileMetalSpawner extends TileSpawner {
 
     @Override
     protected ItemStack getNextSpawnItem(Random random) {
-        return new ItemStack(pool.get(random));
+        return pool.get(random);
     }
 }

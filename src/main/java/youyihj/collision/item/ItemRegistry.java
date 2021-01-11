@@ -12,7 +12,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import youyihj.collision.Collision;
 import youyihj.collision.block.BlockBase;
 import youyihj.collision.block.absorber.Absorber;
-import youyihj.collision.config.Configuration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,11 +63,7 @@ public class ItemRegistry {
             new ItemDebugger().register();
             new ItemHolder(Absorber.Type.PROTON).register();
             new ItemHolder(Absorber.Type.NEUTRON).register();
-
-            Configuration.nuclei.get().forEach(string -> {
-                String[] strings = string.split(",");
-                new ItemNucleus(strings[0].trim(), Integer.parseInt(strings[1], 16), Integer.parseInt(strings[2])).register();
-            });
+            ItemNucleus.INSTANCE.register();
         }
     }
 }

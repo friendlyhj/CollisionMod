@@ -53,7 +53,7 @@ public class Booster extends BlockHasTileEntityBase<TileBooster> implements INee
             if (!teo.isPresent() || teo.map(TileBooster::isFull).get())
                 return ActionResultType.FAIL;
             TileBooster te = teo.get();
-            te.setNucleusType(((ItemNucleus) handItem.getItem()).getType());
+            te.setNucleusType(((ItemNucleus) handItem.getItem()).getType(handItem));
             handItem.shrink(1);
             te.setFull(true);
             if (worldIn.isRemote) {

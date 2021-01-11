@@ -33,7 +33,11 @@ public class NucleusSmeltingHandler {
             if (nuggetTag != null) {
                 JsonObject json = new JsonObject();
                 JsonObject ingredient = new JsonObject();
-                ingredient.addProperty("item", Collision.rl( nucleusEntry.getName() + "_nucleus").toString());
+                ingredient.addProperty("type", "forge:nbt");
+                ingredient.addProperty("item", Collision.rl( "nucleus").toString());
+                JsonObject nbt = new JsonObject();
+                nbt.addProperty("type", nucleusEntry.getName());
+                ingredient.add("nbt", nbt);
                 json.add("ingredient", ingredient);
                 Item nugget = nuggetTag.getAllElements().get(0);
                 JsonObject result = new JsonObject();

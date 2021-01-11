@@ -2,14 +2,17 @@ package youyihj.collision.compat.jei;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import youyihj.collision.Collision;
 import youyihj.collision.block.ColliderBase;
+import youyihj.collision.item.ItemNucleus;
 import youyihj.collision.recipe.ColliderRecipe;
 import youyihj.collision.recipe.ColliderRecipeType;
 
@@ -40,5 +43,10 @@ public class CollisionPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(Minecraft.getInstance().world.getRecipeManager().getRecipesForType(ColliderRecipeType.INSTANCE), ColliderRecipe.ID);
+    }
+
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+        jeiRuntime.getIngredientManager().addIngredientsAtRuntime(VanillaTypes.ITEM, ItemNucleus.getAllSubItems());
     }
 }
