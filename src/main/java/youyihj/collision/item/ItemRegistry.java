@@ -64,6 +64,7 @@ public class ItemRegistry {
             new ItemHolder(Absorber.Type.PROTON).register();
             new ItemHolder(Absorber.Type.NEUTRON).register();
             ItemNucleus.INSTANCE.register();
+            ItemWitherAltarWand.INSTANCE.register();
         }
     }
 }

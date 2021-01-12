@@ -98,16 +98,16 @@ dependencies {
 
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
     // Only for energy test! Collision Mod doesn't need mek.
-    runtimeOnly fg.deobf("mekanism:Mekanism:1.16.4-10.0.18.445")
-    runtimeOnly fg.deobf("mekanism:Mekanism:1.16.4-10.0.18.445:additions")
+//    runtimeOnly fg.deobf("mekanism:Mekanism:1.16.4-10.0.18.445")
+//    runtimeOnly fg.deobf("mekanism:Mekanism:1.16.4-10.0.18.445:additions")
 
 }
 
 repositories {
-    maven {
-        name "mek"
-        url 'https://modmaven.dev/'
-    }
+//    maven {
+//        name "mek"
+//        url 'https://modmaven.dev/'
+//    }
 
     maven {
         name "jei"

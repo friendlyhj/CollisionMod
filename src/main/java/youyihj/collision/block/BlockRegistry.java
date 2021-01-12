@@ -9,10 +9,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import youyihj.collision.Collision;
-import youyihj.collision.block.absorber.Neutron;
-import youyihj.collision.block.absorber.NeutronEmpty;
-import youyihj.collision.block.absorber.Proton;
-import youyihj.collision.block.absorber.ProtonEmpty;
+import youyihj.collision.block.absorber.*;
 import youyihj.collision.block.spawner.BlockGemSpawner;
 import youyihj.collision.block.spawner.BlockMetalSpawner;
 
@@ -67,6 +64,7 @@ public class BlockRegistry {
             }
 
             new BlockBase("bone_plank", AbstractBlock.Properties.create(Material.WOOD)).register();
+            new BlockBase("wither_altar", AbstractBlock.Properties.create(Material.IRON)).register();
         }
     }
 }

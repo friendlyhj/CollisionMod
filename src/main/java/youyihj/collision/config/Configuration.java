@@ -15,6 +15,8 @@ public class Configuration {
     public static ForgeConfigSpec.IntValue nuggetsOutputCount;
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> nuclei;
     public static ForgeConfigSpec.BooleanValue noEnergyNeeded;
+    public static ForgeConfigSpec.DoubleValue witherAltarWandAttackDamage;
+    public static ForgeConfigSpec.DoubleValue witherAltarWandAttackSpeed;
 
     public static ForgeConfigSpec.IntValue absorberSpeed;
     public static ForgeConfigSpec.BooleanValue onlyWorkInDaytime;
@@ -35,6 +37,8 @@ public class Configuration {
                 .defineList("nuclei", Lists.newArrayList("iron,BF8040,200", "gold,FFFF00,120"),
                         s -> ((String) s).split(",").length == 3);
         noEnergyNeeded = configBuilder.comment("set it true, then all machines won't need energy").define("noEnergyNeeded", false);
+        witherAltarWandAttackDamage = configBuilder.defineInRange("witherAltarWandAttackDamage", 4.0, 0.0, 100.0);
+        witherAltarWandAttackSpeed = configBuilder.defineInRange("witherAltarWandAttackSpeed", 1.5, 0.1, 100.0);
         configBuilder.pop();
 
         configBuilder.push("absorber");
