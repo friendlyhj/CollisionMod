@@ -58,13 +58,13 @@ public class BlockRegistry {
             BlockProtonStorage.INSTANCE.register();
             BlockHarvester.INSTANCE.register();
             BlockStructureBuilder.INSTANCE.register();
+            BlockWitherAltar.INSTANCE.register();
 
             for (int i = 1; i < 5; i++) {
                 new ColliderBase(i).register();
             }
 
             new BlockBase("bone_plank", AbstractBlock.Properties.create(Material.WOOD)).register();
-            new BlockBase("wither_altar", AbstractBlock.Properties.create(Material.IRON)).register();
         }
     }
 }

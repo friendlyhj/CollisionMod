@@ -33,7 +33,7 @@ public class DataGenerators {
             event.getGenerator().addProvider(new ItemModelProvider(event.getGenerator(), Collision.MODID, event.getExistingFileHelper()) {
                 @Override
                 protected void registerModels() {
-                    ItemRegistry.getBlockItems().forEach((blockItem -> {
+                    ItemRegistry.getBlockItems().stream().filter(blockItem -> AnnotationUtil.hasNotAnnotation(blockItem.getBlock(), DisableModelGenerator.class)).forEach((blockItem -> {
                         String name = blockItem.getBlock().getRegistryName().getPath();
                         withExistingParent(name, Collision.rl( "block/" + name));
                     }));
