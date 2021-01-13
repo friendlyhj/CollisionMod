@@ -5,10 +5,13 @@ import com.google.common.collect.Multimap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SkullBlock;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -20,22 +23,25 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import youyihj.collision.Collision;
+import youyihj.collision.block.BlockWitherAltar;
 import youyihj.collision.config.Configuration;
 import youyihj.collision.multiblock.SimpleMultiblock;
 import youyihj.collision.util.Utils;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
  * @author youyihj
  */
-public class ItemWitherAltarWand extends ItemBase {
+public class ItemWitherAltarWand extends ItemBase implements IVanishable {
     public ItemWitherAltarWand() {
         super("wither_altar_wand", new Properties());
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
@@ -44,10 +50,10 @@ public class ItemWitherAltarWand extends ItemBase {
         attributes = builder.build();
         Predicate<BlockState> boneBlock = state -> state.getBlock() == Blocks.BONE_BLOCK;
         witherAltar = new SimpleMultiblock(this::isWitherAltar)
-                .addElement(new Vector3i(1, 0, 1), boneBlock)
-                .addElement(new Vector3i(-1, 0, 1), boneBlock)
-                .addElement(new Vector3i(1, 0, -1), boneBlock)
-                .addElement(new Vector3i(-1, 0, -1), boneBlock);
+                .addElement(new Vector3i(1, 0, 0), boneBlock)
+                .addElement(new Vector3i(-1, 0, 0), boneBlock)
+                .addElement(new Vector3i(0, 0, -1), boneBlock)
+                .addElement(new Vector3i(0, 0, 1), boneBlock);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 witherAltar.addElement(new Vector3i(i - 1, -1, j - 1), boneBlock);
@@ -90,14 +96,14 @@ public class ItemWitherAltarWand extends ItemBase {
         ItemStack stack = context.getItem();
         World world = context.getWorld();
         BlockPos pos = context.getPos();
-        if (isWitherAltar(world.getBlockState(pos))) {
+        if (witherAltar.match(world, pos)) {
             if (world.isRemote)
                 return ActionResultType.SUCCESS;
             CompoundNBT nbt = stack.getOrCreateTag();
             nbt.putInt(TAG_X, pos.getX());
             nbt.putInt(TAG_Y, pos.getY());
             nbt.putInt(TAG_Z, pos.getZ());
-            nbt.putString(TAG_WORLD, world.getDimensionKey().toString());
+            nbt.putString(TAG_WORLD, world.getDimensionKey().getLocation().toString());
             Optional.ofNullable(context.getPlayer()).ifPresent(playerEntity ->
                     playerEntity.sendStatusMessage(new TranslationTextComponent("message.collision.bound_altar"), true));
             return ActionResultType.SUCCESS;
@@ -108,6 +114,19 @@ public class ItemWitherAltarWand extends ItemBase {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
         return slot == EquipmentSlotType.MAINHAND ? attributes : ImmutableMultimap.of();
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        if (stack.hasTag()) {
+            CompoundNBT nbt = stack.getTag();
+            tooltip.add(new TranslationTextComponent("tooltip.collision.wither_altar_bound", nbt.getInt(TAG_X), nbt.getInt(TAG_Y), nbt.getInt(TAG_Z), nbt.getString(TAG_WORLD)));
+        }
+    }
+
+    @Override
+    public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+        return !player.isCreative();
     }
 
     private static void transformSkull(ServerWorld world, BlockPos corePos) {
@@ -122,6 +141,6 @@ public class ItemWitherAltarWand extends ItemBase {
     }
 
     private boolean isWitherAltar(BlockState state) {
-        return state.getBlock().getRegistryName().equals(Collision.rl("wither_altar"));
+        return state.getBlock() == BlockWitherAltar.INSTANCE;
     }
 }

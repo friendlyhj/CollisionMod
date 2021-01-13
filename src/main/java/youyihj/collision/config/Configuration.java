@@ -33,12 +33,12 @@ public class Configuration {
         configBuilder.push("general");
         givePlayerInitialItems = configBuilder.comment("should give player initial items? (collider lv1 and so on)").define("givePlayerInitialItems", true);
         nuggetsOutputCount = configBuilder.comment("How many nuggets will be outputted when nuclei are smelted").defineInRange("nuggetsOutputCount", 3, 0, 64);
-        nuclei = configBuilder.comment("The list of nuclei", "The format is \"meta,name,color,wightInMetalSpawner\"")
+        nuclei = configBuilder.comment("The list of nuclei", "The format is \"name,color,wightInMetalSpawner\"")
                 .defineList("nuclei", Lists.newArrayList("iron,BF8040,200", "gold,FFFF00,120"),
                         s -> ((String) s).split(",").length == 3);
         noEnergyNeeded = configBuilder.comment("set it true, then all machines won't need energy").define("noEnergyNeeded", false);
         witherAltarWandAttackDamage = configBuilder.defineInRange("witherAltarWandAttackDamage", 4.0, 0.0, 100.0);
-        witherAltarWandAttackSpeed = configBuilder.defineInRange("witherAltarWandAttackSpeed", 1.5, 0.1, 100.0);
+        witherAltarWandAttackSpeed = configBuilder.defineInRange("witherAltarWandAttackSpeed", -2.4, -4.0, 100.0);
         configBuilder.pop();
 
         configBuilder.push("absorber");
