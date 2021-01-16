@@ -43,9 +43,9 @@ a new way to get resources
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
 # Here's another dependency
-#[[dependencies.Collision]]
-#    modId="minecraft"
-#    mandatory=true
-#    versionRange="[1.14.4]"
-#    ordering="NONE"
-#    side="BOTH"
+[[dependencies.collision]]
+modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.3,1.17)"
+    ordering="NONE"
+    side="BOTH"

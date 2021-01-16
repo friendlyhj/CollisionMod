@@ -30,6 +30,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import youyihj.collision.block.BlockWitherAltar;
 import youyihj.collision.config.Configuration;
+import youyihj.collision.data.DisableModelGenerator;
 import youyihj.collision.multiblock.SimpleMultiblock;
 import youyihj.collision.util.Utils;
 
@@ -41,6 +42,7 @@ import java.util.function.Predicate;
 /**
  * @author youyihj
  */
+@DisableModelGenerator
 public class ItemWitherAltarWand extends ItemBase implements IVanishable {
     public ItemWitherAltarWand() {
         super("wither_altar_wand", new Properties());
