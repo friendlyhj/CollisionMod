@@ -5,15 +5,16 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.*;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
 import youyihj.collision.tile.ContainerHarvester;
 import youyihj.collision.tile.ContainerRegistry;
 import youyihj.collision.tile.TileHarvester;
@@ -33,20 +34,14 @@ public class BlockHarvester extends SingleItemDeviceBase.BlockModule<TileHarvest
     public static final BlockHarvester INSTANCE = new BlockHarvester();
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            getLinkedTileEntity(worldIn, pos).ifPresent(tileHarvester -> {
-                if (player.isSneaking() && player.getHeldItem(handIn).isEmpty()) {
-                    tileHarvester.transformWork();
-                    player.sendStatusMessage(tileHarvester.getShowWorkTypeText(), true);
-                } else {
-                    NetworkHooks.openGui(((ServerPlayerEntity) player), tileHarvester, packetBuffer -> {
-                        packetBuffer.writeBlockPos(tileHarvester.getPos());
-                    });
-                }
-            });
-        }
-        return ActionResultType.SUCCESS;
+    protected boolean extraWorkCondition(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit, TileHarvester tileEntity) {
+        return player.isSneaking() && player.getHeldItem(handIn).isEmpty();
+    }
+
+    @Override
+    protected void extraWork(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit, TileHarvester tileEntity) {
+        tileEntity.transformWork();
+        player.sendStatusMessage(tileEntity.getShowWorkTypeText(), true);
     }
 
     @Override

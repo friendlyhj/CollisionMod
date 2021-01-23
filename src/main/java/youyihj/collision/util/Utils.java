@@ -1,13 +1,20 @@
 package youyihj.collision.util;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import youyihj.collision.block.absorber.Neutron;
 import youyihj.collision.block.absorber.NeutronEmpty;
 import youyihj.collision.block.absorber.Proton;
@@ -15,8 +22,10 @@ import youyihj.collision.block.absorber.ProtonEmpty;
 import youyihj.collision.tile.TileNeutronStorage;
 import youyihj.collision.tile.TileProtonStorage;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.reflect.Array;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -146,6 +155,30 @@ public class Utils {
             stack.attemptDamageItem(amount, world.rand, null);
         } else {
             stack.damageItem(amount, entityIn, entity -> {});
+        }
+    }
+
+    @Nonnull
+    public static ServerWorld getDimension(@Nonnull MinecraftServer server, String id) {
+        return Optional.ofNullable(server.getWorld(RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(id))))
+                .orElse(Objects.requireNonNull(server.getWorld(World.OVERWORLD)));
+    }
+
+    public static World getDimensionAlsoClientSide(@Nullable MinecraftServer server, String id) {
+        if (server == null) {
+            return ClientWorldSupplier.INSTANCE.get();
+        } else {
+            return getDimension(server, id);
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private enum ClientWorldSupplier implements Supplier<World> {
+        INSTANCE;
+
+        @Override
+        public World get() {
+            return Minecraft.getInstance().world;
         }
     }
 }

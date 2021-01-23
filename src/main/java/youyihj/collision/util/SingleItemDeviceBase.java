@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
@@ -33,6 +34,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.client.gui.GuiUtils;
+import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -154,7 +156,29 @@ public class SingleItemDeviceBase {
         }
 
         @Override
-        public abstract ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit);
+        public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+            if (!worldIn.isRemote) {
+                getLinkedTileEntity(worldIn, pos).ifPresent(tileEntity -> {
+                    if (extraWorkCondition(state, worldIn, pos, player, handIn, hit, tileEntity)) {
+                        extraWork(state, worldIn, pos, player, handIn, hit, tileEntity);
+                    } else {
+                        NetworkHooks.openGui(((ServerPlayerEntity) player), tileEntity, packetBuffer -> {
+                            packetBuffer.writeBlockPos(tileEntity.getPos());
+                            packetBuffer.writeString(worldIn.getDimensionKey().getLocation().toString());
+                        });
+                    }
+                });
+            }
+            return ActionResultType.SUCCESS;
+        }
+
+        protected boolean extraWorkCondition(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit, T tileEntity) {
+            return false;
+        }
+
+        protected void extraWork(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit, T tileEntity) {
+
+        }
 
         @Override
         public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {

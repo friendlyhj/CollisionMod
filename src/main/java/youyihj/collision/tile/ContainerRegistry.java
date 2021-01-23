@@ -1,6 +1,5 @@
 package youyihj.collision.tile;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.IIntArray;
@@ -12,6 +11,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import youyihj.collision.Collision;
+import youyihj.collision.util.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class ContainerRegistry {
             IForgeContainerType.create(((windowId, inv, data) -> {
                 try {
                     return containerClass.getConstructor(String.class, int.class, inv.getClass(), BlockPos.class, World.class, intArray.getClass())
-                            .newInstance(name, windowId, inv, data.readBlockPos(), Minecraft.getInstance().world, intArray);
+                            .newInstance(name, windowId, inv, data.readBlockPos(), Utils.getDimensionAlsoClientSide(inv.player.getServer(), data.readString()), intArray);
                 } catch (Exception e) {
                     throw new RuntimeException("fail to register container: " + containerClass.getCanonicalName(), e);
                 }

@@ -18,11 +18,8 @@ import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3i;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.Explosion;
@@ -79,15 +76,12 @@ public class ItemWitherAltarWand extends ItemBase implements IVanishable {
             String altarWorldID = nbt.getString(TAG_WORLD);
             if (!altarWorldID.isEmpty()) {
                 BlockPos posAltar = new BlockPos(nbt.getInt(TAG_X), nbt.getInt(TAG_Y), nbt.getInt(TAG_Z));
-                Optional.ofNullable(server.getWorld(RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(altarWorldID))))
-                        .ifPresent(world -> {
-                            if (world.isAreaLoaded(posAltar, 4) && witherAltar.match(world, posAltar)) {
-                                transformSkull(world, posAltar);
-                                world.createExplosion(null, posAltar.getX() + 0.5f, posAltar.getY(), posAltar.getZ() + 0.5f, 0.5f, Explosion.Mode.NONE);
-                                witherAltar.getMultiblockElements().forEach(element -> world.setBlockState(posAltar.add(element.getOffset()), Blocks.AIR.getDefaultState()));
-                            }
-                        });
-
+                ServerWorld world = Utils.getDimension(server, altarWorldID);
+                if (world.isAreaLoaded(posAltar, 4) && witherAltar.match(world, posAltar)) {
+                    transformSkull(world, posAltar);
+                    world.createExplosion(null, posAltar.getX() + 0.5f, posAltar.getY(), posAltar.getZ() + 0.5f, 0.5f, Explosion.Mode.NONE);
+                    witherAltar.getMultiblockElements().forEach(element -> world.setBlockState(posAltar.add(element.getOffset()), Blocks.AIR.getDefaultState()));
+                }
             }
         }
         return true;

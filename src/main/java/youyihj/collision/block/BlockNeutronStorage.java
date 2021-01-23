@@ -3,14 +3,11 @@ package youyihj.collision.block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
 import youyihj.collision.tile.ContainerNeutronStorage;
 import youyihj.collision.tile.ContainerRegistry;
 import youyihj.collision.tile.TileNeutronStorage;
@@ -31,20 +28,14 @@ public class BlockNeutronStorage extends SingleItemDeviceBase.BlockModule<TileNe
     public static final String NAME = "neutron_storage";
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            getLinkedTileEntity(worldIn, pos).ifPresent(tileNeutronStorage -> {
-                if (player.isSneaking() && player.getHeldItem(handIn).isEmpty()) {
-                    tileNeutronStorage.transformIO();
-                    tileNeutronStorage.getIOType().sendMessageToPlayer(player);
-                } else {
-                    NetworkHooks.openGui(((ServerPlayerEntity) player), tileNeutronStorage, packetBuffer -> {
-                        packetBuffer.writeBlockPos(pos);
-                    });
-                }
-            });
-        }
-        return ActionResultType.SUCCESS;
+    protected boolean extraWorkCondition(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit, TileNeutronStorage tileEntity) {
+        return player.isSneaking() && player.getHeldItem(handIn).isEmpty();
+    }
+
+    @Override
+    protected void extraWork(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit, TileNeutronStorage tileEntity) {
+        tileEntity.transformIO();
+        tileEntity.getIOType().sendMessageToPlayer(player);
     }
 
     @Nonnull
