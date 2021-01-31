@@ -23,10 +23,11 @@ import youyihj.collision.recipe.FurnaceRecipeHandler;
 public class Collision {
     public static final String MODID = "collision";
     public static final String NAME = "Collision";
-    public static final String VERSION = "1.0.4";
-    public static final String DEPENDENCIES = "before:crafttweaker";
+    public static final String VERSION = "1.0.5";
+    public static final String DEPENDENCIES = "after:crafttweaker";
 
     private static Logger logger;
+    private static boolean disableModelGenerator;
 
     @EventHandler
     public void onConstruct(FMLConstructionEvent event) {
@@ -42,7 +43,9 @@ public class Collision {
         BlockRegistrar.registerAllBlock();
         FluidRegistrar.registerAll();
         NetworkRegistryHandler.register();
-        ModelGenerator.generate();
+        if (!disableModelGenerator) {
+            ModelGenerator.generate();
+        }
         new ColliderRecipeRegistrar();
         FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "youyihj.collision.compat.theoneprobe.TOPCompatHandler");
     }
@@ -54,6 +57,10 @@ public class Collision {
         logger.info(String.format("%s collider recipes have registered!", ColliderRecipeManager.getColliderRecipes().size()));
         logger.info(String.format("%s nuclei registered!", MetalSpawner.initMetalList()));
         logger.info(String.format("%s spawned gem registered!", GemSpawner.initGemList()));
+    }
+
+    public static void disableModelGenerator() {
+        Collision.disableModelGenerator = true;
     }
 
     private static void checkCompatCrTVersion() {
