@@ -17,6 +17,8 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import youyihj.collision.block.absorber.Absorber;
 import youyihj.collision.block.absorber.Neutron;
@@ -28,7 +30,6 @@ import youyihj.collision.tile.TileBooster;
 import youyihj.collision.util.INeedRenderUpdate;
 
 import javax.annotation.Nullable;
-import java.util.WeakHashMap;
 
 
 public class Booster extends CollisionBlock implements INeedRenderUpdate {
@@ -64,6 +65,7 @@ public class Booster extends CollisionBlock implements INeedRenderUpdate {
     }
 
     @Override
+    @SuppressWarnings("MethodCallSideOnly")
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItem(hand);
         if (stack.getItem() instanceof Nucleus) {
@@ -142,8 +144,9 @@ public class Booster extends CollisionBlock implements INeedRenderUpdate {
         return true;
     }
 
-    @Mod.EventBusSubscriber
+    @Mod.EventBusSubscriber(Side.CLIENT)
     @SuppressWarnings("unused")
+    @SideOnly(Side.CLIENT)
     public static final class BoosterTinter {
         @SubscribeEvent
         public static void blockColors(ColorHandlerEvent.Block event) {

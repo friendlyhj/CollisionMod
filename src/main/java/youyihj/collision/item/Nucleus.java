@@ -8,6 +8,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import youyihj.collision.Collision;
 import youyihj.collision.Configuration;
@@ -76,8 +78,9 @@ public class Nucleus extends CollisionItem {
         }
     }
 
-    @EventBusSubscriber(modid = Collision.MODID)
+    @EventBusSubscriber(modid = Collision.MODID, value = Side.CLIENT)
     @SuppressWarnings("unused")
+    @SideOnly(Side.CLIENT)
     public static final class NucleusTinter {
         @SubscribeEvent
         public static void colorMultiplier(ColorHandlerEvent.Item event) {

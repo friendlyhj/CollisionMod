@@ -13,7 +13,7 @@ import youyihj.collision.util.INeedRenderUpdate;
 
 import java.util.LinkedList;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(Side.CLIENT)
 @SideOnly(Side.CLIENT)
 public class RenderEventHandler {
     private static final LinkedList<BlockPos> renderPoses = new LinkedList<>();
