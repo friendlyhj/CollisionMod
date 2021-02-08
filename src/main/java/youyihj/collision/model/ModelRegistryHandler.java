@@ -20,8 +20,7 @@ import youyihj.collision.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-@SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class ModelRegistryHandler {
     @SubscribeEvent
     public static void onModelRegistry(ModelRegistryEvent event) {
